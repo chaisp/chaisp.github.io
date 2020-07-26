@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chaisp.github.io/"/>
-  <updated>2020-07-26T11:01:02.521Z</updated>
+  <updated>2020-07-26T15:33:27.816Z</updated>
   <id>https://chaisp.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于Double进行运算的方法</title>
+    <link href="https://chaisp.github.io/2020/07/26/DoubleTest/"/>
+    <id>https://chaisp.github.io/2020/07/26/DoubleTest/</id>
+    <published>2020-07-26T15:33:27.721Z</published>
+    <updated>2020-07-26T15:33:27.816Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Double运算&quot;&gt;&lt;a href=&quot;#Double运算&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>MarkdownType</title>
@@ -57,6 +80,21 @@
           &lt;h1 id=&quot;项目集成Swagger&quot;&gt;&lt;a href=&quot;#项目集成Swagger&quot; class=&quot;headerlink&quot; title=&quot;项目集成Swagger&quot;&gt;&lt;/a&gt;项目集成Swagger&lt;/h1&gt;&lt;p&gt;&lt;img
         
       
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>blog</title>
+    <link href="https://chaisp.github.io/2020/07/25/blog/"/>
+    <id>https://chaisp.github.io/2020/07/25/blog/</id>
+    <published>2020-07-25T09:02:31.000Z</published>
+    <updated>2020-07-26T15:34:11.174Z</updated>
+    
+    <summary type="html">
     
     </summary>
     
