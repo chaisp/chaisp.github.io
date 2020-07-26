@@ -3,11 +3,11 @@
   <title>小柴的Blog</title>
   
   
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="https://github.com/chaisp/sen.github.io.git/"/>
+  <link href="https://github.com/chaisp.github.io.git/"/>
   <updated>2020-07-26T11:01:02.521Z</updated>
-  <id>https://github.com/chaisp/sen.github.io.git/</id>
+  <id>https://github.com/chaisp.github.io.git/</id>
   
   <author>
     <name>senpengchai</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MarkdownType</title>
-    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/26/MarkdownType/"/>
-    <id>https://github.com/chaisp/sen.github.io.git/2020/07/26/MarkdownType/</id>
+    <link href="https://github.com/chaisp.github.io.git/2020/07/26/MarkdownType/"/>
+    <id>https://github.com/chaisp.github.io.git/2020/07/26/MarkdownType/</id>
     <published>2020-07-26T10:21:34.546Z</published>
     <updated>2020-07-26T11:01:02.521Z</updated>
     
@@ -43,8 +43,8 @@
   
   <entry>
     <title>Swagger 的学习方法</title>
-    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/26/7-26/"/>
-    <id>https://github.com/chaisp/sen.github.io.git/2020/07/26/7-26/</id>
+    <link href="https://github.com/chaisp.github.io.git/2020/07/26/7-26/"/>
+    <id>https://github.com/chaisp.github.io.git/2020/07/26/7-26/</id>
     <published>2020-07-26T10:16:20.513Z</published>
     <updated>2020-07-26T11:30:56.298Z</updated>
     
@@ -66,8 +66,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/25/hello-world/"/>
-    <id>https://github.com/chaisp/sen.github.io.git/2020/07/25/hello-world/</id>
+    <link href="https://github.com/chaisp.github.io.git/2020/07/25/hello-world/"/>
+    <id>https://github.com/chaisp.github.io.git/2020/07/25/hello-world/</id>
     <published>2020-07-25T08:53:19.256Z</published>
     <updated>2020-07-25T09:08:41.815Z</updated>
     
