@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hello World</title>
-    <url>/blog/2020/07/25/hello-world/</url>
+    <url>/chaisp/2020/07/25/hello-world/</url>
     <content><![CDATA[<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><blockquote>
 <p>首次使用Hexo的感受还是不错的</p>
 </blockquote>
@@ -11,7 +11,7 @@
   </entry>
   <entry>
     <title>MarkdownType</title>
-    <url>/blog/2020/07/26/MarkdownType/</url>
+    <url>/chaisp/2020/07/26/MarkdownType/</url>
     <content><![CDATA[<ol>
 <li><p>插入代码的方法就是使用 Esc 下方的符号 ``<br> 效果如下:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">System.out.println(&quot;this is markdown&quot;)</span><br></pre></td></tr></table></figure>
@@ -99,7 +99,7 @@
   </entry>
   <entry>
     <title>Swagger 的学习方法</title>
-    <url>/blog/2020/07/26/7-26/</url>
+    <url>/chaisp/2020/07/26/7-26/</url>
     <content><![CDATA[<h1 id="项目集成Swagger"><a href="#项目集成Swagger" class="headerlink" title="项目集成Swagger"></a>项目集成Swagger</h1><p><img src="https://shop.io.mi-img.com/app/shop/img?id=shop_65180179a189e99443f0e93190259be4.png" alt="项目集成" title="项目集成"></p>
 <p>学习目标:<br>    - 了解Swagger的概念和应用<br>    - 掌握在项目中集成Swagger自动生成API文档</p>
 <h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><p><strong>前后端分离</strong><br>    - 前端 -&gt;前端控制层,视图层<br>    - 后端 -&gt;后端控制层,服务处,数据访问层<br>    - 前后端通过API进行交互<br>    - 前后端相对独立且松耦合<br><strong>产生的问题</strong><br>    - 前后端集成,前端或后端无法做到及时协商,尽早解决<br><strong>解决方案</strong><br>    - 首先定义schema[计划提纲],并实施跟踪最新的API,降低集成风险<br><strong>Swagger</strong><br>    - 号称世界上最流行的API框架<br>    - Restful Api文档在线自动生成器=&gt; <strong>API文档与API定义同步更新</strong><br>    - 直接运行,在线测试API<br>    - 支持多种语言<br>    - 官网: <a href="https://swagger.io/" target="_blank" rel="noopener">https://swagger.io/</a></p>
