@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小柴的Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://github.com/chaisp/sen.github.io.git/"/>
+  <updated>2020-07-26T11:01:02.521Z</updated>
+  <id>https://github.com/chaisp/sen.github.io.git/</id>
+  
+  <author>
+    <name>senpengchai</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MarkdownType</title>
+    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/26/MarkdownType/"/>
+    <id>https://github.com/chaisp/sen.github.io.git/2020/07/26/MarkdownType/</id>
+    <published>2020-07-26T10:21:34.546Z</published>
+    <updated>2020-07-26T11:01:02.521Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;插入代码的方法就是使用 Esc 下方的符号 ``&lt;br&gt; 效果如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Swagger 的学习方法</title>
+    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/26/7-26/"/>
+    <id>https://github.com/chaisp/sen.github.io.git/2020/07/26/7-26/</id>
+    <published>2020-07-26T10:16:20.513Z</published>
+    <updated>2020-07-26T11:30:56.298Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;项目集成Swagger&quot;&gt;&lt;a href=&quot;#项目集成Swagger&quot; class=&quot;headerlink&quot; title=&quot;项目集成Swagger&quot;&gt;&lt;/a&gt;项目集成Swagger&lt;/h1&gt;&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://github.com/chaisp/sen.github.io.git/2020/07/25/hello-world/"/>
+    <id>https://github.com/chaisp/sen.github.io.git/2020/07/25/hello-world/</id>
+    <published>2020-07-25T08:53:19.256Z</published>
+    <updated>2020-07-25T09:08:41.815Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Hello-Hexo&quot;&gt;&lt;a href=&quot;#Hello-Hexo&quot; class=&quot;headerlink&quot; title=&quot;Hello Hexo&quot;&gt;&lt;/a&gt;Hello
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
