@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     小柴的Blog
+    ThinkinginJava-LearnNote-8-9-10 |  小柴的Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -45,60 +45,8 @@
     
       
     <main class="content on">
-      
-<section class="cover">
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover2.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">小柴的Blog</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '', ''],
-        startDelay: 0,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 100,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  <article class="articles">
-    
-    
-    
-    
-    <article
+      <section class="outer">
+  <article
   id="post-ThinkinginJava-LearnNote-8-9-10"
   class="article article-type-post"
   itemscope
@@ -109,10 +57,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/"
-    >ThinkinginJava-LearnNote-8-9-10</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ThinkinginJava-LearnNote-8-9-10
+</h1>
  
 
     </header>
@@ -120,9 +67,34 @@
     <div class="article-meta">
       <a href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/" class="article-date">
   <time datetime="2020-07-29T15:35:10.618Z" itemprop="datePublished">2020-07-29</time>
-</a>    
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <hr>
@@ -244,373 +216,141 @@
  
       <!-- reward -->
       
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-DoubleTest"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/26/DoubleTest/"
-    >关于Double进行运算的方法</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/26/DoubleTest/" class="article-date">
-  <time datetime="2020-07-26T15:33:27.721Z" itemprop="datePublished">2020-07-26</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="Double运算"><a href="#Double运算" class="headerlink" title="Double运算"></a>Double运算</h1><p>Double在进行计算时,不管是加减乘除,都会出现误差,解决办法就是用BigDecimal</p>
-<h2 id="Double加法"><a href="#Double加法" class="headerlink" title="Double加法"></a>Double加法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static Double add(Double value1, Double value2) &#123;</span><br><span class="line">     BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">     BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">     return b1.add(b2).doubleValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Double减法"><a href="#Double减法" class="headerlink" title="Double减法"></a>Double减法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static double sub(Double value1, Double value2) &#123;</span><br><span class="line">        BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">        BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.subtract(b2).doubleValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public static Double mul(Double value1, Double value2) &#123;</span><br><span class="line">     BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">      BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">     return b1.multiply(b2).doubleValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="整体代码"><a href="#整体代码" class="headerlink" title="整体代码"></a>整体代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">  * double的计算不精确，会有类似0.0000000000000002的误差，正确的方法是使用BigDecimal或者用整型</span><br><span class="line">  * 整型地方法适合于货币精度已知的情况，比如12.11+1.10转成1211+110计算，最后再&#x2F;100即可</span><br><span class="line">  * 以下是摘抄的BigDecimal方法:</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class DoubleUtils implements Serializable &#123;</span><br><span class="line">     private static final long serialVersionUID &#x3D; -3345205828566485102L;</span><br><span class="line">     &#x2F;&#x2F; 默认除法运算精度</span><br><span class="line">     private static final Integer DEF_DIV_SCALE &#x3D; 2;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 提供精确的加法运算。</span><br><span class="line">     *</span><br><span class="line">      * @param value1 被加数</span><br><span class="line">      * @param value2 加数</span><br><span class="line">    * @return 两个参数的和</span><br><span class="line">    *&#x2F;</span><br><span class="line">    public static Double add(Double value1, Double value2) &#123;</span><br><span class="line">         BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">         BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">         return b1.add(b2).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">      * 提供精确的减法运算。</span><br><span class="line">      *</span><br><span class="line">      * @param value1 被减数</span><br><span class="line">      * @param value2 减数</span><br><span class="line">      * @return 两个参数的差</span><br><span class="line">      *&#x2F;</span><br><span class="line">     public static double sub(Double value1, Double value2) &#123;</span><br><span class="line">         BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">        BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.subtract(b2).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 提供精确的乘法运算。</span><br><span class="line">     *</span><br><span class="line">      * @param value1 被乘数</span><br><span class="line">      * @param value2 乘数</span><br><span class="line">     * @return 两个参数的积</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Double mul(Double value1, Double value2) &#123;</span><br><span class="line">        BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">         BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.multiply(b2).doubleValue();</span><br><span class="line">   &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">      * 提供（相对）精确的除法运算，当发生除不尽的情况时， 精确到小数点以后10位，以后的数字四舍五入。</span><br><span class="line">      *</span><br><span class="line">      * @param dividend 被除数</span><br><span class="line">      * @param divisor  除数</span><br><span class="line">      * @return 两个参数的商</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Double divide(Double dividend, Double divisor) &#123;</span><br><span class="line">        return divide(dividend, divisor, DEF_DIV_SCALE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 提供（相对）精确的除法运算。 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入。</span><br><span class="line">      *</span><br><span class="line">      * @param dividend 被除数</span><br><span class="line">      * @param divisor  除数</span><br><span class="line">      * @param scale    表示表示需要精确到小数点以后几位。</span><br><span class="line">      * @return 两个参数的商</span><br><span class="line">      *&#x2F;</span><br><span class="line">     public static Double divide(Double dividend, Double divisor, Integer scale) &#123;</span><br><span class="line">        if (scale &lt; 0) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;The scale must be a positive integer or zero&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">       BigDecimal b1 &#x3D; new BigDecimal(Double.toString(dividend));</span><br><span class="line">      BigDecimal b2 &#x3D; new BigDecimal(Double.toString(divisor));</span><br><span class="line">         return b1.divide(b2, scale,RoundingMode.HALF_UP).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">     * 提供指定数值的（精确）小数位四舍五入处理。</span><br><span class="line">      *</span><br><span class="line">      * @param value 需要四舍五入的数字</span><br><span class="line">      * @param scale 小数点后保留几位</span><br><span class="line">      * @return 四舍五入后的结果</span><br><span class="line">      *&#x2F;</span><br><span class="line">    public static double round(double value,int scale)&#123;</span><br><span class="line">         if(scale&lt;0)&#123;</span><br><span class="line">           throw new IllegalArgumentException(&quot;The scale must be a positive integer or zero&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">         BigDecimal b &#x3D; new BigDecimal(Double.toString(value));</span><br><span class="line">       BigDecimal one &#x3D; new BigDecimal(&quot;1&quot;);</span><br><span class="line">        return b.divide(one,scale, RoundingMode.HALF_UP).doubleValue();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 以上代码源于<a href="https://blog.csdn.net/liupantao/article/details/79727973" target="_blank" rel="noopener" title="CSDN">CSDN</a>,虽然他也是转载…</p>
- 
-      <!-- reward -->
+      <div id="reward-btn">
+        Donate
+      </div>
       
     </div>
     
 
     <!-- copyright -->
     
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-MarkdownType"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/26/MarkdownType/"
-    >MarkdownType</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/26/MarkdownType/" class="article-date">
-  <time datetime="2020-07-26T10:21:34.546Z" itemprop="datePublished">2020-07-26</time>
-</a>    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <ol>
-<li><p>插入代码的方法就是使用 Esc 下方的符号 ``<br> 效果如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;this is markdown&quot;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对于标题的应用,必须在#后面加上空格,不然无法显示<br> 效果如下:</p>
-<h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3></li>
-</ol>
-<ol start="3">
-<li>对于加粗的字,或者倾斜的字,就不用在符号和文字之间加上空格使用,前面加上**或者***<br> 效果如下:<br> <strong>两个个星是加粗</strong><br> <strong><em>三个星是加粗加倾斜</em></strong></li>
-</ol>
-<ol start="4">
-<li>对于需要引用的文字,使用&gt;<br> 即可,该符号还支持嵌套引用,并且引用内部还可以支持其他符号的应用</li>
-</ol>
-<ol start="5">
-<li><p>对于段落,要保证该项目下的每个段落都有4个空格的缩进,适合写大段的话<br> 效果如下:</p>
-<ul>
-<li>轻轻的我走了， 正如我轻轻的来； 我轻轻的招手， 作别西天的云彩。<br>那河畔的金柳， 是夕阳中的新娘； 波光里的艳影， 在我的心头荡漾。<br>软泥上的青荇， 油油的在水底招摇； 在康河的柔波里， 我甘心做一条水草！</li>
-</ul>
-</li>
-<li><p>如果要在列表项目内使用引用,那么就要对&gt;加上缩进<br> 效果如下:</p>
-<ul>
-<li>阅读的方法:<blockquote>
-<p>打开书本。<br>打开电灯。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="7">
-<li><p>有两种列表,无序列表,每行前面只有黑点,有序列表每行前面是数字<br> 效果如下:<br> -,+,- 都可以表示为无序列表</p>
-<ul>
-<li>这是无序列表第一行</li>
-<li>这是无序列表第二行</li>
-<li>这是无序列表第三行</li>
-</ul>
-</li>
-<li><p>数字后加上.和一个空格 就是有序列表</p>
-<ol>
-<li>这是有序列表第一行    </li>
-<li>这是有序列表第二行</li>
-<li>这是有序列表第三行</li>
-</ol>
-</li>
-<li><p>使用链接的方法,需要超链接的文字用[]括起来并且后面通过[1]进行标识, 之后使用[1]:url”文字”就可以了<br> 效果如下:<br> 目前的几个学习网站[Github][1]、[Bilibili][2]、[CSDN][3],通过这几个网站的学习,能够有效的提高代码水平<br> [1]: <a href="https://github.com" target="_blank" rel="noopener">https://github.com</a> “Github”<br> [2]: <a href="https://www.bilibili.com" target="_blank" rel="noopener">https://www.bilibili.com</a> “Bilibili”<br> [3]: <a href="https://www.csdn.com" target="_blank" rel="noopener">https://www.csdn.com</a> “CSDN”</p>
-</li>
-</ol>
-<ol start="10">
-<li>图片的插入就要使用图床来创建,具体的做法与超链接类似使用[]包起来,用标识符标记,最后 通过标识符:url “文字”连接到图床<br>效果如下:<br>快乐学习：<br><img src="https://yanxuan.nosdn.127.net/0a92cb4575418602108d3112aa5a3c14.png" alt="快乐学习" title="快乐学习"></li>
-</ol>
-<ol start="11">
-<li>表格的写法,使用|和-完成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">学号|姓名|分数</span><br><span class="line">-|-|-</span><br><span class="line">小明|男|75</span><br><span class="line">小红|女|79</span><br><span class="line">小陆|男|92</span><br></pre></td></tr></table></figure>
-效果如下:<table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>小明</td>
-<td>男</td>
-<td>75</td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79</td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<ol start="12">
-<li>分隔线,连续三个以上的*,-,或者_都可以,注意行内不可以写其他东西</li>
-</ol>
-<hr>
-<hr>
-<hr>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
     
     <footer class="article-footer">
        
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-7-26"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/26/7-26/"
-    >Swagger 的学习方法</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/26/7-26/" class="article-date">
-  <time datetime="2020-07-26T10:16:20.513Z" itemprop="datePublished">2020-07-26</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="项目集成Swagger"><a href="#项目集成Swagger" class="headerlink" title="项目集成Swagger"></a>项目集成Swagger</h1><p><img src="https://shop.io.mi-img.com/app/shop/img?id=shop_65180179a189e99443f0e93190259be4.png" alt="项目集成" title="项目集成"></p>
-<p>学习目标:<br>    - 了解Swagger的概念和应用<br>    - 掌握在项目中集成Swagger自动生成API文档</p>
-<h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><p><strong>前后端分离</strong><br>    - 前端 -&gt;前端控制层,视图层<br>    - 后端 -&gt;后端控制层,服务处,数据访问层<br>    - 前后端通过API进行交互<br>    - 前后端相对独立且松耦合<br><strong>产生的问题</strong><br>    - 前后端集成,前端或后端无法做到及时协商,尽早解决<br><strong>解决方案</strong><br>    - 首先定义schema[计划提纲],并实施跟踪最新的API,降低集成风险<br><strong>Swagger</strong><br>    - 号称世界上最流行的API框架<br>    - Restful Api文档在线自动生成器=&gt; <strong>API文档与API定义同步更新</strong><br>    - 直接运行,在线测试API<br>    - 支持多种语言<br>    - 官网: <a href="https://swagger.io/" target="_blank" rel="noopener">https://swagger.io/</a></p>
-<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><p>   SpringBoot集成Swagger=&gt;springfox,两个jar包</p>
-<ul>
-<li>Springfox-swagger2</li>
-<li>swagger-springmvc</li>
-</ul>
-<p>   <strong>使用Swagger</strong><br>   要求:JDK 1.8+ 否则swagger2无法运行<br>   步骤:</p>
-<ol>
-<li>新建一个SpringBoot-web项目</li>
-<li>添加Maven依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;io.springfox&#x2F;springfox-swagger2 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;io.springfox&#x2F;springfox-swagger-ui --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;springfox-swagger-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>编写HelloController,测试确保运行成功</li>
-<li>要使用Swagger,我们要编写一个配置类SwaggerConfig来配置swagger<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  @Configuration &#x2F;&#x2F;配置类</span><br><span class="line">@EnableSwagger2&#x2F;&#x2F; 开启Swagger2的自动配置</span><br><span class="line">public class SwaggerConfig &#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>访问测试: <a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html</a> ，可以看到swagger的界面；<br><img src="https://shop.io.mi-img.com/app/shop/img?id=shop_893f7fa73cfa50a6353fc2c9bb520f6f.png" alt="测试图片" title="访问测试"></li>
-</ol>
-<h1 id="以上内容都是狂神说SpringBoot的内容-使用MD重新自己写了一遍-原文地址-狂神说"><a href="#以上内容都是狂神说SpringBoot的内容-使用MD重新自己写了一遍-原文地址-狂神说" class="headerlink" title="以上内容都是狂神说SpringBoot的内容,使用MD重新自己写了一遍,原文地址:狂神说"></a>以上内容都是狂神说SpringBoot的内容,使用MD重新自己写了一遍,原文地址:<a href="https://mp.weixin.qq.com/s/0-c0MAgtyOeKx6qzmdUG0w" target="_blank" rel="noopener" title="狂神说">狂神说</a></h1> 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="hexo-blog"
-  class="article article-type-hexo"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/25/blog/"
-    >blog</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/25/blog/" class="article-date">
-  <time datetime="2020-07-25T09:02:31.000Z" itemprop="datePublished">2020-07-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/25/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/25/hello-world/" class="article-date">
-  <time datetime="2020-07-25T08:53:19.256Z" itemprop="datePublished">2020-07-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><blockquote>
-<p>首次使用Hexo的感受还是不错的</p>
-</blockquote>
-<h3 id="Chapter1-学习计划"><a href="#Chapter1-学习计划" class="headerlink" title="Chapter1 学习计划"></a>Chapter1 学习计划</h3><h3 id="Chapter2-生活计划"><a href="#Chapter2-生活计划" class="headerlink" title="Chapter2 生活计划"></a>Chapter2 生活计划</h3><h3 id="Chapter3-自己以后的发展规划"><a href="#Chapter3-自己以后的发展规划" class="headerlink" title="Chapter3 自己以后的发展规划"></a>Chapter3 自己以后的发展规划</h3><p>暂时能想到的就这么些了</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-  </article>
-  
-
-  
-</section>
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
 </div>
 
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/07/26/DoubleTest/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">关于Double进行运算的方法</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -748,6 +488,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
