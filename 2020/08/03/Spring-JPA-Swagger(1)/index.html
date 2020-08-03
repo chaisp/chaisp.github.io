@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">799</span>
         </span>
     </span>
 
@@ -82,20 +82,70 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="基于Spring-JPA-Swagger的项目-1"><a href="#基于Spring-JPA-Swagger的项目-1" class="headerlink" title="基于Spring+JPA+Swagger的项目(1)"></a>基于Spring+JPA+Swagger的项目(1)</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ol>
+<li>java1.8</li>
+<li>mysql5.7</li>
+<li>maven3.6.0</li>
+<li>lombok</li>
+<li>JPA</li>
+<li>Swagger</li>
+</ol>
+<h2 id="简单的JPA应用"><a href="#简单的JPA应用" class="headerlink" title="简单的JPA应用"></a>简单的JPA应用</h2><ul>
+<li>第一步在数据库中创建相关的数据,表信息等等,创建实体类<code>Entity</code>,实体类内属性与表信息一一对应.实际上,可以直接创建实体类,JPA会自动在数据库中建表.</li>
+<li>第二步根据刚才的实体类创建DAO接口,直接<code>extends JPAReposity</code>即可,在JPA库中已经包含基本的查询语句,删除语句,以及插入语句,但是功能比较简单,对于复杂的语句依旧需要自定义sql语句</li>
+<li>第三部创建Service,该接口中定义相关的方法,之后在ServiceImpl中实现该方法,大部分直接调用DAO中的增删改查即可</li>
+<li>第四部创建Controller,在该层中,主要根据路由,获取用户访问路径,根据路径设计业务逻辑,然后直接调用ServiceImpl中的方法去实现,最后通过return,可以返回给页面String类型,直接输出到页面上.</li>
+</ul>
+<h2 id="今天遇到部分问题"><a href="#今天遇到部分问题" class="headerlink" title="今天遇到部分问题"></a>今天遇到部分问题</h2><h3 id="GetMapping和-PostMapping-和-RequestMapping区别"><a href="#GetMapping和-PostMapping-和-RequestMapping区别" class="headerlink" title="@GetMapping和@PostMapping 和@RequestMapping区别"></a>@GetMapping和@PostMapping 和@RequestMapping区别</h3><ol>
+<li><p>@GetMapping:用于将HTTP get请求映射到特定处理程序的方法注解,是一个组合注解，是@RequestMapping(method = RequestMethod.GET)的缩写。</p>
+</li>
+<li><p>@PostMapping: 用于将HTTP post请求映射到特定处理程序的方法注解,是一个组合注解，是@RequestMapping(method = RequestMethod.POST)的缩写</p>
+</li>
+<li><p>@RequestMapping:一般情况下都是用@RequestMapping（method=RequestMethod.），因为@RequestMapping可以直接替代以上两个注解，但是以上两个注解并不能替代@RequestMapping，@RequestMapping相当于以上两个注解的父类！</p>
+</li>
+</ol>
+<h3 id="在controller中通过路由传递参数进行查询的调用"><a href="#在controller中通过路由传递参数进行查询的调用" class="headerlink" title="在controller中通过路由传递参数进行查询的调用"></a>在controller中通过路由传递参数进行查询的调用</h3><ul>
+<li>使用@PathVariable注解</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;&#123;id&#125;&#x2F;&#123;str&#125;&quot;) </span><br><span class="line">public ModelAndView helloWorld(@PathVariable String id, @PathVariable String str) &#123; </span><br><span class="line">     System.out.println(id); </span><br><span class="line">    System.out.println(str); </span><br><span class="line">    return new ModelAndView(&quot;&#x2F;helloWorld&quot;); </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>对于要加载的类，每个类之前都要添加一个@Autowired 不然该对象Bean无法被加载，会报出NullException的错误</p>
+</li>
+<li><p>在spring中的实体类一定要和自己数据库中完全对应，否则，在Spring中的变量会自动在表中创建一个新的column</p>
+</li>
+<li><p>JPAReposity基本上实现了所有基础的sql操作，直接在DAO类中继承该类，最后直接调用就可以，基础的函数包括基础的增删改查</p>
+</li>
+<li><p>对数据库进行插入删除时，必须在Service层前加上@transaction，否则是无法执行的</p>
+</li>
+<li><p>使用List&lt;?&gt;统一接收List是可行的，会不会出现其他问题暂时不知</p>
+</li>
+<li><p>Entity-&gt;EntityDAO-&gt;EntityService-&gt;EntityServiceImpl-&gt;Controller</p>
+</li>
+</ul>
+<h1 id="之后需要学习的部分"><a href="#之后需要学习的部分" class="headerlink" title="之后需要学习的部分"></a>之后需要学习的部分</h1><ol>
+<li>如何设计更好的路由,减少重复代码</li>
+<li>在设计查询时,逻辑是否完整,例如在查询任务时,是不是用contains比全匹配更有意义</li>
+<li>设计异常页面的跳转</li>
+<li>自定义查询语句与删除语句,增加程序可用性</li>
+<li>暴露给前端的接口,应该是Json格式,包含是否成功,msg,以及要传递的数据等等</li>
+<li>使用Swagger返回接口的文档</li>
+</ol>
+ 
       <!-- reward -->
       
       <div id="reward-btn">
