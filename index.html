@@ -99,6 +99,1082 @@
     
     
     <article
+  id="post-Spring-JPA-Swagger(1)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/Spring-JPA-Swagger(1)/"
+    >SpringBoot+JPA+Swagger</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/Spring-JPA-Swagger(1)/" class="article-date">
+  <time datetime="2020-08-03T15:04:22.936Z" itemprop="datePublished">2020-08-03</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-15"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-15/"
+    >ThinkinginJava LearnNote 15</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-15/" class="article-date">
+  <time datetime="2020-08-02T13:37:39.760Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十五章-泛型"><a href="#第十五章-泛型" class="headerlink" title="第十五章 泛型"></a>第十五章 泛型</h1><ul>
+<li><p>通过泛型,实现了参数化类型,可以使程序适用于多种类型(多用于集合)</p>
+</li>
+<li><p>可以创建一个泛型堆栈类,这样可以向里面存储各种类型</p>
+</li>
+</ul>
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><ul>
+<li>将泛型用于接口,最常用的就是生成器(一种专门创建对象的类)</li>
+<li>一般而言，一个生成器只定义一个方法，用于创建对象。例如 <code>java.util.function</code> 类库中的 Supplier 就是一个生成器，调用其 get() 获取对象。get() 是泛型方法，返回值为类型参数 T。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import java.util.function.*;</span><br><span class="line">import java.util.stream.*;</span><br><span class="line"></span><br><span class="line">public class Fibonacci implements Supplier&lt;Integer&gt; &#123;</span><br><span class="line">    private int count &#x3D; 0;</span><br><span class="line">    @Override</span><br><span class="line">    public Integer get() &#123; return fib(count++); &#125;</span><br><span class="line">  </span><br><span class="line">    private int fib(int n) &#123;</span><br><span class="line">        if(n &lt; 2) return 1;</span><br><span class="line">        return fib(n-2) + fib(n-1);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Stream.generate(new Fibonacci())</span><br><span class="line">              .limit(18)</span><br><span class="line">              .map(n -&gt; n + &quot; &quot;)</span><br><span class="line">              .forEach(System.out::print);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><ul>
+<li>泛型方法独立于类而改变方法</li>
+<li>如果使用泛型参数,就必须是泛型方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class GenericMethods &#123;</span><br><span class="line">    public &lt;T&gt; void f(T x) &#123;</span><br><span class="line">        System.out.println(x.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        GenericMethods gm &#x3D; new GenericMethods();</span><br><span class="line">        gm.f(&quot;&quot;);</span><br><span class="line">        gm.f(1);</span><br><span class="line">        gm.f(1.0);</span><br><span class="line">        gm.f(1.0F);</span><br><span class="line">        gm.f(&#39;c&#39;);</span><br><span class="line">        gm.f(gm);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>变长参数和泛型方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class GenericVarargs &#123;</span><br><span class="line">    @SafeVarargs</span><br><span class="line">    public static &lt;T&gt; List&lt;T&gt; makeList(T... args) &#123;</span><br><span class="line">        List&lt;T&gt; result &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        for (T item : args)</span><br><span class="line">            result.add(item);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;String&gt; ls &#x3D; makeList(&quot;A&quot;);</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">        ls &#x3D; makeList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">        ls &#x3D; makeList(</span><br><span class="line">                &quot;ABCDEFFHIJKLMNOPQRSTUVWXYZ&quot;.split(&quot;&quot;));</span><br><span class="line">        System.out.println(ls);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型擦除"><a href="#泛型擦除" class="headerlink" title="泛型擦除"></a>泛型擦除</h2><p><code>ArrayList&lt;String&gt;</code> 和 <code>ArrayList&lt;Integer&gt;</code> 应该是不同的类型。不同的类型会有不同的行为。例如，如果尝试向 <code>ArrayList&lt;String&gt;</code>中放入一个 Integer，所得到的行为（失败）和向 <code>ArrayList&lt;Integer&gt;</code> 中放入一个 Integer 所得到的行为（成功）完全不同。然而上面的程序认为它们是相同的类型。</p>
+<ul>
+<li>在泛型内部是无法获取泛型参数类型信息的</li>
+<li>在泛型中不能显式的引用运行时类型的操作,如转型,instanceof和new表达式</li>
+</ul>
+<p><strong>擦除的补偿</strong></p>
+<ul>
+<li><p>可以通过动态的<code>arg.isInstance()</code>来判断对象类别,通过<code>arg.newInstance()</code>创建实例</p>
+</li>
+<li><p>擦除和迁移兼容性就以为止,使用泛型不是强制的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class genericBasic&lt;T&gt;&#123;&#125;</span><br><span class="line">class Derived&lt;T&gt; extends genericBase&lt;T&gt;&#123;&#125;</span><br><span class="line">class Derived extends genericBase&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在继承时,并非强制使用泛型,但是在子类中调用基类的<code>set(),get()</code>方法就会提醒错误</p>
+</li>
+</ul>
+<h2 id="泛型数组"><a href="#泛型数组" class="headerlink" title="泛型数组"></a>泛型数组</h2><ul>
+<li>我们无法创建泛型数组,一般使用ArrayList来代替</li>
+<li>原因是数据将跟踪它们的实际类型,这个类别是在数组被创建时确定的,哪些关于类型的信息只存在于编译期,在运行时就变成了Object数组</li>
+</ul>
+<h2 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h2><ul>
+<li>边界允许我们对泛型使用的参数类型施加约束。尽管这可以强制执行有关应用了泛型类型的规则，但潜在的更重要的效果是我们可以在绑定的类型中调用方法。</li>
+<li>通过extends来修饰,在构造函数中传递参数就可以通过super(item)实现对父类方法的继承</li>
+</ul>
+<h2 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h2><ul>
+<li>通过?的通配符,可以实现一个向上转型的泛型容器的赋值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class GenericsAndCovariance &#123;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F; Wildcards allow covariance:</span><br><span class="line">        List&lt;? extends Fruit&gt; flist &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        &#x2F;&#x2F; Compile Error: can&#39;t add any type of object:</span><br><span class="line">        &#x2F;&#x2F; flist.add(new Apple());</span><br><span class="line">        &#x2F;&#x2F; flist.add(new Fruit());</span><br><span class="line">        &#x2F;&#x2F; flist.add(new Object());</span><br><span class="line">        flist.add(null); &#x2F;&#x2F; Legal but uninteresting</span><br><span class="line">        &#x2F;&#x2F; We know it returns at least Fruit:</span><br><span class="line">        Fruit f &#x3D; flist.get(0);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>编译器也会禁止<code>add()</code>方法因为会涉及到具体类型</li>
+<li>对于<code>contains()</code>和<code>indexOf()</code>因为参数是Object,因此允许调用</li>
+</ul>
+<h2 id="逆变"><a href="#逆变" class="headerlink" title="逆变"></a>逆变</h2><ul>
+<li>即使用超类型通配符。这里，可以声明通配符是由某个特定类的任何基类来界定的，方法是指定 &lt;？super MyClass&gt; ，或者甚至使用类型参数： &lt;？super T&gt;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">public class SuperTypeWildcards &#123;</span><br><span class="line">    static void writeTo(List&lt;? super Apple&gt; apples) &#123;</span><br><span class="line">        apples.add(new Apple());</span><br><span class="line">        apples.add(new Jonathan());</span><br><span class="line">        &#x2F;&#x2F; apples.add(new Fruit()); &#x2F;&#x2F; Error</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="捕获转换"><a href="#捕获转换" class="headerlink" title="捕获转换"></a>捕获转换</h2><ul>
+<li>一种特殊情况需要使用 <?> 而不是原生类型。如果向一个使用 <?> 的方法传递原生类型，那么对编译器来说，可能会推断出实际的类型参数，使得这个方法可以回转并调用另一个使用这个确切类型的方法。下面的示例演示了这种技术，它被称为捕获转换，因为未指定的通配符类型被捕获，并被转换为确切类型。</li>
+</ul>
+<h2 id="泛型的限制"><a href="#泛型的限制" class="headerlink" title="泛型的限制"></a>泛型的限制</h2><ul>
+<li>基本类型不能作为类型参数</li>
+<li>一个类不能实现同一个泛型接口的两种变体,这两种会变成相同的接口</li>
+<li>泛型方法不能重载,在编译器内部,看起来是一样的</li>
+</ul>
+<h2 id="自限定的类型"><a href="#自限定的类型" class="headerlink" title="自限定的类型"></a>自限定的类型</h2><ul>
+<li><code>class SelfBounded&lt;T extends SelfBounded&lt;T&gt;&gt; { // ...</code></li>
+</ul>
+<p>这会强制要求将正在定义的类当作参数传递给基类。</p>
+<p>自限定的参数的意义:<br>    它可以保证类型参数必须与正在被定义的类相同。正如你在 B 类的定义中所看到的，还可以从使用了另一个 SelfBounded 参数的 SelfBounded 中导出，尽管在 A 类看到的用法看起来是主要的用法。对定义 E 的尝试说明不能使用不是 SelfBounded 的类型参数。 遗憾的是， F 可以编译，不会有任何警告，因此自限定惯用法不是可强制执行的。如果它确实很重要，可以要求一个外部工具来确保不会使用原生类型来替代参数化类型。 </p>
+<h2 id="动态类型安全"><a href="#动态类型安全" class="headerlink" title="动态类型安全"></a>动态类型安全</h2><ul>
+<li>对于旧代码中没使用的泛型的类,可以在插入前进行检查</li>
+<li><code>checkedCollection(),checkedList()</code></li>
+<li>在检查时出现类型不安全的问题,抛出ClassCastException</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li>由于擦除原因, catch语句不能捕获泛型类型的异常,泛型类不能直接或间接继承自Throwable</li>
+<li>但是<code>interface Processor&lt;T, E extends Exception&gt;{}</code>可以获取异常参数,并在内部的方法中 throw该异常<blockquote>
+<p>如果不能参数化所抛出的异常,由于检查型异常的缘故,将不能编写这种泛化的代码 </p>
+</blockquote>
+</li>
+</ul>
+<h2 id="通过反射补偿潜在类型机制"><a href="#通过反射补偿潜在类型机制" class="headerlink" title="通过反射补偿潜在类型机制"></a>通过反射补偿潜在类型机制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Does not implement Performs:</span><br><span class="line">class Mime &#123;</span><br><span class="line">    public void walkAgainstTheWind() &#123;&#125;</span><br><span class="line">    public void sit() &#123;</span><br><span class="line">        System.out.println(&quot;Pretending to sit&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void pushInvisibleWalls() &#123;&#125;</span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123; return &quot;Mime&quot;; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Does not implement Performs:</span><br><span class="line">class SmartDog &#123;</span><br><span class="line">    public void speak() &#123; System.out.println(&quot;Woof!&quot;); &#125;</span><br><span class="line">    public void sit() &#123; System.out.println(&quot;Sitting&quot;); &#125;</span><br><span class="line">    public void reproduce() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class CommunicateReflectively &#123;</span><br><span class="line">    public static void perform(Object speaker) &#123;</span><br><span class="line">        Class&lt;?&gt; spkr &#x3D; speaker.getClass();</span><br><span class="line">        try &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Method speak &#x3D; spkr.getMethod(&quot;speak&quot;);</span><br><span class="line">                speak.invoke(speaker);</span><br><span class="line">            &#125; catch(NoSuchMethodException e) &#123;</span><br><span class="line">                System.out.println(speaker + &quot; cannot speak&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                Method sit &#x3D; spkr.getMethod(&quot;sit&quot;);</span><br><span class="line">                sit.invoke(speaker);</span><br><span class="line">            &#125; catch(NoSuchMethodException e) &#123;</span><br><span class="line">                System.out.println(speaker + &quot; cannot sit&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch(SecurityException |</span><br><span class="line">            IllegalAccessException |</span><br><span class="line">            IllegalArgumentException |</span><br><span class="line">            InvocationTargetException e) &#123;</span><br><span class="line">            throw new RuntimeException(speaker.toString(), e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LatentReflection &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        CommunicateReflectively.perform(new SmartDog());</span><br><span class="line">        CommunicateReflectively.perform(new Robot());</span><br><span class="line">        CommunicateReflectively.perform(new Mime());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-14"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-14/"
+    >ThinkinginJava LearnNote 14</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-14/" class="article-date">
+  <time datetime="2020-08-02T12:27:01.029Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="RTTI和反射-gt-在运行时识别对象和类的信息"><a href="#RTTI和反射-gt-在运行时识别对象和类的信息" class="headerlink" title="RTTI和反射-&gt;在运行时识别对象和类的信息"></a>RTTI和反射-&gt;在运行时识别对象和类的信息</h2><ul>
+<li>RTTI:它假定我们在编译时已经知道所有类型</li>
+<li>反射:在程序运行时发现和使用类的信息</li>
+</ul>
+<h2 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h2><ul>
+<li><p>Class对象负责类型信息在运行时如何显示</p>
+</li>
+<li><p>所有的类都是第一次使用时,动态加载到JVM中,当创建第一个对类的静态成员的引用时会加载这个类</p>
+<blockquote>
+<p>其实构造器也是类的静态方法，虽然构造器前面并没有 static 关键字。所以，使用 new 操作符创建类的新对象，这个操作也算作对类的静态成员引用。</p>
+</blockquote>
+</li>
+<li><p>通过<code>Class.forName(XXX)</code>如果XXX类还没被加载就会加载它,然后开始执行静态初始化块</p>
+</li>
+<li><p>如果找不到要加载的类,就会抛出<code>ClassNotFoundException</code>异常</p>
+</li>
+<li><p>注意XXX要是一个包含包名的全名</p>
+</li>
+<li><p><code>getName()</code>可以获得完整的类名</p>
+</li>
+<li><p><code>getSimpleName()</code>可以获得不产生包名的类名</p>
+</li>
+<li><p><code>getConnicalName()</code>获取完整类名(除内部类和数组外,大部分结果与getName()相同)</p>
+</li>
+<li><p><code>isInterface()</code>会判断该class是不是接口</p>
+</li>
+<li><p><code>getSuperclass()</code>会获得父类的class对象</p>
+</li>
+<li><p><code>newInstance()</code>即便不知道该类的确切类型也可以创建这个类的对象</p>
+</li>
+</ul>
+<h2 id="类字面初始量"><a href="#类字面初始量" class="headerlink" title="类字面初始量"></a>类字面初始量</h2><ul>
+<li>基本类型.class可以生成类对象的引用</li>
+<li>当使用.class来创建对Class对象的引用时,不会自动初始化对象,而是有三个步骤<ol>
+<li>加载，这是由类加载器执行的。该步骤将查找字节码（通常在 classpath 所指定的路径中查找，但这并非是必须的），并从这些字节码中创建一个 Class 对象。</li>
+<li>链接。在链接阶段将验证类中的字节码，为 static 字段分配存储空间，并且如果需要的话，将解析这个类创建的对其他类的所有引用。</li>
+<li>初始化。如果该类具有超类，则先初始化超类，执行 static 初始化器和 static 初始化块。</li>
+</ol>
+</li>
+</ul>
+<h2 id="cast-方法"><a href="#cast-方法" class="headerlink" title="cast()方法"></a>cast()方法</h2><p>通过<code>cast()</code>我们可以完成自定义类型的向下转型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Building &#123;&#125;</span><br><span class="line">class House extends Building &#123;&#125;</span><br><span class="line"></span><br><span class="line">public class ClassCasts &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Building b &#x3D; new House();</span><br><span class="line">        Class&lt;House&gt; houseType &#x3D; House.class;</span><br><span class="line">        House h &#x3D; houseType.cast(b);</span><br><span class="line">        h &#x3D; (House)b; &#x2F;&#x2F; ... 或者这样做.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型转化检测"><a href="#类型转化检测" class="headerlink" title="类型转化检测"></a>类型转化检测</h2><ul>
+<li>通过<code>A instanceof B</code>我们可以判断A是不是B的实例</li>
+<li>该方法可以用于if判断条件</li>
+</ul>
+<h2 id="RTTI的三种形式"><a href="#RTTI的三种形式" class="headerlink" title="RTTI的三种形式"></a>RTTI的三种形式</h2><ol>
+<li>传统的类型转换</li>
+<li>代表对象的类型的Class对象,通过查询Class对象可以获取运行时所需的信息</li>
+<li>instanceof,通过返回的布尔值告诉我们是否为该类型实例</li>
+</ol>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><ul>
+<li><p>RTTI和反射的区别:</p>
+<ol>
+<li>对RTTI来说,编译器在编译时打开和检查.class</li>
+<li>对反射来说.class在编译时是不可获取的,只能在运行时打开和检查.class文件</li>
+<li>通过java.lang.reflect类调用<code>getFields(),getMethods(),getConstructors()</code>返回表示字段,方法以及构造器的对象的数组</li>
+</ol>
+</li>
+<li><p>通过<code>getmethods()</code>和getconstructors()分别返回<code>Method</code>数组和<code>Constructor</code>数组</p>
+</li>
+</ul>
+<h2 id="在命令行总执行java文件"><a href="#在命令行总执行java文件" class="headerlink" title="在命令行总执行java文件"></a>在命令行总执行java文件</h2><ul>
+<li>首先在指定文件.java下使用javac进行编译</li>
+<li>如果.java中有package的定义,在使用java XXX时一般在src目录下,采用java com.chapter.XXX完成调用</li>
+</ul>
+<h2 id="接口和类型"><a href="#接口和类型" class="headerlink" title="接口和类型"></a>接口和类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import typeinfo.interfacea.*;</span><br><span class="line"></span><br><span class="line">class C implements A &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void f() &#123;</span><br><span class="line">        System.out.println(&quot;public C.f()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void g() &#123;</span><br><span class="line">        System.out.println(&quot;public C.g()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void u() &#123;</span><br><span class="line">        System.out.println(&quot;package C.u()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void v() &#123;</span><br><span class="line">        System.out.println(&quot;protected C.v()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void w() &#123;</span><br><span class="line">        System.out.println(&quot;private C.w()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HiddenC &#123;</span><br><span class="line">    public static A makeA() &#123;</span><br><span class="line">        return new C();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我们可以看到只有HiddenC()使用了public方法</li>
+<li>虽然返回的是C类型,但是外部不能使用A之外的任何方法</li>
+<li>但是,通过反射,我们依旧可以完成C方法的调用,甚至是private方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import typeinfo.interfacea.*;</span><br><span class="line">import typeinfo.packageaccess.*;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line">public class HiddenImplementation &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        A a &#x3D; HiddenC.makeA();</span><br><span class="line">        a.f();</span><br><span class="line">        System.out.println(a.getClass().getName());</span><br><span class="line">        &#x2F;&#x2F; Compile error: cannot find symbol &#39;C&#39;:</span><br><span class="line">        &#x2F;* if(a instanceof C) &#123;</span><br><span class="line">            C c &#x3D; (C)a;</span><br><span class="line">            c.g();</span><br><span class="line">        &#125; *&#x2F;</span><br><span class="line">        &#x2F;&#x2F; Oops! Reflection still allows us to call g():</span><br><span class="line">        callHiddenMethod(a, &quot;g&quot;);</span><br><span class="line">        &#x2F;&#x2F; And even less accessible methods!</span><br><span class="line">        callHiddenMethod(a, &quot;u&quot;);</span><br><span class="line">        callHiddenMethod(a, &quot;v&quot;);</span><br><span class="line">        callHiddenMethod(a, &quot;w&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static void callHiddenMethod(Object a, String methodName) throws Exception &#123;</span><br><span class="line">        Method g &#x3D; a.getClass().getDeclaredMethod(methodName);</span><br><span class="line">        g.setAccessible(true);</span><br><span class="line">        g.invoke(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-13"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-13/"
+    >ThinkinginJava LearnNote 13</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-13/" class="article-date">
+  <time datetime="2020-08-02T10:16:30.708Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十三章-字符串"><a href="#第十三章-字符串" class="headerlink" title="第十三章 字符串"></a>第十三章 字符串</h1><ul>
+<li>String是不可变的,每次对String的修改实际上都是创建了新的对象</li>
+<li>在对String操作时,Java编译器会使用StringBuilder进行优化</li>
+<li>在循环内对String相加时,最好自己使用StringBuilder来实现</li>
+</ul>
+<h2 id="意外递归"><a href="#意外递归" class="headerlink" title="意外递归"></a>意外递归</h2><ul>
+<li>在重写<code>toString()</code>时,不要<code>return String+this;</code>因为this也会调用<code>toString()</code></li>
+<li>应该使用<code>super.toString()</code></li>
+</ul>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>以下是 <code>String</code> 对象具备的一些基本方法。重载的方法归纳在同一行中：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数，重载版本</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造方法</td>
+<td>默认版本，<code>String</code>，<code>StringBuilder</code>，<code>StringBuffer</code>，<code>char</code>数组，<code>byte</code>数组</td>
+<td>创建<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>length()</code></td>
+<td></td>
+<td><code>String</code>中字符的个数</td>
+</tr>
+<tr>
+<td><code>charAt()</code></td>
+<td><code>int</code>索引</td>
+<td>获取<code>String</code>中索引位置上的<code>char</code></td>
+</tr>
+<tr>
+<td><code>getChars()</code>，<code>getBytes()</code></td>
+<td>待复制部分的开始和结束索引，复制的目标数组，目标数组的开始索引</td>
+<td>复制<code>char</code>或<code>byte</code>到一个目标数组中</td>
+</tr>
+<tr>
+<td><code>toCharArray()</code></td>
+<td></td>
+<td>生成一个<code>char[]</code>，包含<code>String</code>中的所有字符</td>
+</tr>
+<tr>
+<td><code>equals()</code>，<code>equalsIgnoreCase()</code></td>
+<td>与之进行比较的<code>String</code></td>
+<td>比较两个<code>String</code>的内容是否相同。如果相同，结果为<code>true</code></td>
+</tr>
+<tr>
+<td><code>compareTo()</code>，<code>compareToIgnoreCase()</code></td>
+<td>与之进行比较的<code>String</code></td>
+<td>按词典顺序比较<code>String</code>的内容，比较结果为负数、零或正数。注意，大小写不等价</td>
+</tr>
+<tr>
+<td><code>contains()</code></td>
+<td>要搜索的<code>CharSequence</code></td>
+<td>如果该<code>String</code>对象包含参数的内容，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>contentEquals()</code></td>
+<td>与之进行比较的<code>CharSequence</code>或<code>StringBuffer</code></td>
+<td>如果该<code>String</code>对象与参数的内容完全一致，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td></td>
+<td>返回<code>boolean</code>结果，以表明<code>String</code>对象的长度是否为0</td>
+</tr>
+<tr>
+<td><code>regionMatches()</code></td>
+<td>该<code>String</code>的索引偏移量，另一个<code>String</code>及其索引偏移量，要比较的长度。重载版本增加了“忽略大小写”功能</td>
+<td>返回<code>boolean</code>结果，以表明所比较区域是否相等</td>
+</tr>
+<tr>
+<td><code>startsWith()</code></td>
+<td>可能的起始<code>String</code>。重载版本在参数中增加了偏移量</td>
+<td>返回<code>boolean</code>结果，以表明该<code>String</code>是否以传入参数开始</td>
+</tr>
+<tr>
+<td><code>endsWith()</code></td>
+<td>该<code>String</code>可能的后缀<code>String</code></td>
+<td>返回<code>boolean</code>结果，以表明此参数是否是该字符串的后缀</td>
+</tr>
+<tr>
+<td><code>indexOf()</code>，<code>lastIndexOf()</code></td>
+<td>重载版本包括：<code>char</code>，<code>char</code>与起始索引，<code>String</code>，<code>String</code>与起始索引</td>
+<td>如果该<code>String</code>并不包含此参数，就返回-1；否则返回此参数在<code>String</code>中的起始索引。<code>lastIndexOf</code>()是从后往前搜索</td>
+</tr>
+<tr>
+<td><code>matches()</code></td>
+<td>一个正则表达式</td>
+<td>返回<code>boolean</code>结果，以表明该<code>String</code>和给出的正则表达式是否匹配</td>
+</tr>
+<tr>
+<td><code>split()</code></td>
+<td>一个正则表达式。可选参数为需要拆分的最大数量</td>
+<td>按照正则表达式拆分<code>String</code>，返回一个结果数组</td>
+</tr>
+<tr>
+<td><code>join()</code>（Java8引入的）</td>
+<td>分隔符，待拼字符序列。用分隔符将字符序列拼接成一个新的<code>String</code></td>
+<td>用分隔符拼接字符片段，产生一个新的<code>String</code></td>
+</tr>
+<tr>
+<td><code>substring()</code>（即<code>subSequence()</code>）</td>
+<td>重载版本：起始索引；起始索引+终止索引</td>
+<td>返回一个新的<code>String</code>对象，以包含参数指定的子串</td>
+</tr>
+<tr>
+<td><code>concat()</code></td>
+<td>要连接的<code>String</code></td>
+<td>返回一个新的<code>String</code>对象，内容为原始<code>String</code>连接上参数<code>String</code></td>
+</tr>
+<tr>
+<td><code>replace()</code></td>
+<td>要替换的字符，用来进行替换的新字符。也可以用一个<code>CharSequence</code>替换另一个<code>CharSequence</code></td>
+<td>返回替换字符后的新<code>String</code>对象。如果没有替换发生，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>replaceFirst()</code></td>
+<td>要替换的正则表达式，用来进行替换的<code>String</code></td>
+<td>返回替换首个目标字符串后的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>replaceAll()</code></td>
+<td>要替换的正则表达式，用来进行替换的<code>String</code></td>
+<td>返回替换所有目标字符串后的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>toLowerCase()</code>，<code>toUpperCase()</code></td>
+<td></td>
+<td>将字符的大小写改变后，返回一个新的<code>String</code>对象。如果没有任何改变，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>trim()</code></td>
+<td></td>
+<td>将<code>String</code>两端的空白符删除后，返回一个新的<code>String</code>对象。如果没有任何改变，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>valueOf()</code>（<code>static</code>）</td>
+<td>重载版本：<code>Object</code>；<code>char[]</code>；<code>char[]</code>，偏移量，与字符个数；<code>boolean</code>；<code>char</code>；<code>int</code>；<code>long</code>；<code>float</code>；<code>double</code></td>
+<td>返回一个表示参数内容的<code>String</code></td>
+</tr>
+<tr>
+<td><code>intern()</code></td>
+<td></td>
+<td>为每个唯一的字符序列生成一个且仅生成一个<code>String</code>引用</td>
+</tr>
+<tr>
+<td><code>format()</code></td>
+<td>要格式化的字符串，要替换到格式化字符串的参数</td>
+<td>返回格式化结果<code>String</code></td>
+</tr>
+</tbody></table>
+<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><ul>
+<li>通过<code>System.out.format()</code>实现类似C语言的<code>printf()</code></li>
+</ul>
+<h2 id="Formatter类"><a href="#Formatter类" class="headerlink" title="Formatter类"></a>Formatter类</h2><p>在 Java 中，所有的格式化功能都是由 java.util.Formatter 类处理的。可以将 Formatter 看做一个翻译器，它将你的格式化字符串与数据翻译成需要的结果。当你创建一个 Formatter 对象时，需要向其构造器传递一些信息，告诉它最终的结果将向哪里输出</p>
+<p><code>Formatter f; f.format(&quot;XXX&quot;,XXX);</code></p>
+<h2 id="Formatter-转换"><a href="#Formatter-转换" class="headerlink" title="Formatter 转换"></a><code>Formatter</code> 转换</h2><p>下面的表格展示了最常用的类型转换：</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>d</code></td>
+<td align="left">整型（十进制）</td>
+</tr>
+<tr>
+<td align="center"><code>c</code></td>
+<td align="left">Unicode字符</td>
+</tr>
+<tr>
+<td align="center"><code>b</code></td>
+<td align="left">Boolean值</td>
+</tr>
+<tr>
+<td align="center"><code>s</code></td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="center"><code>f</code></td>
+<td align="left">浮点数（十进制）</td>
+</tr>
+<tr>
+<td align="center"><code>e</code></td>
+<td align="left">浮点数（科学计数）</td>
+</tr>
+<tr>
+<td align="center"><code>x</code></td>
+<td align="left">整型（十六进制）</td>
+</tr>
+<tr>
+<td align="center"><code>h</code></td>
+<td align="left">散列码（十六进制）</td>
+</tr>
+<tr>
+<td align="center"><code>%</code></td>
+<td align="left">字面值“%”</td>
+</tr>
+</tbody></table>
+<h3 id="String-format"><a href="#String-format" class="headerlink" title="String.format()"></a><code>String.format()</code></h3><p>Java SE5 也参考了 C 中的 <code>sprintf()</code> 方法，以生成格式化的 <code>String</code> 对象。<code>String.format()</code> 是一个 <code>static</code> 方法，它接受与 <code>Formatter.format()</code> 方法一样的参数，但返回一个 <code>String</code> 对象。当你只需使用一次 <code>format()</code> 方法的时候，<code>String.format()</code> 用起来很方便。</p>
+<p>其实在 <code>String.format()</code> 内部，它也是创建了一个 <code>Formatter</code> 对象，然后将你传入的参数转给 <code>Formatter</code>。不过，与其自己做这些事情，不如使用便捷的 <code>String.format()</code> 方法，何况这样的代码更清晰易读。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><ul>
+<li>正则表达式就是以某种方式描述字符串</li>
+<li>在java中相比其他语言要多一个<code>\</code>来表示,比如<code>\\d</code>表示一个数字</li>
+<li>但是对于<code>\n</code>,<code>\t</code>,等还是用一个一个分号</li>
+<li><code>-?\\d+</code>表示一个负号后面可能有一个或多个数字</li>
+<li>通过String.matches(regex),可以直接对字符串进行匹配,返回值为true或false</li>
+</ul>
+<h3 id="创建正则表达式"><a href="#创建正则表达式" class="headerlink" title="创建正则表达式"></a>创建正则表达式</h3><p>我们首先从正则表达式可能存在的构造集中选取一个很有用的子集，以此开始学习正则表达式。正则表达式的完整构造子列表，请参考JDK文档 <code>java.util.regex</code> 包中的 <code>Pattern</code>类。</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>B</code></td>
+<td align="left">指定字符<code>B</code></td>
+</tr>
+<tr>
+<td align="left"><code>\xhh</code></td>
+<td align="left">十六进制值为<code>0xhh</code>的字符</td>
+</tr>
+<tr>
+<td align="left"><code>\uhhhh</code></td>
+<td align="left">十六进制表现为<code>0xhhhh</code>的Unicode字符</td>
+</tr>
+<tr>
+<td align="left"><code>\t</code></td>
+<td align="left">制表符Tab</td>
+</tr>
+<tr>
+<td align="left"><code>\n</code></td>
+<td align="left">换行符</td>
+</tr>
+<tr>
+<td align="left"><code>\r</code></td>
+<td align="left">回车</td>
+</tr>
+<tr>
+<td align="left"><code>\f</code></td>
+<td align="left">换页</td>
+</tr>
+<tr>
+<td align="left"><code>\e</code></td>
+<td align="left">转义（Escape）</td>
+</tr>
+</tbody></table>
+<p>当你学会了使用字符类（character classes）之后，<br>正则表达式的威力才能真正显现出来。以下是一些创建字符类的典型方式，以及一些预定义的类：</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>.</code></td>
+<td align="left">任意字符</td>
+</tr>
+<tr>
+<td align="left"><code>[abc]</code></td>
+<td align="left">包含<code>a</code>、<code>b</code>或<code>c</code>的任何字符（和`a</td>
+</tr>
+<tr>
+<td align="left"><code>[^abc]</code></td>
+<td align="left">除<code>a</code>、<code>b</code>和<code>c</code>之外的任何字符（否定）</td>
+</tr>
+<tr>
+<td align="left"><code>[a-zA-Z]</code></td>
+<td align="left">从<code>a</code>到<code>z</code>或从<code>A</code>到<code>Z</code>的任何字符（范围）</td>
+</tr>
+<tr>
+<td align="left"><code>[abc[hij]]</code></td>
+<td align="left"><code>a</code>、<code>b</code>、<code>c</code>、<code>h</code>、<code>i</code>、<code>j</code>中的任意字符（与`a</td>
+</tr>
+<tr>
+<td align="left"><code>[a-z&amp;&amp;[hij]]</code></td>
+<td align="left">任意<code>h</code>、<code>i</code>或<code>j</code>（交）</td>
+</tr>
+<tr>
+<td align="left"><code>\s</code></td>
+<td align="left">空白符（空格、tab、换行、换页、回车）</td>
+</tr>
+<tr>
+<td align="left"><code>\S</code></td>
+<td align="left">非空白符（<code>[^\s]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\d</code></td>
+<td align="left">数字（<code>[0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\D</code></td>
+<td align="left">非数字（<code>[^0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\w</code></td>
+<td align="left">词字符（<code>[a-zA-Z_0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\W</code></td>
+<td align="left">非词字符（<code>[^\w]</code>）</td>
+</tr>
+</tbody></table>
+<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><p>量词描述了一个模式捕获输入文本的方式：</p>
+<ul>
+<li><p><strong>贪婪型</strong>：<br>量词总是贪婪的，除非有其他的选项被设置。贪婪表达式会为所有可能的模式发现尽可能多的匹配。导致此问题的一个典型理由就是假定我们的模式仅能匹配第一个可能的字符组，如果它是贪婪的，那么它就会继续往下匹配。</p>
+</li>
+<li><p><strong>勉强型</strong>：<br>用问号来指定，这个量词匹配满足模式所需的最少字符数。因此也被称作懒惰的、最少匹配的、非贪婪的或不贪婪的。</p>
+</li>
+<li><p><strong>占有型</strong>：<br>目前，这种类型的量词只有在 Java 语言中才可用（在其他语言中不可用），并且也更高级，因此我们大概不会立刻用到它。当正则表达式被应用于 <code>String</code> 时，它会产生相当多的状态，以便在匹配失败时可以回溯。而“占有的”量词并不保存这些中间状态，因此它们可以防止回溯。它们常常用于防止正则表达式失控，因此可以使正则表达式执行起来更高效。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>贪婪型</th>
+<th>勉强型</th>
+<th>占有型</th>
+<th>如何匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>X?</code></td>
+<td><code>X??</code></td>
+<td><code>X?+</code></td>
+<td>一个或零个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X*</code></td>
+<td><code>X*?</code></td>
+<td><code>X*+</code></td>
+<td>零个或多个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X+</code></td>
+<td><code>X+?</code></td>
+<td><code>X++</code></td>
+<td>一个或多个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n}</code></td>
+<td><code>X{n}?</code></td>
+<td><code>X{n}+</code></td>
+<td>恰好<code>n</code>次<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n,}</code></td>
+<td><code>X{n,}?</code></td>
+<td><code>X{n,}+</code></td>
+<td>至少<code>n</code>次<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n,m}</code></td>
+<td><code>X{n,m}?</code></td>
+<td><code>X{n,m}+</code></td>
+<td><code>X</code>至少<code>n</code>次，但不超过<code>m</code>次</td>
+</tr>
+</tbody></table>
+<h2 id="Pattern和Matcher"><a href="#Pattern和Matcher" class="headerlink" title="Pattern和Matcher"></a>Pattern和Matcher</h2><ol>
+<li>通过<code>static Pattern.compile()</code> 方法来编译正则表达式。它会根据你的 <code>String</code> 类型的正则表达式生成一个 <code>Pattern</code> 对象。</li>
+<li>把你想要检索的字符串传入 <code>Pattern</code> 对象的 <code>matcher()</code> 方法。</li>
+<li><code>matcher()</code> 方法会生成一个 <code>Matcher</code> 对象，它有很多功能可用,例如，它的 <code>replaceAll()</code> 方法能将所有匹配的部分都替换成你传入的参数。</li>
+<li>匹配完成后,通过<code>start()</code>和<code>end()</code>可以获取匹配到字符的起始和结束位置</li>
+</ol>
+<ul>
+<li><p>通过<code>split()</code>可以将字符分割,而断开的边界由正则表达式确定</p>
+</li>
+<li><p><code>Pattern.compile(&quot;边界&quot;).split(输入字符串)));</code> 对输入字符串,按照边界分割</p>
+</li>
+<li><p><code>Pattern.compile(&quot;边界&quot;).split(输入字符串，数量)));</code> 如果超出数量就不再分割</p>
+</li>
+<li><p>对于Matcher()匹配到后,返回的Matcher对象,可以使用<code>find()</code>可以像迭代器一样遍历字符串</p>
+</li>
+</ul>
+<h2 id="替换操作"><a href="#替换操作" class="headerlink" title="替换操作"></a>替换操作</h2><ul>
+<li>通过正则表达式对文本进行替换时,有多种方式:</li>
+</ul>
+<ul>
+<li><code>replaceFirst(String replacement)</code> 以参数字符串 <code>replacement</code> 替换掉第一个匹配成功的部分。</li>
+<li><code>replaceAll(String replacement)</code> 以参数字符串 <code>replacement</code> 替换所有匹配成功的部分。</li>
+<li><code>appendReplacement(StringBuffer sbuf, String replacement)</code> 执行渐进式的替换，而不是像 <code>replaceFirst()</code> 和 <code>replaceAll()</code> 那样只替换第一个匹配或全部匹配。这是一个非常重要的方法。它允许你调用其他方法来生成或处理 <code>replacement</code>（<code>replaceFirst()</code> 和 <code>replaceAll()</code> 则只能使用一个固定的字符串），使你能够以编程的方式将目标分割成组，从而具备更强大的替换功能。</li>
+<li><code>appendTail(StringBuffer sbuf)</code> 在执行了一次或多次 <code>appendReplacement()</code> 之后，调用此方法可以将输入字符串余下的部分复制到 <code>sbuf</code> 中。</li>
+</ul>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset()"></a>reset()</h3><ul>
+<li>对于一个Macher对象,可以应用于一个新的字符序列</li>
+<li>也就是说,对新的字符序列使用该匹配规则进行匹配</li>
+</ul>
+<h2 id="扫描输入"><a href="#扫描输入" class="headerlink" title="扫描输入"></a>扫描输入</h2><ul>
+<li>通过BufferReader获取到一个流对象,通过<code>readLine()</code>方法读取一行,后者使用<code>split()</code>分隔一行上的内容,返回一个数组列表</li>
+<li>通过Scanner可以接受任何类型的输入对象,包括File</li>
+<li>通过Scanner可以通过next()返回下一个String</li>
+</ul>
+<h3 id="Scanner分隔符"><a href="#Scanner分隔符" class="headerlink" title="Scanner分隔符"></a>Scanner分隔符</h3><ul>
+<li>默认情况下使用空白字符进行分隔,但是也可以自己用正则指定分隔符 </li>
+<li>通过<code>useDelimiter(regex)</code>来调用正则<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">public class ScannerDelimiter &#123;  </span><br><span class="line">    public static void main(String[] args) &#123;    </span><br><span class="line">        Scanner scanner &#x3D; new Scanner(&quot;12, 42, 78, 99, 42&quot;);    </span><br><span class="line">        scanner.useDelimiter(&quot;\\s*,\\s*&quot;);    </span><br><span class="line">        while(scanner.hasNextInt())    </span><br><span class="line">            System.out.println(scanner.nextInt());  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-12"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-12/"
+    >ThinkinginJava LearnNote 12</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-12/" class="article-date">
+  <time datetime="2020-08-02T04:10:35.146Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十二章-异常"><a href="#第十二章-异常" class="headerlink" title="第十二章 异常"></a>第十二章 异常</h1><blockquote>
+<p>Java的基本理念是结构不佳的代码不能运行</p>
+</blockquote>
+<h2 id="异常情形"><a href="#异常情形" class="headerlink" title="异常情形"></a>异常情形</h2><p>要组织当前方法或作用域继续执行问题</p>
+<p>面对出现的异常我们能做的就是从当前环境跳出,并把问题提交至上一级</p>
+<p>抛出异常时,会使用<strong>new</strong>在堆上创建异常对象,然后当前的执行路径被终止,并从当前环境中弹出对异常对象的引用,此时，异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序。这个恰当的地方就是异常处理程序，它的任务是将程序从错误状态中恢复，以使程序能要么换一种方式运行，要么继续运行下去。</p>
+<h2 id="异常的参数"><a href="#异常的参数" class="headerlink" title="异常的参数"></a>异常的参数</h2><p>标准的异常有两个构造器:一个是无参构造器；另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器.</p>
+<h2 id="异常的捕获"><a href="#异常的捕获" class="headerlink" title="异常的捕获"></a>异常的捕获</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">	正常语句</span><br><span class="line">&#125;catch&#123;</span><br><span class="line">	异常处理程序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>要自己定义异常类，必须从已有的异常类继承，最好是选择意思相近的异常类继承（不过这样的异常并不容易找）。建立新的异常类型最简单的方法就是让编译器为你产生无参构造器.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class SimpleException extends Exception &#123;&#125;</span><br><span class="line"></span><br><span class="line">public class InheritingExceptions &#123;</span><br><span class="line">    public void f() throws SimpleException &#123;</span><br><span class="line">        System.out.println(</span><br><span class="line">                &quot;Throw SimpleException from f()&quot;);</span><br><span class="line">        throw new SimpleException();</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InheritingExceptions sed &#x3D;</span><br><span class="line">                new InheritingExceptions();</span><br><span class="line">        try &#123;</span><br><span class="line">            sed.f();</span><br><span class="line">        &#125; catch(SimpleException e) &#123;</span><br><span class="line">            System.out.println(&quot;Caught it!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常的声明"><a href="#异常的声明" class="headerlink" title="异常的声明"></a>异常的声明</h2><p>在方法后面附加关键字<strong>throws</strong>,后面跟上所有的异常类型的列表<br><code>void f() throws TooBig, TooSmall, DivZero {...}</code></p>
+<h2 id="捕获所有异常"><a href="#捕获所有异常" class="headerlink" title="捕获所有异常"></a>捕获所有异常</h2><p>可以只写一个异常处理程序来捕获所有类型的异常。通过捕获异常类型的基类 Exception，就可以做到这一点（</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;Caught an exception&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多重捕获"><a href="#多重捕获" class="headerlink" title="多重捕获"></a>多重捕获</h2><p>对于要捕获多种异常,java7之前只能一个个catch(),java7之后可以使用<br><code>catch(Except1 | Except2 | Except3 | Except4 e) {
+            process();
+        }</code></p>
+<h2 id="重新抛出异常"><a href="#重新抛出异常" class="headerlink" title="重新抛出异常"></a>重新抛出异常</h2><p>既然已经得到了对当前异常对象的引用，可以直接把它重新抛出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;An exception was thrown&quot;);</span><br><span class="line">    throw e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重抛异常会把异常抛给上一级环境中的异常处理程序，同一个 try 块的后续 catch 子句将被忽略。此外，异常对象的所有信息都得以保持，所以高一级环境中捕获此异常的处理程序可以从这个异常对象中得到所有信息。</p>
+<h2 id="异常链"><a href="#异常链" class="headerlink" title="异常链"></a>异常链</h2><p>常常会想要在捕获一个异常后抛出另一个异常，并且希望把原始异常的信息保存下来，这被称为异常链。</p>
+<p>现在所有<code>Throwable</code>的子类在构造器中都可以接受一个<code>cause</code>对象作为参数。这个<code>cause</code>就用来表示原始异常，这样通过把原始异常传递给新的异常，使得即使在当前位置创建并抛出了新的异常，也能通过这个异常链追踪到异常最初发生的位置。</p>
+<p>在<code>Throwable</code>的子类中，只有三种基本的异常类提供了带<code>cause</code>参数的构造器。它们是<code>Error</code>（用于 Java 虚拟机报告系统错误）、Exception 以及 RuntimeException。如果要把其他类型的异常链接起来，应该使用<code>initCause()</code>方法而不是构造器。</p>
+<h2 id="使用finally进行清理"><a href="#使用finally进行清理" class="headerlink" title="使用finally进行清理"></a>使用finally进行清理</h2><ul>
+<li>不管try块中的异常是否会抛出,它们都可以得道执行,多用于内存回收</li>
+<li>即便finally在return语句之后,也会执行,完成相关内容的回收</li>
+</ul>
+<h2 id="异常的丢失"><a href="#异常的丢失" class="headerlink" title="异常的丢失"></a>异常的丢失</h2><ul>
+<li>如果在finally语句中,也有会抛出的异常,那么就会导致try语句块中的异常缺失</li>
+<li>如果在finally语句中,有return,也会导致try语句块中的异常缺失<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class ExceptionSilencer &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            &#x2F;&#x2F; Using &#39;return&#39; inside the finally block</span><br><span class="line">            &#x2F;&#x2F; will silence any thrown exception.</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="Java7出现的-try-with-resources"><a href="#Java7出现的-try-with-resources" class="headerlink" title="Java7出现的 try-with-resources"></a>Java7出现的 try-with-resources</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">public class TryWithResources &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try(</span><br><span class="line">                InputStream in &#x3D; new FileInputStream(</span><br><span class="line">                        new File(&quot;TryWithResources.java&quot;))</span><br><span class="line">        ) &#123;</span><br><span class="line">            int contents &#x3D; in.read();</span><br><span class="line">            &#x2F;&#x2F; Process contents</span><br><span class="line">        &#125; catch(IOException e) &#123;</span><br><span class="line">            &#x2F;&#x2F; Handle the error</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出在try()catch(){}之间多了个{}<br>括号内的部分称为资源规范头（resource specification header）。现在可用于整个 try 块的其余部分。<strong>无论你如何退出 try 块（正常或异常），都会执行相应的close语句</strong>，</p>
+<p>Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了 try-with-resources 特性。</p>
+<p>try-with-resource语句可以在没有catch()和finally()的情况下运行<br>如果使用一个没有AutoCloseable接口的对象,编译器会直接报错</p>
+<h2 id="异常匹配"><a href="#异常匹配" class="headerlink" title="异常匹配"></a>异常匹配</h2><p>抛出异常的时候，异常处理系统会按照代码的书写顺序找出“最近”的处理程序。找到匹配的处理程序之后，它就认为异常将得到处理，然后就不再继续查找。</p>
+<p>查找的时候并不要求抛出的异常同处理程序所声明的异常完全匹配。派生类的对象也可以匹配其基类的处理程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Annoyance extends Exception &#123;&#125;</span><br><span class="line">class Sneeze extends Annoyance &#123;&#125;</span><br><span class="line">public class Human &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F; Catch the exact type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Sneeze s) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Sneeze&quot;);</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; Catch the base type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-11"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-11/"
+    >ThinkinginJava LearnNote 11</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-11/" class="article-date">
+  <time datetime="2020-08-02T03:12:57.269Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十一章-持有对象"><a href="#第十一章-持有对象" class="headerlink" title="第十一章 持有对象"></a>第十一章 持有对象</h1><blockquote>
+<p>该章中主要介绍了容器等基本知识</p>
+</blockquote>
+<h2 id="容器的泛型"><a href="#容器的泛型" class="headerlink" title="容器的泛型"></a>容器的泛型</h2><ul>
+<li>通过ArrayList<Type>来代替ArrayList,可以再编译前对插入对象进行校验</li>
+<li>对于泛型中的元素可以进行向上转型(可以将子类add()到父类的ArrayList中)</li>
+</ul>
+<h2 id="集合-Collection"><a href="#集合-Collection" class="headerlink" title="集合 Collection"></a>集合 Collection</h2><ul>
+<li>一个独立元素的序列，这些元素都服从一条或多条规则。<strong>Lis</strong>必须以插入的顺序保存元素,<strong>Set</strong> 不能包含重复元素,<strong>Queue</strong>按照排队规则来确定对象产生的顺序（通常与它们被插入的顺序相同）。</li>
+</ul>
+<h2 id="映射-Map"><a href="#映射-Map" class="headerlink" title="映射 Map"></a>映射 Map</h2><ul>
+<li>一组成对的<strong>键值对</strong>对象，允许使用键来查找值。</li>
+</ul>
+<h2 id="元素添加"><a href="#元素添加" class="headerlink" title="元素添加"></a>元素添加</h2><ul>
+<li><code>Arrays.asList()</code>接受一个数组或者逗号分割的元素列表,转为List</li>
+<li><code>Collections.addAll()</code>接受一个Collection对象,以及一个数组或者逗号分隔的列表</li>
+</ul>
+<h2 id="集合的打印"><a href="#集合的打印" class="headerlink" title="集合的打印"></a>集合的打印</h2><ul>
+<li>数组需要使用<code>Arrays.toString()</code></li>
+<li>集合的打印直接输出即可,以数组的形式输出</li>
+</ul>
+<h2 id="列表List"><a href="#列表List" class="headerlink" title="列表List"></a>列表List</h2><ul>
+<li>第一种ArrayList,随机访问数据,插入删除速度较慢.</li>
+<li>第二种LinkedList,它通过代价较低的的插入和删除操作，提供了优化的顺序访问.LinkedList 对于随机访问来说相对较慢，但它具有比 ArrayList 更大的特征集.</li>
+<li>通过<code>contains(X)</code>可以返回是否List包含该元素</li>
+<li>通过<code>toArray()</code>可以将List转为数组</li>
+<li>通过<code>subList()</code>可以进行切片操作</li>
+</ul>
+<h2 id="迭代器Iterators"><a href="#迭代器Iterators" class="headerlink" title="迭代器Iterators"></a>迭代器Iterators</h2><ul>
+<li>使用<code>Iterator()</code>返回一个Iterator(序列中第一个元素)</li>
+<li>使用<code>next()</code>方法获取序列下一个元素</li>
+<li>使用<code>hasNext()</code>方法检查序列中是否还有元素</li>
+<li>使用<code>remove()</code>方法将迭代器最近返回的那个元素删除(<strong>调用remove()之前必须调用next()</strong>)</li>
+</ul>
+<h2 id="链表LinkedList"><a href="#链表LinkedList" class="headerlink" title="链表LinkedList"></a>链表LinkedList</h2><ul>
+<li>相比ArrayList,LinkedList添加了一些方法,使其可以用作栈,队列或双端队列</li>
+<li><code>getFirst()</code> 和 <code>element()</code> 是相同的，它们都返回列表的头部（第一个元素）而并不删除它，如果 List为空，则抛出NoSuchElementException异常</li>
+<li><code>peek()</code> 方法与这两个方法只是稍有差异，它在列表为空时返回 null</li>
+<li><code>removeFirst()</code> 和 <code>remove()</code> 也是相同的，它们删除并返回列表的头部元素，并在列表为空时抛出 NoSuchElementException 异常</li>
+<li><code>poll()</code> 稍有差异，它在列表为空时返回 null</li>
+<li><code>addFirst()</code> 在列表的开头插入一个元素</li>
+<li><code>offer()</code> 与 <code>add()</code> 和 <code>addLast()</code> 相同.它们都在列表的尾部（末尾）添加一个元素</li>
+<li><code>removeLast()</code> 删除并返回列表的最后一个元素</li>
+</ul>
+<h2 id="堆栈Stack"><a href="#堆栈Stack" class="headerlink" title="堆栈Stack"></a>堆栈Stack</h2><ul>
+<li>在java6中增加了ArrayDeque包含了实现了堆栈的功能<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class StackTest &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Deque&lt;String&gt; stack &#x3D; new ArrayDeque&lt;&gt;();</span><br><span class="line">    for(String s : &quot;My dog has fleas&quot;.split(&quot; &quot;))</span><br><span class="line">      stack.push(s);</span><br><span class="line">    while(!stack.isEmpty())</span><br><span class="line">      System.out.print(stack.pop() + &quot; &quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="集合Set"><a href="#集合Set" class="headerlink" title="集合Set"></a>集合Set</h2><ul>
+<li>Set中最常用的就是测试归属性,查找是最重要的操作,通常使用HashSet实现</li>
+<li>HashSet维护的顺序与TreeSet或LinkedhashSet不同,因为底层存储顺序不同</li>
+<li>HashSet使用散列,TreeSet使用红黑树,LinkedhashSet虽然使用散列,但是维护了插入顺序</li>
+<li>最常用操作使用<code>contains()</code>测试成员属性</li>
+</ul>
+<h2 id="映射Map"><a href="#映射Map" class="headerlink" title="映射Map"></a>映射Map</h2><ul>
+<li><code>containsKey()</code>和<code>containsValue()</code>判断是否含有某个元素</li>
+<li>在遍历时,通过foreach,遍历<code>X.keySet()</code>,使用<code>X.get(key)</code>获取对应的value</li>
+<li>Map和Collection之间唯一的交集是map可以使用entrySet()和values()</li>
+</ul>
+<h2 id="队列Queue"><a href="#队列Queue" class="headerlink" title="队列Queue"></a>队列Queue</h2><ul>
+<li>队列的先进先出,由Linkedlist实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class QueueDemo &#123;</span><br><span class="line">  public static void printQ(Queue queue) &#123;</span><br><span class="line">    while(queue.peek() !&#x3D; null)</span><br><span class="line">      System.out.print(queue.remove() + &quot; &quot;);</span><br><span class="line">    System.out.println();</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Queue&lt;Integer&gt; queue &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">    Random rand &#x3D; new Random(47);</span><br><span class="line">    for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">      queue.offer(rand.nextInt(i + 10));</span><br><span class="line">    printQ(queue);</span><br><span class="line">    Queue&lt;Character&gt; qc &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">    for(char c : &quot;Brontosaurus&quot;.toCharArray())</span><br><span class="line">      qc.offer(c);</span><br><span class="line">    printQ(qc);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>普通的队列顺序是由插入顺序确定的</li>
+<li>优先级队列<strong>PriorityQueue</strong>,基于Comparator兑现改变元素的顺序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class PriorityQueueDemo &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    PriorityQueue&lt;Integer&gt; priorityQueue &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;();</span><br><span class="line">    Random rand &#x3D; new Random(47);</span><br><span class="line">    for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">      priorityQueue.offer(rand.nextInt(i + 10));</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; ints &#x3D; Arrays.asList(25, 22, 20,</span><br><span class="line">      18, 14, 9, 3, 1, 1, 2, 3, 9, 14, 18, 21, 23, 25);</span><br><span class="line">    priorityQueue &#x3D; new PriorityQueue&lt;&gt;(ints);</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line">    priorityQueue &#x3D; new PriorityQueue&lt;&gt;(</span><br><span class="line">        ints.size(), Collections.reverseOrder());</span><br><span class="line">    priorityQueue.addAll(ints);</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line"></span><br><span class="line">    String fact &#x3D; &quot;EDUCATION SHOULD ESCHEW OBFUSCATION&quot;;</span><br><span class="line">    List&lt;String&gt; strings &#x3D;</span><br><span class="line">      Arrays.asList(fact.split(&quot;&quot;));</span><br><span class="line">    PriorityQueue&lt;String&gt; stringPQ &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;(strings);</span><br><span class="line">    QueueDemo.printQ(stringPQ);</span><br><span class="line">    stringPQ &#x3D; new PriorityQueue&lt;&gt;(</span><br><span class="line">      strings.size(), Collections.reverseOrder());</span><br><span class="line">    stringPQ.addAll(strings);</span><br><span class="line">    QueueDemo.printQ(stringPQ);</span><br><span class="line"></span><br><span class="line">    Set&lt;Character&gt; charSet &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">    for(char c : fact.toCharArray())</span><br><span class="line">      charSet.add(c); &#x2F;&#x2F; Autoboxing</span><br><span class="line">    PriorityQueue&lt;Character&gt; characterPQ &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;(charSet);</span><br><span class="line">    QueueDemo.printQ(characterPQ);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="不要在新代码中使用遗留类-Vector-HashTable-和Stack"><a href="#不要在新代码中使用遗留类-Vector-HashTable-和Stack" class="headerlink" title="不要在新代码中使用遗留类 Vector HashTable 和Stack"></a>不要在新代码中使用遗留类 Vector HashTable 和Stack</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-8-1-Random"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/8-1-Random/"
+    >Random的使用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/8-1-Random/" class="article-date">
+  <time datetime="2020-08-02T01:46:57.964Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="在测试Enum时发现的Random问题"><a href="#在测试Enum时发现的Random问题" class="headerlink" title="在测试Enum时发现的Random问题"></a>在测试Enum时发现的Random问题</h1><h2 id="Random正常的使用"><a href="#Random正常的使用" class="headerlink" title="Random正常的使用"></a>Random正常的使用</h2><ul>
+<li>在java中Random一般在使用时都会先创建Random对象,有两种方式</li>
+<li><code>Random random = new Random();</code>以系统时钟作为seed</li>
+<li><code>Random random = new Random(seed);</code>自己定义数字作为seed</li>
+<li>Random的实质是创建一个随机序列,在该序列上向后拿取随机数</li>
+<li>之后通过random.nextInt()就是在该序列上拿取一个随机数</li>
+<li>如果seed相同,就是同一个序列,线性的向后拿取随机数,保证(伪)随机</li>
+</ul>
+<h2 id="在Enum测试中出现的问题"><a href="#在Enum测试中出现的问题" class="headerlink" title="在Enum测试中出现的问题"></a>在Enum测试中出现的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Supplier&lt;T&gt;&#123;</span><br><span class="line">	T get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum CartoonCharacter implements Supplier&lt;CartoonCharacter&gt; &#123;</span><br><span class="line">    SLAPPY, SPANKY, PUNCHY,</span><br><span class="line">    SILLY, BOUNCY, NUTTY, BOB;</span><br><span class="line">    private Random rand &#x3D; new Random(47);</span><br><span class="line">    @Override</span><br><span class="line">    public CartoonCharacter get() &#123;</span><br><span class="line">        return values()[rand.nextInt(values().length)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class EnumImplementation &#123; </span><br><span class="line">	public static &lt;T&gt; void printNext(Supplier&lt;T&gt; rg) &#123;</span><br><span class="line">        System.out.print(rg.get() + &quot;, &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">&#x2F;&#x2F; Choose any instance:</span><br><span class="line">        CartoonCharacter cc &#x3D; CartoonCharacter.BOB;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">            printNext(cc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以上为正常代码,也就是通过集成Supplier接口,重写get方法,来获取随机的enum元素,在<code>main()</code>函数中通过传递实例,实现Enum方法的调用.</li>
+<li>但是在我对其进行修改后就只能,重复相同元素,<strong>失去Random的意义</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(CartoonCharacter c:CartoonCharacter.values())</span><br><span class="line">	printNext(c)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在我想通过foreach遍历<code>values()</code>产生的enum实例数组完成循环调用时,出现了无法产生随机数的问题,每次遍历结果都相同</li>
+<li>通过debug,发现确实调用了<code>rand.nextInt()</code>,只是每次数字相同,而且数字只随seed改变</li>
+<li>原因:通过<code>values()</code>获得的enum实例,其实是引用,每个都是一个enum类,也就是说每个都重新生成了一个enum类</li>
+<li>也就是说,在<code>foeeach</code>迭代中,每次迭代,我都创建了相同的Random序列,每次调用<code>rand.nextInt()</code>都会从相同的序列取第一个值,这也就是伪随机的缺陷</li>
+<li>在正常的<code>for(int)</code>循环中,使用的是同一个实例,因此每次的循环顺着一个序列向后找随机数</li>
+</ul>
+<p><strong>解决办法</strong></p>
+<ul>
+<li>使用static修饰enum中的Random对象,不管创建多少次实例,都会沿着一个序列向后随机</li>
+<li>不使用固定的seed,直接让random和系统时间绑定</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-8-2-git"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/8-2-git/"
+    >git命令的使用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/8-2-git/" class="article-date">
+  <time datetime="2020-08-02T01:30:28.700Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="git-clone和-git-pull"><a href="#git-clone和-git-pull" class="headerlink" title="git clone和 git pull"></a>git clone和 git pull</h2><ul>
+<li>首先使用<strong>gitbash</strong>选中一个文件夹</li>
+<li>然后在该空文件夹下使用gitclone,完成一个从无到有的过程</li>
+<li>通过gitclone,可以完整复制全部的仓库文件</li>
+<li>之后如果想要删除某个文件夹,使用<code>git rm -r --cached target 文件名</code></li>
+<li>在删除多个文件之后,使用<code>git push -u origin master</code>将删除的指令push到github上,此时仓库相应文件就会删除</li>
+<li>git pull是为了保持和远程仓库的更新,将github上新的文件下载下来,前提是该文件夹下本身已经有仓库了</li>
+<li>git pull 相当于 <code>git fetch</code> +<code>git merge</code>先从远程下载git项目中的文件,然后将文件与本地的分支进行merge</li>
+</ul>
+<h2 id="git删除分支"><a href="#git删除分支" class="headerlink" title="git删除分支"></a>git删除分支</h2><ul>
+<li>通过<code>git branch</code>我们可以知道当前分支名称</li>
+<li>通过<code>git branch -r</code>可以查看本地仓库的分支</li>
+<li>如果没有看到要删除的分支,说明没有更新,使用<code>git fetch origin</code>进行更新</li>
+<li>最后<code>git branch -rd 分支名</code>或者 <code>git push origin -delete</code></li>
+<li>再用<code>git branch -r</code>查看时就找不到相应的分支了</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-ThinkinginJava-LearnNote-8-9-10"
   class="article article-type-post"
   itemscope
@@ -111,7 +1187,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/"
-    >ThinkinginJava-LearnNote-8-9-10</a> 
+    >ThinkinginJava LearnNote 8-9-10</a> 
 </h2>
  
 
@@ -125,8 +1201,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<h2 id="title-ThinkinginJava-LearnNote-8-9-10"><a href="#title-ThinkinginJava-LearnNote-8-9-10" class="headerlink" title="title:ThinkinginJava LearnNote 8-9-10"></a>title:ThinkinginJava LearnNote 8-9-10</h2><h1 id="第八章学习重点-多态"><a href="#第八章学习重点-多态" class="headerlink" title="第八章学习重点 多态"></a>第八章学习重点 多态</h1><h3 id="多态的作用就是消除类型之间的耦合"><a href="#多态的作用就是消除类型之间的耦合" class="headerlink" title="多态的作用就是消除类型之间的耦合"></a>多态的作用就是消除类型之间的耦合</h3><ul>
+  <h1 id="第八章学习重点-多态"><a href="#第八章学习重点-多态" class="headerlink" title="第八章学习重点 多态"></a>第八章学习重点 多态</h1><h3 id="多态的作用就是消除类型之间的耦合"><a href="#多态的作用就是消除类型之间的耦合" class="headerlink" title="多态的作用就是消除类型之间的耦合"></a>多态的作用就是消除类型之间的耦合</h3><ul>
 <li>子类可以转为父类，完成向上转型这一过程</li>
 <li>其中涉及两个概念，<strong>前期绑定</strong>，<strong>后期绑定</strong>,后期绑定也被成为动态绑定</li>
 <li>在java中除了static方法和final方法，都自动使用后期绑定</li>
@@ -317,296 +1392,14 @@
 </article>
 
     
-    <article
-  id="post-MarkdownType"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/26/MarkdownType/"
-    >MarkdownType</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/26/MarkdownType/" class="article-date">
-  <time datetime="2020-07-26T10:21:34.546Z" itemprop="datePublished">2020-07-26</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <ol>
-<li><p>插入代码的方法就是使用 Esc 下方的符号 ``<br> 效果如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;this is markdown&quot;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对于标题的应用,必须在#后面加上空格,不然无法显示<br> 效果如下:</p>
-<h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3></li>
-</ol>
-<ol start="3">
-<li>对于加粗的字,或者倾斜的字,就不用在符号和文字之间加上空格使用,前面加上**或者***<br> 效果如下:<br> <strong>两个个星是加粗</strong><br> <strong><em>三个星是加粗加倾斜</em></strong></li>
-</ol>
-<ol start="4">
-<li>对于需要引用的文字,使用&gt;<br> 即可,该符号还支持嵌套引用,并且引用内部还可以支持其他符号的应用</li>
-</ol>
-<ol start="5">
-<li><p>对于段落,要保证该项目下的每个段落都有4个空格的缩进,适合写大段的话<br> 效果如下:</p>
-<ul>
-<li>轻轻的我走了， 正如我轻轻的来； 我轻轻的招手， 作别西天的云彩。<br>那河畔的金柳， 是夕阳中的新娘； 波光里的艳影， 在我的心头荡漾。<br>软泥上的青荇， 油油的在水底招摇； 在康河的柔波里， 我甘心做一条水草！</li>
-</ul>
-</li>
-<li><p>如果要在列表项目内使用引用,那么就要对&gt;加上缩进<br> 效果如下:</p>
-<ul>
-<li>阅读的方法:<blockquote>
-<p>打开书本。<br>打开电灯。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="7">
-<li><p>有两种列表,无序列表,每行前面只有黑点,有序列表每行前面是数字<br> 效果如下:<br> -,+,- 都可以表示为无序列表</p>
-<ul>
-<li>这是无序列表第一行</li>
-<li>这是无序列表第二行</li>
-<li>这是无序列表第三行</li>
-</ul>
-</li>
-<li><p>数字后加上.和一个空格 就是有序列表</p>
-<ol>
-<li>这是有序列表第一行    </li>
-<li>这是有序列表第二行</li>
-<li>这是有序列表第三行</li>
-</ol>
-</li>
-<li><p>使用链接的方法,需要超链接的文字用[]括起来并且后面通过[1]进行标识, 之后使用[1]:url”文字”就可以了<br> 效果如下:<br> 目前的几个学习网站[Github][1]、[Bilibili][2]、[CSDN][3],通过这几个网站的学习,能够有效的提高代码水平<br> [1]: <a href="https://github.com" target="_blank" rel="noopener">https://github.com</a> “Github”<br> [2]: <a href="https://www.bilibili.com" target="_blank" rel="noopener">https://www.bilibili.com</a> “Bilibili”<br> [3]: <a href="https://www.csdn.com" target="_blank" rel="noopener">https://www.csdn.com</a> “CSDN”</p>
-</li>
-</ol>
-<ol start="10">
-<li>图片的插入就要使用图床来创建,具体的做法与超链接类似使用[]包起来,用标识符标记,最后 通过标识符:url “文字”连接到图床<br>效果如下:<br>快乐学习：<br><img src="https://yanxuan.nosdn.127.net/0a92cb4575418602108d3112aa5a3c14.png" alt="快乐学习" title="快乐学习"></li>
-</ol>
-<ol start="11">
-<li>表格的写法,使用|和-完成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">学号|姓名|分数</span><br><span class="line">-|-|-</span><br><span class="line">小明|男|75</span><br><span class="line">小红|女|79</span><br><span class="line">小陆|男|92</span><br></pre></td></tr></table></figure>
-效果如下:<table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>小明</td>
-<td>男</td>
-<td>75</td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79</td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<ol start="12">
-<li>分隔线,连续三个以上的*,-,或者_都可以,注意行内不可以写其他东西</li>
-</ol>
-<hr>
-<hr>
-<hr>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-7-26"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/26/7-26/"
-    >Swagger 的学习方法</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/26/7-26/" class="article-date">
-  <time datetime="2020-07-26T10:16:20.513Z" itemprop="datePublished">2020-07-26</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="项目集成Swagger"><a href="#项目集成Swagger" class="headerlink" title="项目集成Swagger"></a>项目集成Swagger</h1><p><img src="https://shop.io.mi-img.com/app/shop/img?id=shop_65180179a189e99443f0e93190259be4.png" alt="项目集成" title="项目集成"></p>
-<p>学习目标:<br>    - 了解Swagger的概念和应用<br>    - 掌握在项目中集成Swagger自动生成API文档</p>
-<h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><p><strong>前后端分离</strong><br>    - 前端 -&gt;前端控制层,视图层<br>    - 后端 -&gt;后端控制层,服务处,数据访问层<br>    - 前后端通过API进行交互<br>    - 前后端相对独立且松耦合<br><strong>产生的问题</strong><br>    - 前后端集成,前端或后端无法做到及时协商,尽早解决<br><strong>解决方案</strong><br>    - 首先定义schema[计划提纲],并实施跟踪最新的API,降低集成风险<br><strong>Swagger</strong><br>    - 号称世界上最流行的API框架<br>    - Restful Api文档在线自动生成器=&gt; <strong>API文档与API定义同步更新</strong><br>    - 直接运行,在线测试API<br>    - 支持多种语言<br>    - 官网: <a href="https://swagger.io/" target="_blank" rel="noopener">https://swagger.io/</a></p>
-<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><p>   SpringBoot集成Swagger=&gt;springfox,两个jar包</p>
-<ul>
-<li>Springfox-swagger2</li>
-<li>swagger-springmvc</li>
-</ul>
-<p>   <strong>使用Swagger</strong><br>   要求:JDK 1.8+ 否则swagger2无法运行<br>   步骤:</p>
-<ol>
-<li>新建一个SpringBoot-web项目</li>
-<li>添加Maven依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;io.springfox&#x2F;springfox-swagger2 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;io.springfox&#x2F;springfox-swagger-ui --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;springfox-swagger-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>编写HelloController,测试确保运行成功</li>
-<li>要使用Swagger,我们要编写一个配置类SwaggerConfig来配置swagger<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  @Configuration &#x2F;&#x2F;配置类</span><br><span class="line">@EnableSwagger2&#x2F;&#x2F; 开启Swagger2的自动配置</span><br><span class="line">public class SwaggerConfig &#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>访问测试: <a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html</a> ，可以看到swagger的界面；<br><img src="https://shop.io.mi-img.com/app/shop/img?id=shop_893f7fa73cfa50a6353fc2c9bb520f6f.png" alt="测试图片" title="访问测试"></li>
-</ol>
-<h1 id="以上内容都是狂神说SpringBoot的内容-使用MD重新自己写了一遍-原文地址-狂神说"><a href="#以上内容都是狂神说SpringBoot的内容-使用MD重新自己写了一遍-原文地址-狂神说" class="headerlink" title="以上内容都是狂神说SpringBoot的内容,使用MD重新自己写了一遍,原文地址:狂神说"></a>以上内容都是狂神说SpringBoot的内容,使用MD重新自己写了一遍,原文地址:<a href="https://mp.weixin.qq.com/s/0-c0MAgtyOeKx6qzmdUG0w" target="_blank" rel="noopener" title="狂神说">狂神说</a></h1> 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="hexo-blog"
-  class="article article-type-hexo"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/25/blog/"
-    >blog</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/25/blog/" class="article-date">
-  <time datetime="2020-07-25T09:02:31.000Z" itemprop="datePublished">2020-07-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/07/25/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/07/25/hello-world/" class="article-date">
-  <time datetime="2020-07-25T08:53:19.256Z" itemprop="datePublished">2020-07-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><blockquote>
-<p>首次使用Hexo的感受还是不错的</p>
-</blockquote>
-<h3 id="Chapter1-学习计划"><a href="#Chapter1-学习计划" class="headerlink" title="Chapter1 学习计划"></a>Chapter1 学习计划</h3><h3 id="Chapter2-生活计划"><a href="#Chapter2-生活计划" class="headerlink" title="Chapter2 生活计划"></a>Chapter2 生活计划</h3><h3 id="Chapter3-自己以后的发展规划"><a href="#Chapter3-自己以后的发展规划" class="headerlink" title="Chapter3 自己以后的发展规划"></a>Chapter3 自己以后的发展规划</h3><p>暂时能想到的就这么些了</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chaisp.github.io/"/>
-  <updated>2020-07-29T16:37:06.542Z</updated>
+  <updated>2020-08-03T15:04:23.037Z</updated>
   <id>https://chaisp.github.io/</id>
   
   <author>
@@ -17,11 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ThinkinginJava-LearnNote-8-9-10</title>
-    <link href="https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/"/>
-    <id>https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/</id>
-    <published>2020-07-29T15:35:10.618Z</published>
-    <updated>2020-07-29T16:37:06.542Z</updated>
+    <title>SpringBoot+JPA+Swagger</title>
+    <link href="https://chaisp.github.io/2020/08/03/Spring-JPA-Swagger(1)/"/>
+    <id>https://chaisp.github.io/2020/08/03/Spring-JPA-Swagger(1)/</id>
+    <published>2020-08-03T15:04:22.936Z</published>
+    <updated>2020-08-03T15:04:23.037Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 15</title>
+    <link href="https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-15/"/>
+    <id>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-15/</id>
+    <published>2020-08-02T13:37:39.760Z</published>
+    <updated>2020-08-02T15:45:28.104Z</updated>
     
     <summary type="html">
     
@@ -29,8 +44,168 @@
       
         
         
-          &lt;hr&gt;
-&lt;h2 id=&quot;title-ThinkinginJava-LearnNote-8-9-10&quot;&gt;&lt;a href=&quot;#title-ThinkinginJava-LearnNote-8-9-10&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;第十五章-泛型&quot;&gt;&lt;a href=&quot;#第十五章-泛型&quot; class=&quot;headerlink&quot; title=&quot;第十五章 泛型&quot;&gt;&lt;/a&gt;第十五章
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 14</title>
+    <link href="https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-14/"/>
+    <id>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-14/</id>
+    <published>2020-08-02T12:27:01.029Z</published>
+    <updated>2020-08-02T13:37:16.814Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;RTTI和反射-gt-在运行时识别对象和类的信息&quot;&gt;&lt;a href=&quot;#RTTI和反射-gt-在运行时识别对象和类的信息&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 13</title>
+    <link href="https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-13/"/>
+    <id>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-13/</id>
+    <published>2020-08-02T10:16:30.708Z</published>
+    <updated>2020-08-02T12:02:56.846Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第十三章-字符串&quot;&gt;&lt;a href=&quot;#第十三章-字符串&quot; class=&quot;headerlink&quot; title=&quot;第十三章 字符串&quot;&gt;&lt;/a&gt;第十三章
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 12</title>
+    <link href="https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-12/"/>
+    <id>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-12/</id>
+    <published>2020-08-02T04:10:35.146Z</published>
+    <updated>2020-08-02T10:15:21.835Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第十二章-异常&quot;&gt;&lt;a href=&quot;#第十二章-异常&quot; class=&quot;headerlink&quot; title=&quot;第十二章 异常&quot;&gt;&lt;/a&gt;第十二章
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 11</title>
+    <link href="https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-11/"/>
+    <id>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-11/</id>
+    <published>2020-08-02T03:12:57.269Z</published>
+    <updated>2020-08-02T04:10:05.200Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第十一章-持有对象&quot;&gt;&lt;a href=&quot;#第十一章-持有对象&quot; class=&quot;headerlink&quot; title=&quot;第十一章 持有对象&quot;&gt;&lt;/a&gt;第十一章
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Random的使用</title>
+    <link href="https://chaisp.github.io/2020/08/02/8-1-Random/"/>
+    <id>https://chaisp.github.io/2020/08/02/8-1-Random/</id>
+    <published>2020-08-02T01:46:57.964Z</published>
+    <updated>2020-08-02T02:07:54.595Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;在测试Enum时发现的Random问题&quot;&gt;&lt;a href=&quot;#在测试Enum时发现的Random问题&quot; class=&quot;headerlink&quot; title=&quot;在测试Enum时发现的Random问题&quot;&gt;&lt;/a&gt;在测试Enum时发现的Random问题&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git命令的使用</title>
+    <link href="https://chaisp.github.io/2020/08/02/8-2-git/"/>
+    <id>https://chaisp.github.io/2020/08/02/8-2-git/</id>
+    <published>2020-08-02T01:30:28.700Z</published>
+    <updated>2020-08-02T01:46:10.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;git-clone和-git-pull&quot;&gt;&lt;a href=&quot;#git-clone和-git-pull&quot; class=&quot;headerlink&quot; title=&quot;git clone和 git pull&quot;&gt;&lt;/a&gt;git clone和 git
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkinginJava LearnNote 8-9-10</title>
+    <link href="https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/"/>
+    <id>https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/</id>
+    <published>2020-07-29T15:35:10.618Z</published>
+    <updated>2020-08-02T02:16:22.543Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第八章学习重点-多态&quot;&gt;&lt;a href=&quot;#第八章学习重点-多态&quot; class=&quot;headerlink&quot; title=&quot;第八章学习重点 多态&quot;&gt;&lt;/a&gt;第八章学习重点 多态&lt;/h1&gt;&lt;h3 id=&quot;多态的作用就是消除类型之间的耦合&quot;&gt;&lt;a
         
       
     

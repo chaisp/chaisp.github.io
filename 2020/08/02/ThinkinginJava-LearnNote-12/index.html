@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    关于Double进行运算的方法 |  小柴的Blog
+    ThinkinginJava LearnNote 12 |  小柴的Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-DoubleTest"
+  id="post-ThinkinginJava-LearnNote-12"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -58,22 +58,22 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  关于Double进行运算的方法
+  ThinkinginJava LearnNote 12
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/07/26/DoubleTest/" class="article-date">
-  <time datetime="2020-07-26T15:33:27.721Z" itemprop="datePublished">2020-07-26</time>
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-12/" class="article-date">
+  <time datetime="2020-08-02T04:10:35.146Z" itemprop="datePublished">2020-08-02</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">737</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -97,18 +97,49 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Double运算"><a href="#Double运算" class="headerlink" title="Double运算"></a>Double运算</h1><p>Double在进行计算时,不管是加减乘除,都会出现误差,解决办法就是用BigDecimal</p>
-<h2 id="Double加法"><a href="#Double加法" class="headerlink" title="Double加法"></a>Double加法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static Double add(Double value1, Double value2) &#123;</span><br><span class="line">     BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">     BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">     return b1.add(b2).doubleValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <h1 id="第十二章-异常"><a href="#第十二章-异常" class="headerlink" title="第十二章 异常"></a>第十二章 异常</h1><blockquote>
+<p>Java的基本理念是结构不佳的代码不能运行</p>
+</blockquote>
+<h2 id="异常情形"><a href="#异常情形" class="headerlink" title="异常情形"></a>异常情形</h2><p>要组织当前方法或作用域继续执行问题</p>
+<p>面对出现的异常我们能做的就是从当前环境跳出,并把问题提交至上一级</p>
+<p>抛出异常时,会使用<strong>new</strong>在堆上创建异常对象,然后当前的执行路径被终止,并从当前环境中弹出对异常对象的引用,此时，异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序。这个恰当的地方就是异常处理程序，它的任务是将程序从错误状态中恢复，以使程序能要么换一种方式运行，要么继续运行下去。</p>
+<h2 id="异常的参数"><a href="#异常的参数" class="headerlink" title="异常的参数"></a>异常的参数</h2><p>标准的异常有两个构造器:一个是无参构造器；另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器.</p>
+<h2 id="异常的捕获"><a href="#异常的捕获" class="headerlink" title="异常的捕获"></a>异常的捕获</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">	正常语句</span><br><span class="line">&#125;catch&#123;</span><br><span class="line">	异常处理程序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>要自己定义异常类，必须从已有的异常类继承，最好是选择意思相近的异常类继承（不过这样的异常并不容易找）。建立新的异常类型最简单的方法就是让编译器为你产生无参构造器.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class SimpleException extends Exception &#123;&#125;</span><br><span class="line"></span><br><span class="line">public class InheritingExceptions &#123;</span><br><span class="line">    public void f() throws SimpleException &#123;</span><br><span class="line">        System.out.println(</span><br><span class="line">                &quot;Throw SimpleException from f()&quot;);</span><br><span class="line">        throw new SimpleException();</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InheritingExceptions sed &#x3D;</span><br><span class="line">                new InheritingExceptions();</span><br><span class="line">        try &#123;</span><br><span class="line">            sed.f();</span><br><span class="line">        &#125; catch(SimpleException e) &#123;</span><br><span class="line">            System.out.println(&quot;Caught it!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Double减法"><a href="#Double减法" class="headerlink" title="Double减法"></a>Double减法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static double sub(Double value1, Double value2) &#123;</span><br><span class="line">        BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">        BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.subtract(b2).doubleValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="异常的声明"><a href="#异常的声明" class="headerlink" title="异常的声明"></a>异常的声明</h2><p>在方法后面附加关键字<strong>throws</strong>,后面跟上所有的异常类型的列表<br><code>void f() throws TooBig, TooSmall, DivZero {...}</code></p>
+<h2 id="捕获所有异常"><a href="#捕获所有异常" class="headerlink" title="捕获所有异常"></a>捕获所有异常</h2><p>可以只写一个异常处理程序来捕获所有类型的异常。通过捕获异常类型的基类 Exception，就可以做到这一点（</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;Caught an exception&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public static Double mul(Double value1, Double value2) &#123;</span><br><span class="line">     BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">      BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">     return b1.multiply(b2).doubleValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多重捕获"><a href="#多重捕获" class="headerlink" title="多重捕获"></a>多重捕获</h2><p>对于要捕获多种异常,java7之前只能一个个catch(),java7之后可以使用<br><code>catch(Except1 | Except2 | Except3 | Except4 e) {
+            process();
+        }</code></p>
+<h2 id="重新抛出异常"><a href="#重新抛出异常" class="headerlink" title="重新抛出异常"></a>重新抛出异常</h2><p>既然已经得到了对当前异常对象的引用，可以直接把它重新抛出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;An exception was thrown&quot;);</span><br><span class="line">    throw e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重抛异常会把异常抛给上一级环境中的异常处理程序，同一个 try 块的后续 catch 子句将被忽略。此外，异常对象的所有信息都得以保持，所以高一级环境中捕获此异常的处理程序可以从这个异常对象中得到所有信息。</p>
+<h2 id="异常链"><a href="#异常链" class="headerlink" title="异常链"></a>异常链</h2><p>常常会想要在捕获一个异常后抛出另一个异常，并且希望把原始异常的信息保存下来，这被称为异常链。</p>
+<p>现在所有<code>Throwable</code>的子类在构造器中都可以接受一个<code>cause</code>对象作为参数。这个<code>cause</code>就用来表示原始异常，这样通过把原始异常传递给新的异常，使得即使在当前位置创建并抛出了新的异常，也能通过这个异常链追踪到异常最初发生的位置。</p>
+<p>在<code>Throwable</code>的子类中，只有三种基本的异常类提供了带<code>cause</code>参数的构造器。它们是<code>Error</code>（用于 Java 虚拟机报告系统错误）、Exception 以及 RuntimeException。如果要把其他类型的异常链接起来，应该使用<code>initCause()</code>方法而不是构造器。</p>
+<h2 id="使用finally进行清理"><a href="#使用finally进行清理" class="headerlink" title="使用finally进行清理"></a>使用finally进行清理</h2><ul>
+<li>不管try块中的异常是否会抛出,它们都可以得道执行,多用于内存回收</li>
+<li>即便finally在return语句之后,也会执行,完成相关内容的回收</li>
+</ul>
+<h2 id="异常的丢失"><a href="#异常的丢失" class="headerlink" title="异常的丢失"></a>异常的丢失</h2><ul>
+<li>如果在finally语句中,也有会抛出的异常,那么就会导致try语句块中的异常缺失</li>
+<li>如果在finally语句中,有return,也会导致try语句块中的异常缺失<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class ExceptionSilencer &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            &#x2F;&#x2F; Using &#39;return&#39; inside the finally block</span><br><span class="line">            &#x2F;&#x2F; will silence any thrown exception.</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="整体代码"><a href="#整体代码" class="headerlink" title="整体代码"></a>整体代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">  * double的计算不精确，会有类似0.0000000000000002的误差，正确的方法是使用BigDecimal或者用整型</span><br><span class="line">  * 整型地方法适合于货币精度已知的情况，比如12.11+1.10转成1211+110计算，最后再&#x2F;100即可</span><br><span class="line">  * 以下是摘抄的BigDecimal方法:</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class DoubleUtils implements Serializable &#123;</span><br><span class="line">     private static final long serialVersionUID &#x3D; -3345205828566485102L;</span><br><span class="line">     &#x2F;&#x2F; 默认除法运算精度</span><br><span class="line">     private static final Integer DEF_DIV_SCALE &#x3D; 2;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 提供精确的加法运算。</span><br><span class="line">     *</span><br><span class="line">      * @param value1 被加数</span><br><span class="line">      * @param value2 加数</span><br><span class="line">    * @return 两个参数的和</span><br><span class="line">    *&#x2F;</span><br><span class="line">    public static Double add(Double value1, Double value2) &#123;</span><br><span class="line">         BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">         BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">         return b1.add(b2).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">      * 提供精确的减法运算。</span><br><span class="line">      *</span><br><span class="line">      * @param value1 被减数</span><br><span class="line">      * @param value2 减数</span><br><span class="line">      * @return 两个参数的差</span><br><span class="line">      *&#x2F;</span><br><span class="line">     public static double sub(Double value1, Double value2) &#123;</span><br><span class="line">         BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">        BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.subtract(b2).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 提供精确的乘法运算。</span><br><span class="line">     *</span><br><span class="line">      * @param value1 被乘数</span><br><span class="line">      * @param value2 乘数</span><br><span class="line">     * @return 两个参数的积</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Double mul(Double value1, Double value2) &#123;</span><br><span class="line">        BigDecimal b1 &#x3D; new BigDecimal(Double.toString(value1));</span><br><span class="line">         BigDecimal b2 &#x3D; new BigDecimal(Double.toString(value2));</span><br><span class="line">        return b1.multiply(b2).doubleValue();</span><br><span class="line">   &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">      * 提供（相对）精确的除法运算，当发生除不尽的情况时， 精确到小数点以后10位，以后的数字四舍五入。</span><br><span class="line">      *</span><br><span class="line">      * @param dividend 被除数</span><br><span class="line">      * @param divisor  除数</span><br><span class="line">      * @return 两个参数的商</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Double divide(Double dividend, Double divisor) &#123;</span><br><span class="line">        return divide(dividend, divisor, DEF_DIV_SCALE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 提供（相对）精确的除法运算。 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入。</span><br><span class="line">      *</span><br><span class="line">      * @param dividend 被除数</span><br><span class="line">      * @param divisor  除数</span><br><span class="line">      * @param scale    表示表示需要精确到小数点以后几位。</span><br><span class="line">      * @return 两个参数的商</span><br><span class="line">      *&#x2F;</span><br><span class="line">     public static Double divide(Double dividend, Double divisor, Integer scale) &#123;</span><br><span class="line">        if (scale &lt; 0) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;The scale must be a positive integer or zero&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">       BigDecimal b1 &#x3D; new BigDecimal(Double.toString(dividend));</span><br><span class="line">      BigDecimal b2 &#x3D; new BigDecimal(Double.toString(divisor));</span><br><span class="line">         return b1.divide(b2, scale,RoundingMode.HALF_UP).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">     * 提供指定数值的（精确）小数位四舍五入处理。</span><br><span class="line">      *</span><br><span class="line">      * @param value 需要四舍五入的数字</span><br><span class="line">      * @param scale 小数点后保留几位</span><br><span class="line">      * @return 四舍五入后的结果</span><br><span class="line">      *&#x2F;</span><br><span class="line">    public static double round(double value,int scale)&#123;</span><br><span class="line">         if(scale&lt;0)&#123;</span><br><span class="line">           throw new IllegalArgumentException(&quot;The scale must be a positive integer or zero&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">         BigDecimal b &#x3D; new BigDecimal(Double.toString(value));</span><br><span class="line">       BigDecimal one &#x3D; new BigDecimal(&quot;1&quot;);</span><br><span class="line">        return b.divide(one,scale, RoundingMode.HALF_UP).doubleValue();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 以上代码源于<a href="https://blog.csdn.net/liupantao/article/details/79727973" target="_blank" rel="noopener" title="CSDN">CSDN</a>,虽然他也是转载…</p>
- 
+</li>
+</ul>
+<h2 id="Java7出现的-try-with-resources"><a href="#Java7出现的-try-with-resources" class="headerlink" title="Java7出现的 try-with-resources"></a>Java7出现的 try-with-resources</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">public class TryWithResources &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try(</span><br><span class="line">                InputStream in &#x3D; new FileInputStream(</span><br><span class="line">                        new File(&quot;TryWithResources.java&quot;))</span><br><span class="line">        ) &#123;</span><br><span class="line">            int contents &#x3D; in.read();</span><br><span class="line">            &#x2F;&#x2F; Process contents</span><br><span class="line">        &#125; catch(IOException e) &#123;</span><br><span class="line">            &#x2F;&#x2F; Handle the error</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出在try()catch(){}之间多了个{}<br>括号内的部分称为资源规范头（resource specification header）。现在可用于整个 try 块的其余部分。<strong>无论你如何退出 try 块（正常或异常），都会执行相应的close语句</strong>，</p>
+<p>Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了 try-with-resources 特性。</p>
+<p>try-with-resource语句可以在没有catch()和finally()的情况下运行<br>如果使用一个没有AutoCloseable接口的对象,编译器会直接报错</p>
+<h2 id="异常匹配"><a href="#异常匹配" class="headerlink" title="异常匹配"></a>异常匹配</h2><p>抛出异常的时候，异常处理系统会按照代码的书写顺序找出“最近”的处理程序。找到匹配的处理程序之后，它就认为异常将得到处理，然后就不再继续查找。</p>
+<p>查找的时候并不要求抛出的异常同处理程序所声明的异常完全匹配。派生类的对象也可以匹配其基类的处理程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Annoyance extends Exception &#123;&#125;</span><br><span class="line">class Sneeze extends Annoyance &#123;&#125;</span><br><span class="line">public class Human &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F; Catch the exact type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Sneeze s) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Sneeze&quot;);</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; Catch the base type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
       <!-- reward -->
       
       <div id="reward-btn">
@@ -174,7 +205,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/07/26/DoubleTest/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-12/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -185,19 +216,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/" class="article-nav-link">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-13/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            ThinkinginJava LearnNote 8-9-10
+            ThinkinginJava LearnNote 13
           
         </div>
       </a>
     
     
-      <a href="/2020/07/26/MarkdownType/" class="article-nav-link">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-11/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">MarkdownType</div>
+        <div class="article-nav-title">ThinkinginJava LearnNote 11</div>
       </a>
     
   </nav>

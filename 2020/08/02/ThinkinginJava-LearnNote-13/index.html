@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="从头开始学习" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ThinkinginJava LearnNote 13 |  小柴的Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="小柴的Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-ThinkinginJava-LearnNote-13"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ThinkinginJava LearnNote 13
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-13/" class="article-date">
+  <time datetime="2020-08-02T10:16:30.708Z" itemprop="datePublished">2020-08-02</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十三章-字符串"><a href="#第十三章-字符串" class="headerlink" title="第十三章 字符串"></a>第十三章 字符串</h1><ul>
+<li>String是不可变的,每次对String的修改实际上都是创建了新的对象</li>
+<li>在对String操作时,Java编译器会使用StringBuilder进行优化</li>
+<li>在循环内对String相加时,最好自己使用StringBuilder来实现</li>
+</ul>
+<h2 id="意外递归"><a href="#意外递归" class="headerlink" title="意外递归"></a>意外递归</h2><ul>
+<li>在重写<code>toString()</code>时,不要<code>return String+this;</code>因为this也会调用<code>toString()</code></li>
+<li>应该使用<code>super.toString()</code></li>
+</ul>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>以下是 <code>String</code> 对象具备的一些基本方法。重载的方法归纳在同一行中：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数，重载版本</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造方法</td>
+<td>默认版本，<code>String</code>，<code>StringBuilder</code>，<code>StringBuffer</code>，<code>char</code>数组，<code>byte</code>数组</td>
+<td>创建<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>length()</code></td>
+<td></td>
+<td><code>String</code>中字符的个数</td>
+</tr>
+<tr>
+<td><code>charAt()</code></td>
+<td><code>int</code>索引</td>
+<td>获取<code>String</code>中索引位置上的<code>char</code></td>
+</tr>
+<tr>
+<td><code>getChars()</code>，<code>getBytes()</code></td>
+<td>待复制部分的开始和结束索引，复制的目标数组，目标数组的开始索引</td>
+<td>复制<code>char</code>或<code>byte</code>到一个目标数组中</td>
+</tr>
+<tr>
+<td><code>toCharArray()</code></td>
+<td></td>
+<td>生成一个<code>char[]</code>，包含<code>String</code>中的所有字符</td>
+</tr>
+<tr>
+<td><code>equals()</code>，<code>equalsIgnoreCase()</code></td>
+<td>与之进行比较的<code>String</code></td>
+<td>比较两个<code>String</code>的内容是否相同。如果相同，结果为<code>true</code></td>
+</tr>
+<tr>
+<td><code>compareTo()</code>，<code>compareToIgnoreCase()</code></td>
+<td>与之进行比较的<code>String</code></td>
+<td>按词典顺序比较<code>String</code>的内容，比较结果为负数、零或正数。注意，大小写不等价</td>
+</tr>
+<tr>
+<td><code>contains()</code></td>
+<td>要搜索的<code>CharSequence</code></td>
+<td>如果该<code>String</code>对象包含参数的内容，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>contentEquals()</code></td>
+<td>与之进行比较的<code>CharSequence</code>或<code>StringBuffer</code></td>
+<td>如果该<code>String</code>对象与参数的内容完全一致，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td></td>
+<td>返回<code>boolean</code>结果，以表明<code>String</code>对象的长度是否为0</td>
+</tr>
+<tr>
+<td><code>regionMatches()</code></td>
+<td>该<code>String</code>的索引偏移量，另一个<code>String</code>及其索引偏移量，要比较的长度。重载版本增加了“忽略大小写”功能</td>
+<td>返回<code>boolean</code>结果，以表明所比较区域是否相等</td>
+</tr>
+<tr>
+<td><code>startsWith()</code></td>
+<td>可能的起始<code>String</code>。重载版本在参数中增加了偏移量</td>
+<td>返回<code>boolean</code>结果，以表明该<code>String</code>是否以传入参数开始</td>
+</tr>
+<tr>
+<td><code>endsWith()</code></td>
+<td>该<code>String</code>可能的后缀<code>String</code></td>
+<td>返回<code>boolean</code>结果，以表明此参数是否是该字符串的后缀</td>
+</tr>
+<tr>
+<td><code>indexOf()</code>，<code>lastIndexOf()</code></td>
+<td>重载版本包括：<code>char</code>，<code>char</code>与起始索引，<code>String</code>，<code>String</code>与起始索引</td>
+<td>如果该<code>String</code>并不包含此参数，就返回-1；否则返回此参数在<code>String</code>中的起始索引。<code>lastIndexOf</code>()是从后往前搜索</td>
+</tr>
+<tr>
+<td><code>matches()</code></td>
+<td>一个正则表达式</td>
+<td>返回<code>boolean</code>结果，以表明该<code>String</code>和给出的正则表达式是否匹配</td>
+</tr>
+<tr>
+<td><code>split()</code></td>
+<td>一个正则表达式。可选参数为需要拆分的最大数量</td>
+<td>按照正则表达式拆分<code>String</code>，返回一个结果数组</td>
+</tr>
+<tr>
+<td><code>join()</code>（Java8引入的）</td>
+<td>分隔符，待拼字符序列。用分隔符将字符序列拼接成一个新的<code>String</code></td>
+<td>用分隔符拼接字符片段，产生一个新的<code>String</code></td>
+</tr>
+<tr>
+<td><code>substring()</code>（即<code>subSequence()</code>）</td>
+<td>重载版本：起始索引；起始索引+终止索引</td>
+<td>返回一个新的<code>String</code>对象，以包含参数指定的子串</td>
+</tr>
+<tr>
+<td><code>concat()</code></td>
+<td>要连接的<code>String</code></td>
+<td>返回一个新的<code>String</code>对象，内容为原始<code>String</code>连接上参数<code>String</code></td>
+</tr>
+<tr>
+<td><code>replace()</code></td>
+<td>要替换的字符，用来进行替换的新字符。也可以用一个<code>CharSequence</code>替换另一个<code>CharSequence</code></td>
+<td>返回替换字符后的新<code>String</code>对象。如果没有替换发生，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>replaceFirst()</code></td>
+<td>要替换的正则表达式，用来进行替换的<code>String</code></td>
+<td>返回替换首个目标字符串后的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>replaceAll()</code></td>
+<td>要替换的正则表达式，用来进行替换的<code>String</code></td>
+<td>返回替换所有目标字符串后的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>toLowerCase()</code>，<code>toUpperCase()</code></td>
+<td></td>
+<td>将字符的大小写改变后，返回一个新的<code>String</code>对象。如果没有任何改变，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>trim()</code></td>
+<td></td>
+<td>将<code>String</code>两端的空白符删除后，返回一个新的<code>String</code>对象。如果没有任何改变，则返回原始的<code>String</code>对象</td>
+</tr>
+<tr>
+<td><code>valueOf()</code>（<code>static</code>）</td>
+<td>重载版本：<code>Object</code>；<code>char[]</code>；<code>char[]</code>，偏移量，与字符个数；<code>boolean</code>；<code>char</code>；<code>int</code>；<code>long</code>；<code>float</code>；<code>double</code></td>
+<td>返回一个表示参数内容的<code>String</code></td>
+</tr>
+<tr>
+<td><code>intern()</code></td>
+<td></td>
+<td>为每个唯一的字符序列生成一个且仅生成一个<code>String</code>引用</td>
+</tr>
+<tr>
+<td><code>format()</code></td>
+<td>要格式化的字符串，要替换到格式化字符串的参数</td>
+<td>返回格式化结果<code>String</code></td>
+</tr>
+</tbody></table>
+<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><ul>
+<li>通过<code>System.out.format()</code>实现类似C语言的<code>printf()</code></li>
+</ul>
+<h2 id="Formatter类"><a href="#Formatter类" class="headerlink" title="Formatter类"></a>Formatter类</h2><p>在 Java 中，所有的格式化功能都是由 java.util.Formatter 类处理的。可以将 Formatter 看做一个翻译器，它将你的格式化字符串与数据翻译成需要的结果。当你创建一个 Formatter 对象时，需要向其构造器传递一些信息，告诉它最终的结果将向哪里输出</p>
+<p><code>Formatter f; f.format(&quot;XXX&quot;,XXX);</code></p>
+<h2 id="Formatter-转换"><a href="#Formatter-转换" class="headerlink" title="Formatter 转换"></a><code>Formatter</code> 转换</h2><p>下面的表格展示了最常用的类型转换：</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>d</code></td>
+<td align="left">整型（十进制）</td>
+</tr>
+<tr>
+<td align="center"><code>c</code></td>
+<td align="left">Unicode字符</td>
+</tr>
+<tr>
+<td align="center"><code>b</code></td>
+<td align="left">Boolean值</td>
+</tr>
+<tr>
+<td align="center"><code>s</code></td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="center"><code>f</code></td>
+<td align="left">浮点数（十进制）</td>
+</tr>
+<tr>
+<td align="center"><code>e</code></td>
+<td align="left">浮点数（科学计数）</td>
+</tr>
+<tr>
+<td align="center"><code>x</code></td>
+<td align="left">整型（十六进制）</td>
+</tr>
+<tr>
+<td align="center"><code>h</code></td>
+<td align="left">散列码（十六进制）</td>
+</tr>
+<tr>
+<td align="center"><code>%</code></td>
+<td align="left">字面值“%”</td>
+</tr>
+</tbody></table>
+<h3 id="String-format"><a href="#String-format" class="headerlink" title="String.format()"></a><code>String.format()</code></h3><p>Java SE5 也参考了 C 中的 <code>sprintf()</code> 方法，以生成格式化的 <code>String</code> 对象。<code>String.format()</code> 是一个 <code>static</code> 方法，它接受与 <code>Formatter.format()</code> 方法一样的参数，但返回一个 <code>String</code> 对象。当你只需使用一次 <code>format()</code> 方法的时候，<code>String.format()</code> 用起来很方便。</p>
+<p>其实在 <code>String.format()</code> 内部，它也是创建了一个 <code>Formatter</code> 对象，然后将你传入的参数转给 <code>Formatter</code>。不过，与其自己做这些事情，不如使用便捷的 <code>String.format()</code> 方法，何况这样的代码更清晰易读。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><ul>
+<li>正则表达式就是以某种方式描述字符串</li>
+<li>在java中相比其他语言要多一个<code>\</code>来表示,比如<code>\\d</code>表示一个数字</li>
+<li>但是对于<code>\n</code>,<code>\t</code>,等还是用一个一个分号</li>
+<li><code>-?\\d+</code>表示一个负号后面可能有一个或多个数字</li>
+<li>通过String.matches(regex),可以直接对字符串进行匹配,返回值为true或false</li>
+</ul>
+<h3 id="创建正则表达式"><a href="#创建正则表达式" class="headerlink" title="创建正则表达式"></a>创建正则表达式</h3><p>我们首先从正则表达式可能存在的构造集中选取一个很有用的子集，以此开始学习正则表达式。正则表达式的完整构造子列表，请参考JDK文档 <code>java.util.regex</code> 包中的 <code>Pattern</code>类。</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>B</code></td>
+<td align="left">指定字符<code>B</code></td>
+</tr>
+<tr>
+<td align="left"><code>\xhh</code></td>
+<td align="left">十六进制值为<code>0xhh</code>的字符</td>
+</tr>
+<tr>
+<td align="left"><code>\uhhhh</code></td>
+<td align="left">十六进制表现为<code>0xhhhh</code>的Unicode字符</td>
+</tr>
+<tr>
+<td align="left"><code>\t</code></td>
+<td align="left">制表符Tab</td>
+</tr>
+<tr>
+<td align="left"><code>\n</code></td>
+<td align="left">换行符</td>
+</tr>
+<tr>
+<td align="left"><code>\r</code></td>
+<td align="left">回车</td>
+</tr>
+<tr>
+<td align="left"><code>\f</code></td>
+<td align="left">换页</td>
+</tr>
+<tr>
+<td align="left"><code>\e</code></td>
+<td align="left">转义（Escape）</td>
+</tr>
+</tbody></table>
+<p>当你学会了使用字符类（character classes）之后，<br>正则表达式的威力才能真正显现出来。以下是一些创建字符类的典型方式，以及一些预定义的类：</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>.</code></td>
+<td align="left">任意字符</td>
+</tr>
+<tr>
+<td align="left"><code>[abc]</code></td>
+<td align="left">包含<code>a</code>、<code>b</code>或<code>c</code>的任何字符（和`a</td>
+</tr>
+<tr>
+<td align="left"><code>[^abc]</code></td>
+<td align="left">除<code>a</code>、<code>b</code>和<code>c</code>之外的任何字符（否定）</td>
+</tr>
+<tr>
+<td align="left"><code>[a-zA-Z]</code></td>
+<td align="left">从<code>a</code>到<code>z</code>或从<code>A</code>到<code>Z</code>的任何字符（范围）</td>
+</tr>
+<tr>
+<td align="left"><code>[abc[hij]]</code></td>
+<td align="left"><code>a</code>、<code>b</code>、<code>c</code>、<code>h</code>、<code>i</code>、<code>j</code>中的任意字符（与`a</td>
+</tr>
+<tr>
+<td align="left"><code>[a-z&amp;&amp;[hij]]</code></td>
+<td align="left">任意<code>h</code>、<code>i</code>或<code>j</code>（交）</td>
+</tr>
+<tr>
+<td align="left"><code>\s</code></td>
+<td align="left">空白符（空格、tab、换行、换页、回车）</td>
+</tr>
+<tr>
+<td align="left"><code>\S</code></td>
+<td align="left">非空白符（<code>[^\s]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\d</code></td>
+<td align="left">数字（<code>[0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\D</code></td>
+<td align="left">非数字（<code>[^0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\w</code></td>
+<td align="left">词字符（<code>[a-zA-Z_0-9]</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>\W</code></td>
+<td align="left">非词字符（<code>[^\w]</code>）</td>
+</tr>
+</tbody></table>
+<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><p>量词描述了一个模式捕获输入文本的方式：</p>
+<ul>
+<li><p><strong>贪婪型</strong>：<br>量词总是贪婪的，除非有其他的选项被设置。贪婪表达式会为所有可能的模式发现尽可能多的匹配。导致此问题的一个典型理由就是假定我们的模式仅能匹配第一个可能的字符组，如果它是贪婪的，那么它就会继续往下匹配。</p>
+</li>
+<li><p><strong>勉强型</strong>：<br>用问号来指定，这个量词匹配满足模式所需的最少字符数。因此也被称作懒惰的、最少匹配的、非贪婪的或不贪婪的。</p>
+</li>
+<li><p><strong>占有型</strong>：<br>目前，这种类型的量词只有在 Java 语言中才可用（在其他语言中不可用），并且也更高级，因此我们大概不会立刻用到它。当正则表达式被应用于 <code>String</code> 时，它会产生相当多的状态，以便在匹配失败时可以回溯。而“占有的”量词并不保存这些中间状态，因此它们可以防止回溯。它们常常用于防止正则表达式失控，因此可以使正则表达式执行起来更高效。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>贪婪型</th>
+<th>勉强型</th>
+<th>占有型</th>
+<th>如何匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>X?</code></td>
+<td><code>X??</code></td>
+<td><code>X?+</code></td>
+<td>一个或零个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X*</code></td>
+<td><code>X*?</code></td>
+<td><code>X*+</code></td>
+<td>零个或多个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X+</code></td>
+<td><code>X+?</code></td>
+<td><code>X++</code></td>
+<td>一个或多个<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n}</code></td>
+<td><code>X{n}?</code></td>
+<td><code>X{n}+</code></td>
+<td>恰好<code>n</code>次<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n,}</code></td>
+<td><code>X{n,}?</code></td>
+<td><code>X{n,}+</code></td>
+<td>至少<code>n</code>次<code>X</code></td>
+</tr>
+<tr>
+<td><code>X{n,m}</code></td>
+<td><code>X{n,m}?</code></td>
+<td><code>X{n,m}+</code></td>
+<td><code>X</code>至少<code>n</code>次，但不超过<code>m</code>次</td>
+</tr>
+</tbody></table>
+<h2 id="Pattern和Matcher"><a href="#Pattern和Matcher" class="headerlink" title="Pattern和Matcher"></a>Pattern和Matcher</h2><ol>
+<li>通过<code>static Pattern.compile()</code> 方法来编译正则表达式。它会根据你的 <code>String</code> 类型的正则表达式生成一个 <code>Pattern</code> 对象。</li>
+<li>把你想要检索的字符串传入 <code>Pattern</code> 对象的 <code>matcher()</code> 方法。</li>
+<li><code>matcher()</code> 方法会生成一个 <code>Matcher</code> 对象，它有很多功能可用,例如，它的 <code>replaceAll()</code> 方法能将所有匹配的部分都替换成你传入的参数。</li>
+<li>匹配完成后,通过<code>start()</code>和<code>end()</code>可以获取匹配到字符的起始和结束位置</li>
+</ol>
+<ul>
+<li><p>通过<code>split()</code>可以将字符分割,而断开的边界由正则表达式确定</p>
+</li>
+<li><p><code>Pattern.compile(&quot;边界&quot;).split(输入字符串)));</code> 对输入字符串,按照边界分割</p>
+</li>
+<li><p><code>Pattern.compile(&quot;边界&quot;).split(输入字符串，数量)));</code> 如果超出数量就不再分割</p>
+</li>
+<li><p>对于Matcher()匹配到后,返回的Matcher对象,可以使用<code>find()</code>可以像迭代器一样遍历字符串</p>
+</li>
+</ul>
+<h2 id="替换操作"><a href="#替换操作" class="headerlink" title="替换操作"></a>替换操作</h2><ul>
+<li>通过正则表达式对文本进行替换时,有多种方式:</li>
+</ul>
+<ul>
+<li><code>replaceFirst(String replacement)</code> 以参数字符串 <code>replacement</code> 替换掉第一个匹配成功的部分。</li>
+<li><code>replaceAll(String replacement)</code> 以参数字符串 <code>replacement</code> 替换所有匹配成功的部分。</li>
+<li><code>appendReplacement(StringBuffer sbuf, String replacement)</code> 执行渐进式的替换，而不是像 <code>replaceFirst()</code> 和 <code>replaceAll()</code> 那样只替换第一个匹配或全部匹配。这是一个非常重要的方法。它允许你调用其他方法来生成或处理 <code>replacement</code>（<code>replaceFirst()</code> 和 <code>replaceAll()</code> 则只能使用一个固定的字符串），使你能够以编程的方式将目标分割成组，从而具备更强大的替换功能。</li>
+<li><code>appendTail(StringBuffer sbuf)</code> 在执行了一次或多次 <code>appendReplacement()</code> 之后，调用此方法可以将输入字符串余下的部分复制到 <code>sbuf</code> 中。</li>
+</ul>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset()"></a>reset()</h3><ul>
+<li>对于一个Macher对象,可以应用于一个新的字符序列</li>
+<li>也就是说,对新的字符序列使用该匹配规则进行匹配</li>
+</ul>
+<h2 id="扫描输入"><a href="#扫描输入" class="headerlink" title="扫描输入"></a>扫描输入</h2><ul>
+<li>通过BufferReader获取到一个流对象,通过<code>readLine()</code>方法读取一行,后者使用<code>split()</code>分隔一行上的内容,返回一个数组列表</li>
+<li>通过Scanner可以接受任何类型的输入对象,包括File</li>
+<li>通过Scanner可以通过next()返回下一个String</li>
+</ul>
+<h3 id="Scanner分隔符"><a href="#Scanner分隔符" class="headerlink" title="Scanner分隔符"></a>Scanner分隔符</h3><ul>
+<li>默认情况下使用空白字符进行分隔,但是也可以自己用正则指定分隔符 </li>
+<li>通过<code>useDelimiter(regex)</code>来调用正则<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">public class ScannerDelimiter &#123;  </span><br><span class="line">    public static void main(String[] args) &#123;    </span><br><span class="line">        Scanner scanner &#x3D; new Scanner(&quot;12, 42, 78, 99, 42&quot;);    </span><br><span class="line">        scanner.useDelimiter(&quot;\\s*,\\s*&quot;);    </span><br><span class="line">        while(scanner.hasNextInt())    </span><br><span class="line">            System.out.println(scanner.nextInt());  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-13/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-14/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            ThinkinginJava LearnNote 14
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-12/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ThinkinginJava LearnNote 12</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> senpengchai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="小柴的Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

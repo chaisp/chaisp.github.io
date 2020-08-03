@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Archives: 2020/7 |  小柴的Blog
+    Random的使用 |  小柴的Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -46,155 +46,231 @@
       
     <main class="content on">
       <section class="outer">
-  <article class="articles">
+  <article
+  id="post-8-1-Random"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2020/7</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2020" class="archive-year">2020</a>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Random的使用
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/8-1-Random/" class="article-date">
+  <time datetime="2020-08-02T01:46:57.964Z" itemprop="datePublished">2020-08-02</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">581</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">2 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/" class="archive-article-date">
-  <time datetime="2020-07-29T15:35:10.618Z" itemprop="datePublished">07/29</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/29/ThinkinginJava-LearnNote-8-9-10/"
-    >ThinkinginJava LearnNote 8-9-10</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/26/DoubleTest/" class="archive-article-date">
-  <time datetime="2020-07-26T15:33:27.721Z" itemprop="datePublished">07/26</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/26/DoubleTest/"
-    >关于Double进行运算的方法</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/26/MarkdownType/" class="archive-article-date">
-  <time datetime="2020-07-26T10:21:34.546Z" itemprop="datePublished">07/26</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/26/MarkdownType/"
-    >MarkdownType</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/26/7-26/" class="archive-article-date">
-  <time datetime="2020-07-26T10:16:20.513Z" itemprop="datePublished">07/26</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/26/7-26/"
-    >Swagger 的学习方法</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-hexo">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/25/blog/" class="archive-article-date">
-  <time datetime="2020-07-25T09:02:31.000Z" itemprop="datePublished">07/25</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/25/blog/"
-    >blog</a> 
-</h2>
- 
+  <h1 id="在测试Enum时发现的Random问题"><a href="#在测试Enum时发现的Random问题" class="headerlink" title="在测试Enum时发现的Random问题"></a>在测试Enum时发现的Random问题</h1><h2 id="Random正常的使用"><a href="#Random正常的使用" class="headerlink" title="Random正常的使用"></a>Random正常的使用</h2><ul>
+<li>在java中Random一般在使用时都会先创建Random对象,有两种方式</li>
+<li><code>Random random = new Random();</code>以系统时钟作为seed</li>
+<li><code>Random random = new Random(seed);</code>自己定义数字作为seed</li>
+<li>Random的实质是创建一个随机序列,在该序列上向后拿取随机数</li>
+<li>之后通过random.nextInt()就是在该序列上拿取一个随机数</li>
+<li>如果seed相同,就是同一个序列,线性的向后拿取随机数,保证(伪)随机</li>
+</ul>
+<h2 id="在Enum测试中出现的问题"><a href="#在Enum测试中出现的问题" class="headerlink" title="在Enum测试中出现的问题"></a>在Enum测试中出现的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Supplier&lt;T&gt;&#123;</span><br><span class="line">	T get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum CartoonCharacter implements Supplier&lt;CartoonCharacter&gt; &#123;</span><br><span class="line">    SLAPPY, SPANKY, PUNCHY,</span><br><span class="line">    SILLY, BOUNCY, NUTTY, BOB;</span><br><span class="line">    private Random rand &#x3D; new Random(47);</span><br><span class="line">    @Override</span><br><span class="line">    public CartoonCharacter get() &#123;</span><br><span class="line">        return values()[rand.nextInt(values().length)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class EnumImplementation &#123; </span><br><span class="line">	public static &lt;T&gt; void printNext(Supplier&lt;T&gt; rg) &#123;</span><br><span class="line">        System.out.print(rg.get() + &quot;, &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">&#x2F;&#x2F; Choose any instance:</span><br><span class="line">        CartoonCharacter cc &#x3D; CartoonCharacter.BOB;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">            printNext(cc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/25/hello-world/" class="archive-article-date">
-  <time datetime="2020-07-25T08:53:19.256Z" itemprop="datePublished">07/25</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/07/25/hello-world/"
-    >Hello World</a> 
-</h2>
- 
+<ul>
+<li>以上为正常代码,也就是通过集成Supplier接口,重写get方法,来获取随机的enum元素,在<code>main()</code>函数中通过传递实例,实现Enum方法的调用.</li>
+<li>但是在我对其进行修改后就只能,重复相同元素,<strong>失去Random的意义</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(CartoonCharacter c:CartoonCharacter.values())</span><br><span class="line">	printNext(c)</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
+<ul>
+<li>在我想通过foreach遍历<code>values()</code>产生的enum实例数组完成循环调用时,出现了无法产生随机数的问题,每次遍历结果都相同</li>
+<li>通过debug,发现确实调用了<code>rand.nextInt()</code>,只是每次数字相同,而且数字只随seed改变</li>
+<li>原因:通过<code>values()</code>获得的enum实例,其实是引用,每个都是一个enum类,也就是说每个都重新生成了一个enum类</li>
+<li>也就是说,在<code>foeeach</code>迭代中,每次迭代,我都创建了相同的Random序列,每次调用<code>rand.nextInt()</code>都会从相同的序列取第一个值,这也就是伪随机的缺陷</li>
+<li>在正常的<code>for(int)</code>循环中,使用的是同一个实例,因此每次的循环顺着一个序列向后找随机数</li>
+</ul>
+<p><strong>解决办法</strong></p>
+<ul>
+<li>使用static修饰enum中的Random对象,不管创建多少次实例,都会沿着一个序列向后随机</li>
+<li>不使用固定的seed,直接让random和系统时间绑定</li>
+</ul>
+ 
+      <!-- reward -->
       
+      <div id="reward-btn">
+        Donate
+      </div>
       
     </div>
-  </div>
-  
-  
+    
 
-  
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/08/02/8-1-Random/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-11/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            ThinkinginJava LearnNote 11
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/08/02/8-2-git/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">git命令的使用</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -333,6 +409,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">

@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://chaisp.github.io/2020/08/03/Spring-JPA-Swagger(1)/</loc>
+    <lastmod>2020-08-03</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-15/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-14/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-13/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-12/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/ThinkinginJava-LearnNote-11/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
     <loc>https://chaisp.github.io/2020/07/29/ThinkinginJava-LearnNote-8-9-10/</loc>
-    <lastmod>2020-07-29</lastmod>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/8-1-Random/</loc>
+    <lastmod>2020-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/02/8-2-git/</loc>
+    <lastmod>2020-08-02</lastmod>
   </url>
   <url>
     <loc>https://chaisp.github.io/2020/07/25/blog/</loc>
