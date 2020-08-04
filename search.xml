@@ -1055,4 +1055,57 @@
 </ol>
 ]]></content>
   </entry>
+  <entry>
+    <title>SpringBoot+JPA+Swagger(2)</title>
+    <url>/2020/08/05/Spring-JPA-Swagger(2)/</url>
+    <content><![CDATA[<h1 id="基于Spring-JPA-Swagger的项目-1"><a href="#基于Spring-JPA-Swagger的项目-1" class="headerlink" title="基于Spring+JPA+Swagger的项目(1)"></a>基于Spring+JPA+Swagger的项目(1)</h1><h2 id="解决pom-xml第一行报unknow错误"><a href="#解决pom-xml第一行报unknow错误" class="headerlink" title="解决pom.xml第一行报unknow错误"></a>解决pom.xml第一行报unknow错误</h2><ul>
+<li>网上解决办法多半是强制更新maven</li>
+<li>其实是maven和springboot-start-parent不匹配</li>
+<li>也可以降低springboot到1.4.0即可</li>
+</ul>
+<h2 id="在搭建JPA项目时出现的问题"><a href="#在搭建JPA项目时出现的问题" class="headerlink" title="在搭建JPA项目时出现的问题"></a>在搭建JPA项目时出现的问题</h2><ul>
+<li><p>通过修改yml文件修改jpa自动建表功能</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jpa: </span><br><span class="line">    #自动建表</span><br><span class="line">    hibernate:</span><br><span class="line">    	ddl-auto: update</span><br></pre></td></tr></table></figure>
+<p>  ddl-auto的配置：<br>  <code>create</code>—-每次运行该程序，没有表格会新建表格，表内有数据会清空<br>  <code>create-drop</code>—-每次程序结束的时候会清空表<br>  <code>update</code>—-每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新<br>  <code>validate</code>—-运行程序会校验数据与数据库的字段类型是否相同，不同会报错</p>
+</li>
+<li><p>被<code>@Entity</code>注解的实体类,一定要在主键前面加上@Id,来表示你的主键变量</p>
+</li>
+<li><p>在<code>DAO</code>层,<code>extends JpaRespository&lt;实体类,主键类型&gt;</code>,第二个参数看主键的属性</p>
+</li>
+<li><p>对于Service层的<code>Interface</code>实体接口以及ServiceImpl层的<code>class implements interface</code>实体接口的实现类,都要加@Service注解</p>
+</li>
+</ul>
+<h2 id="关于项目接口的设计"><a href="#关于项目接口的设计" class="headerlink" title="关于项目接口的设计"></a>关于项目接口的设计</h2><ul>
+<li><p>在一开始的UserController之上,就可以加上一个Requestmapping<code>(&quot;/_api/user&quot;)</code>来定义下面整个接口的前缀</p>
+</li>
+<li><p>在设计接口的返回时,有多个方面需要注意:</p>
+<p>  1.单独写一个<code>ReturnType</code>类,用来存储返回的的值,它可以包含<code>status</code>,<code>msg</code>,<code>code</code>,<code>data</code>等专门传递给前端的信息,直接return,相当于返回一个json<br>  2.对于每次抛出异常时,选用直接返回错误信息<code>msg</code>,还是根据不同的错误状态返回<code>code</code>错误码,要自己斟酌,注意,code可以和<strong>Swagger</strong>搭配,方便写接口信息<br>  3.code最好和枚举类一起使用,可以直接调用.<br>  4.在ReturnType中,用static final修饰方法,方便调用</p>
+</li>
+<li><p>前端传来的Json格式数据,在使用<code>RestController</code>的情况下,直接使用一个<code>Entity</code>接收就可以</p>
+</li>
+<li><p><strong>遇到的问题</strong>:对于时间,实体类中定义的TimeStamp,与在前端定义不同,因此我们需要一个中间类,完成json数据的接收,不然前端无法传来正确的类型(ajax造不出java的TimeStamp)</p>
+</li>
+<li><p><strong>解决办法</strong>:创建一个EntityModel,将timestamp设计为long类型,接收前端传来的long时间戳,然后对其进行转换为java的TimeStamp传递给实体Entity</p>
+</li>
+<li></li>
+</ul>
+<h2 id="关于Swagger"><a href="#关于Swagger" class="headerlink" title="关于Swagger"></a>关于Swagger</h2><ul>
+<li>使用Swagger自动生成文档接口</li>
+<li>Swagger注解<ol>
+<li><code>@Api(value=)</code>用在Controller前,表示一个类</li>
+<li><code>ApiOperation(value=&quot;&quot;,notes=&quot;&quot;)</code>放在方法前面,表示该方法的作用,</li>
+<li><code>ApiImplicitParam()</code>用于表示方法中的一个变量</li>
+<li>ApiImplicitParams({@ApiImplicitParam(),@ApiImplicitParam())可以在里面写多个参数</li>
+<li>要针对前端发来的类型,<code>GET</code>,<code>POST</code>,在一开始的<code>RequestMapping()</code>时进行区分,否则就会在文档中出现全类型的接口</li>
+</ol>
+</li>
+</ul>
+<h1 id="下一步的学习"><a href="#下一步的学习" class="headerlink" title="下一步的学习"></a>下一步的学习</h1><ul>
+<li>重构ReturnType,优化返回值</li>
+<li>设计一种通用的Exception,用于抛出异常</li>
+<li>将时间戳的转换完成,设计通用的时间戳转换方法<code>YY-MM-DD HH:MM:SS</code>,因为从前端传过来的可能是各种形式</li>
+<li>学习如何创建对应项目的新模板</li>
+</ul>
+]]></content>
+  </entry>
 </search>
