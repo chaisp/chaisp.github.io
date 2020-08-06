@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chaisp.github.io/2020/07/26/MarkdownType/</loc>
+    
+    <lastmod>2020-08-06T15:46:23.218Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chaisp.github.io/2020/08/06/Spring-JPA-Swagger(3)/</loc>
+    
+    <lastmod>2020-08-06T15:45:25.794Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chaisp.github.io/2020/08/05/Spring-JPA-Swagger(2)/</loc>
     
-    <lastmod>2020-08-04T16:32:30.745Z</lastmod>
+    <lastmod>2020-08-06T14:46:20.255Z</lastmod>
     
   </url>
   
@@ -89,13 +103,6 @@
     <loc>https://chaisp.github.io/2020/07/26/7-26/</loc>
     
     <lastmod>2020-07-26T11:30:56.298Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chaisp.github.io/2020/07/26/MarkdownType/</loc>
-    
-    <lastmod>2020-07-26T11:01:02.521Z</lastmod>
     
   </url>
   

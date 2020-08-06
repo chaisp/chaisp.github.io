@@ -55,7 +55,7 @@
 <li>这是有序列表第三行</li>
 </ol>
 </li>
-<li><p>使用链接的方法,需要超链接的文字用[]括起来并且后面通过[1]进行标识, 之后使用[1]:url”文字”就可以了<br> 效果如下:<br> 目前的几个学习网站[Github][1]、[Bilibili][2]、[CSDN][3],通过这几个网站的学习,能够有效的提高代码水平<br> [1]: <a href="https://github.com">https://github.com</a> “Github”<br> [2]: <a href="https://www.bilibili.com" target="_blank" rel="noopener">https://www.bilibili.com</a> “Bilibili”<br> [3]: <a href="https://www.csdn.com" target="_blank" rel="noopener">https://www.csdn.com</a> “CSDN”</p>
+<li><p>使用链接的方法,需要超链接的文字用[]括起来并且后面通过[1]进行标识, 之后使用[1]:url”文字”就可以了<br> 效果如下:<br> 目前的几个学习网站<a href="https://github.com" target="_blank" rel="noopener">Github</a>、<a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a>、<a href="https://www.csdn.com" target="_blank" rel="noopener">CSDN</a>,通过这几个网站的学习,能够有效的提高代码水平</p>
 </li>
 </ol>
 <ol start="10">
@@ -1058,7 +1058,7 @@
   <entry>
     <title>SpringBoot+JPA+Swagger(2)</title>
     <url>/2020/08/05/Spring-JPA-Swagger(2)/</url>
-    <content><![CDATA[<h1 id="基于Spring-JPA-Swagger的项目-1"><a href="#基于Spring-JPA-Swagger的项目-1" class="headerlink" title="基于Spring+JPA+Swagger的项目(1)"></a>基于Spring+JPA+Swagger的项目(1)</h1><h2 id="解决pom-xml第一行报unknow错误"><a href="#解决pom-xml第一行报unknow错误" class="headerlink" title="解决pom.xml第一行报unknow错误"></a>解决pom.xml第一行报unknow错误</h2><ul>
+    <content><![CDATA[<h1 id="基于Spring-JPA-Swagger的项目-2"><a href="#基于Spring-JPA-Swagger的项目-2" class="headerlink" title="基于Spring+JPA+Swagger的项目(2)"></a>基于Spring+JPA+Swagger的项目(2)</h1><h2 id="解决pom-xml第一行报unknow错误"><a href="#解决pom-xml第一行报unknow错误" class="headerlink" title="解决pom.xml第一行报unknow错误"></a>解决pom.xml第一行报unknow错误</h2><ul>
 <li>网上解决办法多半是强制更新maven</li>
 <li>其实是maven和springboot-start-parent不匹配</li>
 <li>也可以降低springboot到1.4.0即可</li>
@@ -1105,6 +1105,58 @@
 <li>设计一种通用的Exception,用于抛出异常</li>
 <li>将时间戳的转换完成,设计通用的时间戳转换方法<code>YY-MM-DD HH:MM:SS</code>,因为从前端传过来的可能是各种形式</li>
 <li>学习如何创建对应项目的新模板</li>
+<li>返回项目信息时,如何进行翻页</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringBoot+JPA+Swagger(2)</title>
+    <url>/2020/08/06/Spring-JPA-Swagger(3)/</url>
+    <content><![CDATA[<h1 id="基于Spring-JPA-Swagger的项目-2"><a href="#基于Spring-JPA-Swagger的项目-2" class="headerlink" title="基于Spring+JPA+Swagger的项目(2)"></a>基于Spring+JPA+Swagger的项目(2)</h1><h2 id="基于XML解析文件-获取变量信息"><a href="#基于XML解析文件-获取变量信息" class="headerlink" title="基于XML解析文件,获取变量信息"></a>基于XML解析文件,获取变量信息</h2><ul>
+<li><p>目前XML解析常用的技术<br>  1.DOM:耗资源,适合多次访问XML<br>  2.SAX:适合数据量较大的XML<br>  3.JDOM:只使用具体类而不使用接口<br>  4.DOM4J:优秀</p>
+</li>
+<li><p>实际项目中使用的是w3c.DOM,主要考虑到周围都在用这个</p>
+</li>
+</ul>
+<h2 id="使用W3C-DOM解析XML"><a href="#使用W3C-DOM解析XML" class="headerlink" title="使用W3C.DOM解析XML"></a>使用W3C.DOM解析XML</h2><ul>
+<li>首先创建解析器工厂类<code>DocumentBuilderFactory</code></li>
+<li>然后根据工厂类创建解析器<code>DocumentBuilder</code></li>
+<li>使用解析器,直接解析<code>File</code>对象,获得文档模型<code>Document</code></li>
+<li><code>Document</code>就已经是一个XML树结构了</li>
+<li>一般操作的话,直接通过<code>getElementbyTagName()</code>获取一个Node列表,直接强制类型转换为Element</li>
+<li>对于Element,可以getAttributes()获取其属性列表,也是按照Node的格式,需要.item()去定位,时候使用getNodeName和getNodeValue获取键值对</li>
+</ul>
+<h2 id="Document其他属性"><a href="#Document其他属性" class="headerlink" title="Document其他属性"></a>Document其他属性</h2><pre><code>节点列表类NodeList
+NodeList代表了一个包含一个或者多个Node的列表，根据操作可以将其简化的看做为数组
+
+节点类Node
+Node对象是DOM中最基本的对象，代表了文档树中的抽象节点。但在实际使用中很少会直接使用Node对象，而是使用Node对象的子对象Element,Attr,Text等
+
+元素类Element
+是Node类最主要的子对象，在元素中可以包含属性，因而Element中有存取其属性的方法</code></pre><p>选自[CSDN](<a href="https://blog.csdn.net/Alice_Xie/article/details/81776420?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159672613619725211915836%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159672613619725211915836&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-" target="_blank" rel="noopener">https://blog.csdn.net/Alice_Xie/article/details/81776420?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159672613619725211915836%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159672613619725211915836&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-</a><br>blog-2<del>all</del>first_rank_ecpm_v3~pc_rank_v3-2-81776420.pc_ecpm_v3_pc_rank_v3&amp;utm_term=w3cdom%E8%A7%A3%E6%9E%90xml&amp;spm=1018.2118.3001.4187)</p>
+<p>7.属性类Attr</p>
+<p>代表某个元素的属性，虽然Attr继承自Node接口，但因为Attr是包含在Element中的，但并不能将其看做是Element的子对象，因为Attr并不是DOM树的一部分</p>
+<h2 id="业务逻辑设计"><a href="#业务逻辑设计" class="headerlink" title="业务逻辑设计"></a>业务逻辑设计</h2><ul>
+<li>考虑到是树形结构,并且有嵌套的成员,因此采用递归的方式,从子节点中搜索同一变量,解析其属性存入实体类,最后调用DAO层完成数据的插入</li>
+<li>目前的设计还有缺陷,只是在Controller调用<code>ParseAndInsert()</code>函数,这个Service层的函数,完成了全部数据的解析和插入,到时候关于异常的抛出肯定要重新优化</li>
+</ul>
+<h2 id="解决的bug"><a href="#解决的bug" class="headerlink" title="解决的bug"></a>解决的bug</h2><ul>
+<li><p>在JPA中的自动配置中,会根据你实体类中的变量名,猜测你的数据库中的column,但是当它猜错了,就出问题了.</p>
+</li>
+<li><p>如果你采用了自动建表,也就是JPA设置为<code>auto</code>,它会把它新建的表插入到你的数据库中,在插入数据时就会忽视你的表,如果恰好它修改的变量是主键,那就根本跑不起来</p>
+</li>
+<li><p>在关掉自动建表后,JPA设置为<code>none</code>,它会提醒你Field出现问题,在CSDN上搜索都是你的主键没有自增什么的,但是跟你的问题完全没有关系.</p>
+</li>
+<li><p><strong>解决办法</strong><br>在yml文件下这样设置:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jpa:</span><br><span class="line">   hibernate:</span><br><span class="line">     naming:</span><br><span class="line">       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</span><br></pre></td></tr></table></figure>
+<p>这样就不会把UserVariable自动设置为User_Variable,问题解决.</p>
+</li>
+</ul>
+<h2 id="Postman的使用"><a href="#Postman的使用" class="headerlink" title="Postman的使用"></a>Postman的使用</h2><ul>
+<li>通过Postman测试后端非常的方便</li>
+<li>可以传Json,时间戳,以及file格式文件</li>
+<li>时间戳,需要设计相关的前端函数</li>
+<li>Json和file直接选传送类型即可</li>
 </ul>
 ]]></content>
   </entry>
