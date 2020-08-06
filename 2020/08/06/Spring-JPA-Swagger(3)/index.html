@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    SpringBoot+JPA+Swagger(2) |  小柴的Blog
+    SpringBoot+JPA+Swagger(3) |  小柴的Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -58,7 +58,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  SpringBoot+JPA+Swagger(2)
+  SpringBoot+JPA+Swagger(3)
 </h1>
  
 
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">859</span>
+            <span class="post-count">798</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -97,7 +97,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="基于Spring-JPA-Swagger的项目-2"><a href="#基于Spring-JPA-Swagger的项目-2" class="headerlink" title="基于Spring+JPA+Swagger的项目(2)"></a>基于Spring+JPA+Swagger的项目(2)</h1><h2 id="基于XML解析文件-获取变量信息"><a href="#基于XML解析文件-获取变量信息" class="headerlink" title="基于XML解析文件,获取变量信息"></a>基于XML解析文件,获取变量信息</h2><ul>
+  <h1 id="基于Spring-JPA-Swagger的项目-3"><a href="#基于Spring-JPA-Swagger的项目-3" class="headerlink" title="基于Spring+JPA+Swagger的项目(3)"></a>基于Spring+JPA+Swagger的项目(3)</h1><h2 id="基于XML解析文件-获取变量信息"><a href="#基于XML解析文件-获取变量信息" class="headerlink" title="基于XML解析文件,获取变量信息"></a>基于XML解析文件,获取变量信息</h2><ul>
 <li><p>目前XML解析常用的技术<br>  1.DOM:耗资源,适合多次访问XML<br>  2.SAX:适合数据量较大的XML<br>  3.JDOM:只使用具体类而不使用接口<br>  4.DOM4J:优秀</p>
 </li>
 <li><p>实际项目中使用的是w3c.DOM,主要考虑到周围都在用这个</p>
@@ -118,8 +118,7 @@ NodeList代表了一个包含一个或者多个Node的列表，根据操作可�
 Node对象是DOM中最基本的对象，代表了文档树中的抽象节点。但在实际使用中很少会直接使用Node对象，而是使用Node对象的子对象Element,Attr,Text等
 
 元素类Element
-是Node类最主要的子对象，在元素中可以包含属性，因而Element中有存取其属性的方法</code></pre><p>选自[CSDN](<a href="https://blog.csdn.net/Alice_Xie/article/details/81776420?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159672613619725211915836%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159672613619725211915836&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-" target="_blank" rel="noopener">https://blog.csdn.net/Alice_Xie/article/details/81776420?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159672613619725211915836%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159672613619725211915836&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-</a><br>blog-2<del>all</del>first_rank_ecpm_v3~pc_rank_v3-2-81776420.pc_ecpm_v3_pc_rank_v3&amp;utm_term=w3cdom%E8%A7%A3%E6%9E%90xml&amp;spm=1018.2118.3001.4187)</p>
-<p>7.属性类Attr</p>
+是Node类最主要的子对象，在元素中可以包含属性，因而Element中有存取其属性的方法</code></pre><p>7.属性类Attr</p>
 <p>代表某个元素的属性，虽然Attr继承自Node接口，但因为Attr是包含在Element中的，但并不能将其看做是Element的子对象，因为Attr并不是DOM树的一部分</p>
 <h2 id="业务逻辑设计"><a href="#业务逻辑设计" class="headerlink" title="业务逻辑设计"></a>业务逻辑设计</h2><ul>
 <li>考虑到是树形结构,并且有嵌套的成员,因此采用递归的方式,从子节点中搜索同一变量,解析其属性存入实体类,最后调用DAO层完成数据的插入</li>
