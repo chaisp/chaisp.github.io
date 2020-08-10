@@ -99,6 +99,68 @@
     
     
     <article
+  id="post-8-2-git"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/8-2-git/"
+    >git命令的使用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/8-2-git/" class="article-date">
+  <time datetime="2020-08-02T01:30:28.700Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="git-clone和-git-pull"><a href="#git-clone和-git-pull" class="headerlink" title="git clone和 git pull"></a>git clone和 git pull</h2><ul>
+<li>首先使用<strong>gitbash</strong>选中一个文件夹</li>
+<li>然后在该空文件夹下使用gitclone,完成一个从无到有的过程</li>
+<li>通过gitclone,可以完整复制全部的仓库文件</li>
+<li>之后如果想要删除某个文件夹,使用<code>git rm -r --cached target 文件名</code></li>
+<li>在删除多个文件之后,使用<code>git push -u origin master</code>将删除的指令push到github上,此时仓库相应文件就会删除</li>
+<li>git pull是为了保持和远程仓库的更新,将github上新的文件下载下来,前提是该文件夹下本身已经有仓库了</li>
+<li>git pull 相当于 <code>git fetch</code> +<code>git merge</code>先从远程下载git项目中的文件,然后将文件与本地的分支进行merge</li>
+</ul>
+<h2 id="git删除分支"><a href="#git删除分支" class="headerlink" title="git删除分支"></a>git删除分支</h2><ul>
+<li>通过<code>git branch</code>我们可以知道当前分支名称</li>
+<li>通过<code>git branch -r</code>可以查看本地仓库的分支</li>
+<li>如果没有看到要删除的分支,说明没有更新,使用<code>git fetch origin</code>进行更新</li>
+<li>最后<code>git branch -rd 分支名</code>或者 <code>git push origin -delete</code></li>
+<li>再用<code>git branch -r</code>查看时就找不到相应的分支了</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-ThinkinginJava-LearnNote-8-9-10"
   class="article article-type-post"
   itemscope

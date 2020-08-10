@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chaisp.github.io/2020/08/10/Spring-JPA-Swagger(4)/</loc>
+    
+    <lastmod>2020-08-10T16:21:15.294Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chaisp.github.io/2020/08/06/Spring-JPA-Swagger(3)/</loc>
     
     <lastmod>2020-08-06T15:50:02.865Z</lastmod>

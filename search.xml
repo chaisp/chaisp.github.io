@@ -1159,4 +1159,39 @@ Node对象是DOM中最基本的对象，代表了文档树中的抽象节点。�
 </ul>
 ]]></content>
   </entry>
+  <entry>
+    <title>SpringBoot+JPA+Swagger(4)</title>
+    <url>/2020/08/10/Spring-JPA-Swagger(4)/</url>
+    <content><![CDATA[<h1 id="SpringBoot-JPA-Swagger-4"><a href="#SpringBoot-JPA-Swagger-4" class="headerlink" title="SpringBoot+JPA+Swagger(4)"></a>SpringBoot+JPA+Swagger(4)</h1><p><strong>这几天主要是熟悉公司的项目生成工具,遇到并解决了其中几个bug</strong></p>
+<h2 id="问题一-JPA建表失败-所有实体类均无法自动建表"><a href="#问题一-JPA建表失败-所有实体类均无法自动建表" class="headerlink" title="问题一: JPA建表失败,所有实体类均无法自动建表"></a>问题一: JPA建表失败,所有实体类均无法自动建表</h2><ul>
+<li>因为实体类属性在数据库表中的属性赋值时,未小写,导致JPA建表时无法识别<br>例如:<br>  <code>varchar</code>类型,却赋了一个<code>VARCHAR</code>,数据库无法识别,就没有建表,之后的插入外键时,检测数据库不存在就会报错<br>  因此在控制台报的只有插入外键时错误,causeby 数据库表 dont exit</li>
+</ul>
+<h2 id="问题二-插入数据时-UUID与实际解析的XML对应UUID不匹配"><a href="#问题二-插入数据时-UUID与实际解析的XML对应UUID不匹配" class="headerlink" title="问题二:插入数据时,UUID与实际解析的XML对应UUID不匹配"></a>问题二:插入数据时,UUID与实际解析的XML对应UUID不匹配</h2><ul>
+<li>项目生成工具建立的模型,所有的实体类都是继承于<code>BaseEntity</code>,该类中定义了主键UUID以及其产生策略,<code>@Generator</code></li>
+<li>在使用JPA库的<code>save()</code>函数时,尽管传进去时entity的UUID为XML中的UUID,但是在save()的过程中,依旧被替换为基类的构造方式</li>
+<li>具体实现通过看源码没有找到,在<code>&lt;?extends&gt;save()</code>处无法向下查询</li>
+<li>解决办法,新建一个DAO接口,使用<code>@Modify</code>  <code>@Query</code> 执行自己自定义的sql语句,在通过<code>nativequery= true</code> <code>@query</code>注解也可以执行insert语句</li>
+<li>可以通过传入<code>entity</code>参数,在sql语句中使用<code>:#{#entity}</code>来调用实体类的属性,注意一定要加<strong>冒号</strong></li>
+<li>在sql语句中,直接插入entity的uuid,就不会执行基类的<code>@Generator</code>,也就能保持和XML文件中UUID一致</li>
+</ul>
+<p><strong>该错误在控制台会报,父类主键不存在,因为父类主键被篡改了,而子类存储父类UUID还是实体类中的UUID,所以报错,否则不容易发现</strong></p>
+<h2 id="问题三-插入实体类的UUID时-出现了主键重复的错误"><a href="#问题三-插入实体类的UUID时-出现了主键重复的错误" class="headerlink" title="问题三:插入实体类的UUID时,出现了主键重复的错误"></a>问题三:插入实体类的UUID时,出现了主键重复的错误</h2><ul>
+<li>通过一步步溯源,可以发现在使用DOM解析时,有的节点被遍历的两遍</li>
+<li>问题在于,为什么会遍历两遍?</li>
+<li>我第一遍采用<code>Element.getElementByTagName()</code>方法,获取第一层,之后对以后的实体类进行递归遍历,</li>
+<li>这种方法实际上是遍历所有的子节点,包含子节点的子节点,<strong>并不是往下一层搜索</strong></li>
+<li>正确的用法是,采用<code>getChildNodes()</code>获取子节点组成的<code>NodeList</code>,之后对<code>NodeList</code>遍历,通过<code>Node.getNodeName()</code>获取具体的某个孩子节点</li>
+<li><code>Node</code>和<code>Element</code>可以相互转型,通过<code>getAttribut(String)</code>可以获取具体的某个属性的value</li>
+</ul>
+<h2 id="便于测试的方法"><a href="#便于测试的方法" class="headerlink" title="便于测试的方法"></a>便于测试的方法</h2><ul>
+<li>因为主键的数据无法重复插入,也就意味着对于同一XML文件,每次测试插入前,如果不删除上次的数据,就会报主键冲突的错误</li>
+<li>可以把ddl-auto设置为auto,每次运行项目时,首先把全部的表都删除,然后重新建表,重新插入外键,最后插入全部值,每次都是新感</li>
+</ul>
+<h2 id="最后发现HEXO的一个小bug-不能-和-连用"><a href="#最后发现HEXO的一个小bug-不能-和-连用" class="headerlink" title="最后发现HEXO的一个小bug,不能{和#连用"></a>最后发现HEXO的一个小bug,不能{和#连用</h2><ul>
+<li>以上用法会导致<code>Error: expected end of comment, got end of file</code></li>
+<li>因为这种语法是<strong>nunjucks</strong>的注释,所以会导致错误</li>
+<li>解决办法对于<code>{#</code> 用一个被{}和%包围的<code>raw</code>作为开始,<code>endraw</code>作为结束</li>
+</ul>
+]]></content>
+  </entry>
 </search>
