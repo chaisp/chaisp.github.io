@@ -99,6 +99,80 @@
     
     
     <article
+  id="post-8-1-Random"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/8-1-Random/"
+    >Random的使用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/8-1-Random/" class="article-date">
+  <time datetime="2020-08-02T01:46:57.964Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="在测试Enum时发现的Random问题"><a href="#在测试Enum时发现的Random问题" class="headerlink" title="在测试Enum时发现的Random问题"></a>在测试Enum时发现的Random问题</h1><h2 id="Random正常的使用"><a href="#Random正常的使用" class="headerlink" title="Random正常的使用"></a>Random正常的使用</h2><ul>
+<li>在java中Random一般在使用时都会先创建Random对象,有两种方式</li>
+<li><code>Random random = new Random();</code>以系统时钟作为seed</li>
+<li><code>Random random = new Random(seed);</code>自己定义数字作为seed</li>
+<li>Random的实质是创建一个随机序列,在该序列上向后拿取随机数</li>
+<li>之后通过random.nextInt()就是在该序列上拿取一个随机数</li>
+<li>如果seed相同,就是同一个序列,线性的向后拿取随机数,保证(伪)随机</li>
+</ul>
+<h2 id="在Enum测试中出现的问题"><a href="#在Enum测试中出现的问题" class="headerlink" title="在Enum测试中出现的问题"></a>在Enum测试中出现的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Supplier&lt;T&gt;&#123;</span><br><span class="line">	T get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum CartoonCharacter implements Supplier&lt;CartoonCharacter&gt; &#123;</span><br><span class="line">    SLAPPY, SPANKY, PUNCHY,</span><br><span class="line">    SILLY, BOUNCY, NUTTY, BOB;</span><br><span class="line">    private Random rand &#x3D; new Random(47);</span><br><span class="line">    @Override</span><br><span class="line">    public CartoonCharacter get() &#123;</span><br><span class="line">        return values()[rand.nextInt(values().length)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class EnumImplementation &#123; </span><br><span class="line">	public static &lt;T&gt; void printNext(Supplier&lt;T&gt; rg) &#123;</span><br><span class="line">        System.out.print(rg.get() + &quot;, &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">&#x2F;&#x2F; Choose any instance:</span><br><span class="line">        CartoonCharacter cc &#x3D; CartoonCharacter.BOB;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">            printNext(cc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以上为正常代码,也就是通过集成Supplier接口,重写get方法,来获取随机的enum元素,在<code>main()</code>函数中通过传递实例,实现Enum方法的调用.</li>
+<li>但是在我对其进行修改后就只能,重复相同元素,<strong>失去Random的意义</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(CartoonCharacter c:CartoonCharacter.values())</span><br><span class="line">	printNext(c)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在我想通过foreach遍历<code>values()</code>产生的enum实例数组完成循环调用时,出现了无法产生随机数的问题,每次遍历结果都相同</li>
+<li>通过debug,发现确实调用了<code>rand.nextInt()</code>,只是每次数字相同,而且数字只随seed改变</li>
+<li>原因:通过<code>values()</code>获得的enum实例,其实是引用,每个都是一个enum类,也就是说每个都重新生成了一个enum类</li>
+<li>也就是说,在<code>foeeach</code>迭代中,每次迭代,我都创建了相同的Random序列,每次调用<code>rand.nextInt()</code>都会从相同的序列取第一个值,这也就是伪随机的缺陷</li>
+<li>在正常的<code>for(int)</code>循环中,使用的是同一个实例,因此每次的循环顺着一个序列向后找随机数</li>
+</ul>
+<p><strong>解决办法</strong></p>
+<ul>
+<li>使用static修饰enum中的Random对象,不管创建多少次实例,都会沿着一个序列向后随机</li>
+<li>不使用固定的seed,直接让random和系统时间绑定</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-8-2-git"
   class="article article-type-post"
   itemscope

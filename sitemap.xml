@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chaisp.github.io/2020/08/17/Fastjson/</loc>
+    
+    <lastmod>2020-08-17T16:11:02.057Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chaisp.github.io/2020/08/10/Spring-JPA-Swagger(4)/</loc>
     
     <lastmod>2020-08-10T16:21:15.294Z</lastmod>

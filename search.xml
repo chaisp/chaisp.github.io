@@ -1194,4 +1194,55 @@ Node对象是DOM中最基本的对象，代表了文档树中的抽象节点。�
 </ul>
 ]]></content>
   </entry>
+  <entry>
+    <title>Fastjosn在项目中的使用</title>
+    <url>/2020/08/17/Fastjson/</url>
+    <content><![CDATA[<h1 id="Fastjson"><a href="#Fastjson" class="headerlink" title="Fastjson"></a>Fastjson</h1><ul>
+<li>Fastjson是用来完成java对象和json相互转换的重要工具</li>
+<li>在项目中的maven依赖<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;x.x.x&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Fastjson的使用"><a href="#Fastjson的使用" class="headerlink" title="Fastjson的使用"></a>Fastjson的使用</h2><ul>
+<li><p>基本的方法<br><code>toJSONString()</code>完成对象转为JSON字符串<br><code>parseObject()</code>完成JSON转换为Java对象</p>
+</li>
+<li><p>在实体类中<code>@JSONField(name= XXX)</code>可以规定实体类属性转换后的key</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@JSONField(name &#x3D; &quot;AGE&quot;)</span><br><span class="line">private int age;</span><br><span class="line"></span><br><span class="line">转换完后:</span><br><span class="line">&#123;&quot;AGE&quot;:15&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>在实体类中<code>@JSONField(name=&quot;AGE&quot;, serialize=false)</code>通过<code>serialize</code>可以控制该属性要不要转换</p>
+</li>
+<li><p>在实体类中<code>@JSONField(name=&quot;AGE&quot;, ordinal = 1)</code> 可以控制序列化的顺序</p>
+</li>
+<li><p>在实体类中<code>@JSONField(name=&quot;DATE OF BIRTH&quot;, format=&quot;dd/MM/yyyy&quot;, ordinal = 3)</code> 可以格式化date属性</p>
+</li>
+<li><p>使用JSONArray可以创建出<code>&quot;key&quot;:[{1},{2},{3}]</code>,在项目中用的比较多,如果传递subList,就用Array存储,使用add方法增加元素,remove删除元素</p>
+</li>
+<li><p>对于外键,Fastjson会把外键也实现并序列化,如果比较复杂,会出现Fastjson循环的Error</p>
+</li>
+<li><p>在Spring中,默认使用的是Jackson,在<code>controller</code>中return给前端数据时,使用Jackson进行转换,即使在maven中引用了Fastjson,在return时也是使用Jackson.</p>
+</li>
+<li><p>需要在application.java中进行配置才会使用Fastjson</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">   public HttpMessageConverters fastJsonHttpMessageConverters()&#123;</span><br><span class="line">       &#x2F;&#x2F; 1.创建一个converter对象</span><br><span class="line">       FastJsonHttpMessageConverter fastConverter &#x3D; new FastJsonHttpMessageConverter();</span><br><span class="line">       &#x2F;&#x2F; 2.创建配置对象</span><br><span class="line">       FastJsonConfig fastJsonConfig &#x3D; new FastJsonConfig();</span><br><span class="line">       &#x2F;&#x2F; 3.添加配置</span><br><span class="line">       fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);</span><br><span class="line">       &#x2F;&#x2F; 4.将配置添加到转换器对象中</span><br><span class="line">       fastConverter.setFastJsonConfig(fastJsonConfig);</span><br><span class="line">       &#x2F;&#x2F; 5. 解决中文乱码问题</span><br><span class="line">       List&lt;MediaType&gt; mediaTypes &#x3D; new ArrayList&lt;MediaType&gt;();</span><br><span class="line">       mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);</span><br><span class="line">       fastConverter.setSupportedMediaTypes(mediaTypes);</span><br><span class="line">       &#x2F;&#x2F; 6.将转换器对象转化为HttpMessageConverter对象</span><br><span class="line">       HttpMessageConverter&lt;?&gt; converter &#x3D; fastConverter;</span><br><span class="line">       return new HttpMessageConverters(converter);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="项目中的使用"><a href="#项目中的使用" class="headerlink" title="项目中的使用"></a>项目中的使用</h2><ul>
+<li>在传递数据时,对于树状结构,采用递归的方式一层层循环,对于多个子节点,使用JSONArray存储</li>
+<li>一开始出现的序列循环错误,解决办法</li>
+</ul>
+<p><strong>1.使用Fastjson返回 2.同时使用@JSONField()隐藏不必要数据 3.使用DTO代替实体类进行序列化</strong></p>
+<ul>
+<li>对于从叶节点一直搜索到根节点,并对同一父节点进行合并的问题</li>
+</ul>
+<ol>
+<li>如果没有循环的父节点,例如system上面还是system,直接一个map缓存判断是否存在就可以</li>
+<li>对于有循环父节点的,首先递归调用从该节点找到根节点(isRoot=1),如果发现<strong>节点A已经在缓存中</strong>,将节点A<strong>更新到父节点B</strong>,并将缓存更新至map</li>
+<li>一旦<strong>节点B需要更新</strong>,那么<strong>B的所有父节点都要更新</strong>,也就是调用另外一个updateParent()递归</li>
+</ol>
+]]></content>
+  </entry>
 </search>
