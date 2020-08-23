@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://chaisp.github.io/2020/08/22/SpringLearningNote/</loc>
+    <lastmod>2020-08-23</lastmod>
+  </url>
+  <url>
+    <loc>https://chaisp.github.io/2020/08/18/functional%20programming/</loc>
+    <lastmod>2020-08-22</lastmod>
+  </url>
+  <url>
     <loc>https://chaisp.github.io/2020/08/17/Fastjson/</loc>
     <lastmod>2020-08-17</lastmod>
   </url>

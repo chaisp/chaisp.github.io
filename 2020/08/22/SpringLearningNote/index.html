@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Fastjosn在项目中的使用 |  小柴的Blog
+    Swagger学习 |  小柴的Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Fastjson"
+  id="post-SpringLearningNote"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -58,22 +58,22 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Fastjosn在项目中的使用
+  Swagger学习
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/08/17/Fastjson/" class="article-date">
-  <time datetime="2020-08-17T15:34:01.033Z" itemprop="datePublished">2020-08-17</time>
+      <a href="/2020/08/22/SpringLearningNote/" class="article-date">
+  <time datetime="2020-08-22T08:10:14.689Z" itemprop="datePublished">2020-08-22</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">701</span>
+            <span class="post-count">803</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -97,52 +97,74 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Fastjson"><a href="#Fastjson" class="headerlink" title="Fastjson"></a>Fastjson</h1><ul>
-<li>Fastjson是用来完成java对象和json相互转换的重要工具</li>
-<li>在项目中的maven依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;x.x.x&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+  <h1 id="Swagger的优点"><a href="#Swagger的优点" class="headerlink" title="Swagger的优点"></a>Swagger的优点</h1><ul>
+<li>直接运行,可以在线测试API接口</li>
+<li>在项目中使用Swagger需要Springbox</li>
+</ul>
+<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><ul>
+<li><p>maven依赖,使用目前最新的3.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入依赖后,需要配置相关的config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在config包下的SwaggerConfig文件下</span><br><span class="line">@Configuration</span><br><span class="line">public class SwaggerConfig &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在Application中需要添加<code>@EnableOpenApi</code></p>
+</li>
+<li><p>之后直接访问<strong><a href="http://127.0.0.1:8080/swagger-ui/index.html#/" target="_blank" rel="noopener">http://127.0.0.1:8080/swagger-ui/index.html#/</a></strong></p>
+</li>
+</ul>
+<h2 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h2><ul>
+<li><p>配置一个bean实例,基于Docket</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Docket docket()&#123;</span><br><span class="line">    return new Docket(DocumentationType.SWAGGER_2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>需要使用的只需要配置一个title和description</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Docket docket()&#123;</span><br><span class="line">    return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo());</span><br><span class="line">&#125;</span><br><span class="line">public ApiInfo apiInfo()&#123;</span><br><span class="line">    return new ApiInfoBuilder()</span><br><span class="line">            .title( &quot;Dr森的Swagger学习文档&quot;)</span><br><span class="line">            .description(&quot;加油学习&quot;)</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要滥用<code>RestController</code>,会导致Swagger该Controller有全部的请求,最好是使用GetMapping,PostMapping等等</p>
+</li>
+</ul>
+<h2 id="Swagger配置扫描接口"><a href="#Swagger配置扫描接口" class="headerlink" title="Swagger配置扫描接口"></a>Swagger配置扫描接口</h2><ul>
+<li><p>Docket.select()</p>
+</li>
+<li><p>通过Docket.select().apis(RequestHandlerSelectors.basePackage(“com.example.swagger.controller”)),可以控制扫描哪个包下的Controller,但是不能说扫描具体哪一个controller,同一包下,通过@ApiIignore来屏蔽有的接口</p>
+</li>
+<li><p>扫描类上的注解,传入参数为注解的class例如GetMapping.class,只有类上有这个注解才会扫描到</p>
+</li>
+<li><p><code>RequestHandlerSelectors.withClassAnnotation(GetMapping.class)</code></p>
+</li>
+<li><p>扫描方法上的注解,传入参数为注解的class例如GetMapping.class,只有某方法上有这个注解才会扫描到</p>
+</li>
+<li><p><code>RequestHandlerSelectors.withMethodAnnotation(GetMapping.class)</code></p>
+</li>
+<li><p>通过<code>Docket.select.paths(PathSelectors.ant(&quot;/hello&quot;))</code>可以控制只扫描某个包下的接口</p>
+</li>
+<li><p>通过<code>Docket.enable(false)</code>可以关闭Swagger<br>  基于生产环境和现场环境,有不同的perpority,通过获取当前环境设置enable的值,然后保证现场无法使用Swagger</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public Docket docket(Environment enviroment)&#123;</span><br><span class="line">       &#x2F;&#x2F;设置要显示的Swagger环境</span><br><span class="line">       Profiles profiles &#x3D; Profiles.of(&quot;dev&quot;,&quot;test&quot;);</span><br><span class="line">       &#x2F;&#x2F;通过acceptProfile判断是否处在自己设定的环境当中</span><br><span class="line">       boolean flag &#x3D; enviroment.acceptsProfiles(profiles);</span><br><span class="line">       通过flag判断是不是在dev或者test环境中</span><br><span class="line">   &#125;</span><br><span class="line">   &#x2F;&#x2F;环境的修改在properties文件中修改</span><br><span class="line">   spring.profiles.active-dev</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="Fastjson的使用"><a href="#Fastjson的使用" class="headerlink" title="Fastjson的使用"></a>Fastjson的使用</h2><ul>
-<li><p>基本的方法<br><code>toJSONString()</code>完成对象转为JSON字符串<br><code>parseObject()</code>完成JSON转换为Java对象</p>
+<h2 id="配置API文档的分组"><a href="#配置API文档的分组" class="headerlink" title="配置API文档的分组"></a>配置API文档的分组</h2><ul>
+<li>同一个SwaggerConfig下是可以有多个Docket()的,每个都对应一个新的分组,设计到多人协作开发</li>
+<li>通过<code>.groupName()</code>配置不同的分组名</li>
+</ul>
+<h2 id="Swagger文档的配置"><a href="#Swagger文档的配置" class="headerlink" title="Swagger文档的配置"></a>Swagger文档的配置</h2><ul>
+<li><p>如果实体类在Controller的返回值中,就会出现在Model中</p>
 </li>
-<li><p>在实体类中<code>@JSONField(name= XXX)</code>可以规定实体类属性转换后的key</p>
+<li><p>使用@ApiModel,@ApiModelProperty</p>
+</li>
+<li><p>直接在controller方法中的参数前加上<code>ApiParam(&quot;XXX&quot;)</code>就可以在Swagger中看到参数的注释</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@JSONField(name &#x3D; &quot;AGE&quot;)</span><br><span class="line">private int age;</span><br><span class="line"></span><br><span class="line">转换完后:</span><br><span class="line">&#123;&quot;AGE&quot;:15&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p>常用注解：</p>
 <ul>
-<li><p>在实体类中<code>@JSONField(name=&quot;AGE&quot;, serialize=false)</code>通过<code>serialize</code>可以控制该属性要不要转换</p>
-</li>
-<li><p>在实体类中<code>@JSONField(name=&quot;AGE&quot;, ordinal = 1)</code> 可以控制序列化的顺序</p>
-</li>
-<li><p>在实体类中<code>@JSONField(name=&quot;DATE OF BIRTH&quot;, format=&quot;dd/MM/yyyy&quot;, ordinal = 3)</code> 可以格式化date属性</p>
-</li>
-<li><p>使用JSONArray可以创建出<code>&quot;key&quot;:[{1},{2},{3}]</code>,在项目中用的比较多,如果传递subList,就用Array存储,使用add方法增加元素,remove删除元素</p>
-</li>
-<li><p>对于外键,Fastjson会把外键也实现并序列化,如果比较复杂,会出现Fastjson循环的Error</p>
-</li>
-<li><p>在Spring中,默认使用的是Jackson,在<code>controller</code>中return给前端数据时,使用Jackson进行转换,即使在maven中引用了Fastjson,在return时也是使用Jackson.</p>
-</li>
-<li><p>需要在application.java中进行配置才会使用Fastjson</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">   public HttpMessageConverters fastJsonHttpMessageConverters()&#123;</span><br><span class="line">       &#x2F;&#x2F; 1.创建一个converter对象</span><br><span class="line">       FastJsonHttpMessageConverter fastConverter &#x3D; new FastJsonHttpMessageConverter();</span><br><span class="line">       &#x2F;&#x2F; 2.创建配置对象</span><br><span class="line">       FastJsonConfig fastJsonConfig &#x3D; new FastJsonConfig();</span><br><span class="line">       &#x2F;&#x2F; 3.添加配置</span><br><span class="line">       fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);</span><br><span class="line">       &#x2F;&#x2F; 4.将配置添加到转换器对象中</span><br><span class="line">       fastConverter.setFastJsonConfig(fastJsonConfig);</span><br><span class="line">       &#x2F;&#x2F; 5. 解决中文乱码问题</span><br><span class="line">       List&lt;MediaType&gt; mediaTypes &#x3D; new ArrayList&lt;MediaType&gt;();</span><br><span class="line">       mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);</span><br><span class="line">       fastConverter.setSupportedMediaTypes(mediaTypes);</span><br><span class="line">       &#x2F;&#x2F; 6.将转换器对象转化为HttpMessageConverter对象</span><br><span class="line">       HttpMessageConverter&lt;?&gt; converter &#x3D; fastConverter;</span><br><span class="line">       return new HttpMessageConverters(converter);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>@Api()用于类；<br>表示标识这个类是swagger的资源</li>
+<li>@ApiOperation()用于方法；<br>表示一个http请求的操作</li>
+<li>@ApiParam()用于方法，参数，字段说明；<br>表示对参数的添加元数据（说明或是否必填等）</li>
+<li>@ApiModel()用于类<br>表示对类进行说明，用于参数用实体类接收</li>
+<li>@ApiModelProperty()用于方法，字段<br>表示对model属性的说明或者数据操作更改</li>
+<li>@ApiIgnore()用于类，方法，方法参数<br>表示这个方法或者类被忽略</li>
+<li>@ApiImplicitParam() 用于方法<br>表示单独的请求参数</li>
+<li>@ApiImplicitParams() 用于方法，包含多个 @ApiImplicitParam</li>
 </ul>
-<h2 id="项目中的使用"><a href="#项目中的使用" class="headerlink" title="项目中的使用"></a>项目中的使用</h2><ul>
-<li>在传递数据时,对于树状结构,采用递归的方式一层层循环,对于多个子节点,使用JSONArray存储</li>
-<li>一开始出现的序列循环错误,解决办法</li>
-</ul>
-<p><strong>1.使用Fastjson返回 2.同时使用@JSONField()隐藏不必要数据 3.使用DTO代替实体类进行序列化</strong></p>
-<ul>
-<li>对于从叶节点一直搜索到根节点,并对同一父节点进行合并的问题</li>
-</ul>
-<ol>
-<li>如果没有循环的父节点,例如system上面还是system,直接一个map缓存判断是否存在就可以</li>
-<li>对于有循环父节点的,首先递归调用从该节点找到根节点(isRoot=1),如果发现<strong>节点A已经在缓存中</strong>,将节点A<strong>更新到父节点B</strong>,并将缓存更新至map</li>
-<li>一旦<strong>节点B需要更新</strong>,那么<strong>B的所有父节点都要更新</strong>,也就是调用另外一个updateParent()递归</li>
-</ol>
+<p>参考 <a href="https://blog.csdn.net/u014231523/article/details/76522486" target="_blank" rel="noopener">https://blog.csdn.net/u014231523/article/details/76522486</a></p>
  
       <!-- reward -->
       
@@ -209,7 +231,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/08/17/Fastjson/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chaisp.github.io/2020/08/22/SpringLearningNote/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -220,19 +242,10 @@
    
   <nav class="article-nav">
     
+    
       <a href="/2020/08/18/functional%20programming/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            函数式编程
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/08/10/Spring-JPA-Swagger(4)/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">SpringBoot+JPA+Swagger(4)</div>
+        <div class="article-nav-title">函数式编程</div>
       </a>
     
   </nav>

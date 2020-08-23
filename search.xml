@@ -1245,4 +1245,126 @@ Node对象是DOM中最基本的对象，代表了文档树中的抽象节点。�
 </ol>
 ]]></content>
   </entry>
+  <entry>
+    <title>函数式编程</title>
+    <url>/2020/08/18/functional%20programming/</url>
+    <content><![CDATA[<h1 id="OO面向对象是抽象数据，FP函数式编程是抽象行为。"><a href="#OO面向对象是抽象数据，FP函数式编程是抽象行为。" class="headerlink" title="OO面向对象是抽象数据，FP函数式编程是抽象行为。"></a>OO面向对象是抽象数据，FP函数式编程是抽象行为。</h1><h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><ul>
+<li>Lambda表达式产生函数,而不是类</li>
+<li>LAmbda语法尽可能少</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">interface Description &#123;</span><br><span class="line">  String brief();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Body &#123;</span><br><span class="line">  String detailed(String head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Multi &#123;</span><br><span class="line">  String twoArg(String head, Double d);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LambdaExpressions &#123;</span><br><span class="line"></span><br><span class="line">  static Body bod &#x3D; h -&gt; h + &quot; No Parens!&quot;; &#x2F;&#x2F; [1]</span><br><span class="line"></span><br><span class="line">  static Body bod2 &#x3D; (h) -&gt; h + &quot; More details&quot;; &#x2F;&#x2F; [2]</span><br><span class="line"></span><br><span class="line">  static Description desc &#x3D; () -&gt; &quot;Short info&quot;; &#x2F;&#x2F; [3]</span><br><span class="line"></span><br><span class="line">  static Multi mult &#x3D; (h, n) -&gt; h + n; &#x2F;&#x2F; [4]</span><br><span class="line"></span><br><span class="line">  static Description moreLines &#x3D; () -&gt; &#123; &#x2F;&#x2F; [5]</span><br><span class="line">    System.out.println(&quot;moreLines()&quot;);</span><br><span class="line">    return &quot;from moreLines()&quot;;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    System.out.println(bod.detailed(&quot;Oh!&quot;));</span><br><span class="line">    System.out.println(bod2.detailed(&quot;Hi!&quot;));</span><br><span class="line">    System.out.println(desc.brief());</span><br><span class="line">    System.out.println(mult.twoArg(&quot;Pi! &quot;, 3.14159));</span><br><span class="line">    System.out.println(moreLines.brief());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Oh! No Parens!</span><br><span class="line">Hi! More details</span><br><span class="line">Short info</span><br><span class="line">Pi! 3.14159</span><br><span class="line">moreLines()</span><br><span class="line">from moreLines()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lambda表达式的基本语法"><a href="#Lambda表达式的基本语法" class="headerlink" title="Lambda表达式的基本语法"></a>Lambda表达式的基本语法</h3><ul>
+<li>参数</li>
+<li>-&gt;视为产出</li>
+<li>-&gt;之后的内容为方法体</li>
+</ul>
+<ol>
+<li>当只用一个参数，可以不需要括号 ()。 然而，这是一个特例。</li>
+<li>正常情况使用括号 () 包裹参数。 为了保持一致性，也可以使用括号 () 包裹单个参数，虽然这种情况并不常见。</li>
+<li>如果没有参数，则必须使用括号 () 表示空参数列表。</li>
+<li>对于多个参数，将参数列表放在括号 () 中。</li>
+<li>如果Lambda表达式需要多行,就必须放在<code>{}</code>中,在这种情况下就需要return</li>
+</ol>
+<h3 id="在递归中使用Lambda表达式"><a href="#在递归中使用Lambda表达式" class="headerlink" title="在递归中使用Lambda表达式"></a>在递归中使用Lambda表达式</h3><p><strong>阶乘</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">interface IntCall &#123;</span><br><span class="line">  int call(int arg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class RecursiveFactorial &#123;</span><br><span class="line">  static IntCall fact;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    fact &#x3D; n -&gt; n &#x3D;&#x3D; 0 ? 1 : n * fact.call(n - 1);</span><br><span class="line">    for(int i &#x3D; 0; i &lt;&#x3D; 10; i++)</span><br><span class="line">      System.out.println(fact.call(i));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">6</span><br><span class="line">24</span><br><span class="line">120</span><br><span class="line">720</span><br><span class="line">5040</span><br><span class="line">40320</span><br><span class="line">362880</span><br><span class="line">3628800</span><br></pre></td></tr></table></figure>
+<p><strong>Fibonacci</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class RecursiveFibonacci &#123;</span><br><span class="line">  IntCall fib;</span><br><span class="line"></span><br><span class="line">  RecursiveFibonacci() &#123;</span><br><span class="line">    fib &#x3D; n -&gt; n &#x3D;&#x3D; 0 ? 0 :</span><br><span class="line">               n &#x3D;&#x3D; 1 ? 1 :</span><br><span class="line">               fib.call(n - 1) + fib.call(n - 2);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  int fibonacci(int n) &#123; return fib.call(n); &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    RecursiveFibonacci rf &#x3D; new RecursiveFibonacci();</span><br><span class="line">    for(int i &#x3D; 0; i &lt;&#x3D; 10; i++)</span><br><span class="line">      System.out.println(rf.fibonacci(i));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><ul>
+<li>方法引用组成 类名或对象名，后面跟<strong>::</strong>，然后跟方法名称。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">interface Callable &#123; &#x2F;&#x2F; [1]</span><br><span class="line">  void call(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Describe &#123;</span><br><span class="line">  void show(String msg) &#123; &#x2F;&#x2F; [2]</span><br><span class="line">    System.out.println(msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class MethodReferences &#123;</span><br><span class="line">  static void hello(String name) &#123; &#x2F;&#x2F; [3]</span><br><span class="line">    System.out.println(&quot;Hello, &quot; + name);</span><br><span class="line">  &#125;</span><br><span class="line">  static class Description &#123;</span><br><span class="line">    String about;</span><br><span class="line">    Description(String desc) &#123; about &#x3D; desc; &#125;</span><br><span class="line">    void help(String msg) &#123; &#x2F;&#x2F; [4]</span><br><span class="line">      System.out.println(about + &quot; &quot; + msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  static class Helper &#123;</span><br><span class="line">    static void assist(String msg) &#123; &#x2F;&#x2F; [5]</span><br><span class="line">      System.out.println(msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Describe d &#x3D; new Describe();</span><br><span class="line">    Callable c &#x3D; d::show; &#x2F;&#x2F; [6]</span><br><span class="line">    c.call(&quot;call()&quot;); &#x2F;&#x2F; [7]</span><br><span class="line"></span><br><span class="line">    c &#x3D; MethodReferences::hello; &#x2F;&#x2F; [8]</span><br><span class="line">    c.call(&quot;Bob&quot;);</span><br><span class="line"></span><br><span class="line">    c &#x3D; new Description(&quot;valuable&quot;)::help; &#x2F;&#x2F; [9]</span><br><span class="line">    c.call(&quot;information&quot;);</span><br><span class="line"></span><br><span class="line">    c &#x3D; Helper::assist; &#x2F;&#x2F; [10]</span><br><span class="line">    c.call(&quot;Help!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Runable接口"><a href="#Runable接口" class="headerlink" title="Runable接口"></a>Runable接口</h2><ul>
+<li>Runable的run()方法不带参数也没有返回值,因此可以使用Lambda表达式和方法引用作为Runable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Go &#123;</span><br><span class="line">  static void go() &#123;</span><br><span class="line">    System.out.println(&quot;Go::go()&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class RunnableMethodReference &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">    new Thread(new Runnable() &#123;</span><br><span class="line">      public void run() &#123;</span><br><span class="line">        System.out.println(&quot;Anonymous&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    new Thread(</span><br><span class="line">      () -&gt; System.out.println(&quot;lambda&quot;)</span><br><span class="line">    ).start();</span><br><span class="line"></span><br><span class="line">    new Thread(Go::go).start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="构造函数的引用"><a href="#构造函数的引用" class="headerlink" title="构造函数的引用"></a>构造函数的引用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Dog &#123;</span><br><span class="line">  String name;</span><br><span class="line">  int age &#x3D; -1; &#x2F;&#x2F; For &quot;unknown&quot;</span><br><span class="line">  Dog() &#123; name &#x3D; &quot;stray&quot;; &#125;</span><br><span class="line">  Dog(String nm) &#123; name &#x3D; nm; &#125;</span><br><span class="line">  Dog(String nm, int yrs) &#123; name &#x3D; nm; age &#x3D; yrs; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface MakeNoArgs &#123;</span><br><span class="line">  Dog make();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Make1Arg &#123;</span><br><span class="line">  Dog make(String nm);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Make2Args &#123;</span><br><span class="line">  Dog make(String nm, int age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class CtorReference &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    MakeNoArgs mna &#x3D; Dog::new; &#x2F;&#x2F; [1]</span><br><span class="line">    Make1Arg m1a &#x3D; Dog::new;   &#x2F;&#x2F; [2]</span><br><span class="line">    Make2Args m2a &#x3D; Dog::new;  &#x2F;&#x2F; [3]</span><br><span class="line"></span><br><span class="line">    Dog dn &#x3D; mna.make();</span><br><span class="line">    Dog d1 &#x3D; m1a.make(&quot;Comet&quot;);</span><br><span class="line">    Dog d2 &#x3D; m2a.make(&quot;Ralph&quot;, 4);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Dog 有三个构造函数，函数式接口内的 make() 方法反映了构造函数参数列表（ make() 方法名称可以不同）。</li>
+<li>注意我们如何对 [1]，[2] 和 [3] 中的每一个使用 Dog :: new。 这三个构造函数只有一个相同名称：:: new，但在每种情况下赋值给不同的接口，编译器可以从中知道具体使用哪个构造函数。</li>
+<li>编译器知道调用函数式方法（本例中为 make()）就相当于调用构造函数。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Swagger学习</title>
+    <url>/2020/08/22/SpringLearningNote/</url>
+    <content><![CDATA[<h1 id="Swagger的优点"><a href="#Swagger的优点" class="headerlink" title="Swagger的优点"></a>Swagger的优点</h1><ul>
+<li>直接运行,可以在线测试API接口</li>
+<li>在项目中使用Swagger需要Springbox</li>
+</ul>
+<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><ul>
+<li><p>maven依赖,使用目前最新的3.0</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入依赖后,需要配置相关的config</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在config包下的SwaggerConfig文件下</span><br><span class="line">@Configuration</span><br><span class="line">public class SwaggerConfig &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在Application中需要添加<code>@EnableOpenApi</code></p>
+</li>
+<li><p>之后直接访问<strong><a href="http://127.0.0.1:8080/swagger-ui/index.html#/" target="_blank" rel="noopener">http://127.0.0.1:8080/swagger-ui/index.html#/</a></strong></p>
+</li>
+</ul>
+<h2 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h2><ul>
+<li><p>配置一个bean实例,基于Docket</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Docket docket()&#123;</span><br><span class="line">    return new Docket(DocumentationType.SWAGGER_2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>需要使用的只需要配置一个title和description</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Docket docket()&#123;</span><br><span class="line">    return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo());</span><br><span class="line">&#125;</span><br><span class="line">public ApiInfo apiInfo()&#123;</span><br><span class="line">    return new ApiInfoBuilder()</span><br><span class="line">            .title( &quot;Dr森的Swagger学习文档&quot;)</span><br><span class="line">            .description(&quot;加油学习&quot;)</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要滥用<code>RestController</code>,会导致Swagger该Controller有全部的请求,最好是使用GetMapping,PostMapping等等</p>
+</li>
+</ul>
+<h2 id="Swagger配置扫描接口"><a href="#Swagger配置扫描接口" class="headerlink" title="Swagger配置扫描接口"></a>Swagger配置扫描接口</h2><ul>
+<li><p>Docket.select()</p>
+</li>
+<li><p>通过Docket.select().apis(RequestHandlerSelectors.basePackage(“com.example.swagger.controller”)),可以控制扫描哪个包下的Controller,但是不能说扫描具体哪一个controller,同一包下,通过@ApiIignore来屏蔽有的接口</p>
+</li>
+<li><p>扫描类上的注解,传入参数为注解的class例如GetMapping.class,只有类上有这个注解才会扫描到</p>
+</li>
+<li><p><code>RequestHandlerSelectors.withClassAnnotation(GetMapping.class)</code></p>
+</li>
+<li><p>扫描方法上的注解,传入参数为注解的class例如GetMapping.class,只有某方法上有这个注解才会扫描到</p>
+</li>
+<li><p><code>RequestHandlerSelectors.withMethodAnnotation(GetMapping.class)</code></p>
+</li>
+<li><p>通过<code>Docket.select.paths(PathSelectors.ant(&quot;/hello&quot;))</code>可以控制只扫描某个包下的接口</p>
+</li>
+<li><p>通过<code>Docket.enable(false)</code>可以关闭Swagger<br>  基于生产环境和现场环境,有不同的perpority,通过获取当前环境设置enable的值,然后保证现场无法使用Swagger</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public Docket docket(Environment enviroment)&#123;</span><br><span class="line">       &#x2F;&#x2F;设置要显示的Swagger环境</span><br><span class="line">       Profiles profiles &#x3D; Profiles.of(&quot;dev&quot;,&quot;test&quot;);</span><br><span class="line">       &#x2F;&#x2F;通过acceptProfile判断是否处在自己设定的环境当中</span><br><span class="line">       boolean flag &#x3D; enviroment.acceptsProfiles(profiles);</span><br><span class="line">       通过flag判断是不是在dev或者test环境中</span><br><span class="line">   &#125;</span><br><span class="line">   &#x2F;&#x2F;环境的修改在properties文件中修改</span><br><span class="line">   spring.profiles.active-dev</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="配置API文档的分组"><a href="#配置API文档的分组" class="headerlink" title="配置API文档的分组"></a>配置API文档的分组</h2><ul>
+<li>同一个SwaggerConfig下是可以有多个Docket()的,每个都对应一个新的分组,设计到多人协作开发</li>
+<li>通过<code>.groupName()</code>配置不同的分组名</li>
+</ul>
+<h2 id="Swagger文档的配置"><a href="#Swagger文档的配置" class="headerlink" title="Swagger文档的配置"></a>Swagger文档的配置</h2><ul>
+<li><p>如果实体类在Controller的返回值中,就会出现在Model中</p>
+</li>
+<li><p>使用@ApiModel,@ApiModelProperty</p>
+</li>
+<li><p>直接在controller方法中的参数前加上<code>ApiParam(&quot;XXX&quot;)</code>就可以在Swagger中看到参数的注释</p>
+</li>
+</ul>
+<p>常用注解：</p>
+<ul>
+<li>@Api()用于类；<br>表示标识这个类是swagger的资源</li>
+<li>@ApiOperation()用于方法；<br>表示一个http请求的操作</li>
+<li>@ApiParam()用于方法，参数，字段说明；<br>表示对参数的添加元数据（说明或是否必填等）</li>
+<li>@ApiModel()用于类<br>表示对类进行说明，用于参数用实体类接收</li>
+<li>@ApiModelProperty()用于方法，字段<br>表示对model属性的说明或者数据操作更改</li>
+<li>@ApiIgnore()用于类，方法，方法参数<br>表示这个方法或者类被忽略</li>
+<li>@ApiImplicitParam() 用于方法<br>表示单独的请求参数</li>
+<li>@ApiImplicitParams() 用于方法，包含多个 @ApiImplicitParam</li>
+</ul>
+<p>参考 <a href="https://blog.csdn.net/u014231523/article/details/76522486" target="_blank" rel="noopener">https://blog.csdn.net/u014231523/article/details/76522486</a></p>
+]]></content>
+  </entry>
 </search>

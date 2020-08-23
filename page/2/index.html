@@ -99,6 +99,207 @@
     
     
     <article
+  id="post-ThinkinginJava-LearnNote-12"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-12/"
+    >ThinkinginJava LearnNote 12</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-12/" class="article-date">
+  <time datetime="2020-08-02T04:10:35.146Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十二章-异常"><a href="#第十二章-异常" class="headerlink" title="第十二章 异常"></a>第十二章 异常</h1><blockquote>
+<p>Java的基本理念是结构不佳的代码不能运行</p>
+</blockquote>
+<h2 id="异常情形"><a href="#异常情形" class="headerlink" title="异常情形"></a>异常情形</h2><p>要组织当前方法或作用域继续执行问题</p>
+<p>面对出现的异常我们能做的就是从当前环境跳出,并把问题提交至上一级</p>
+<p>抛出异常时,会使用<strong>new</strong>在堆上创建异常对象,然后当前的执行路径被终止,并从当前环境中弹出对异常对象的引用,此时，异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序。这个恰当的地方就是异常处理程序，它的任务是将程序从错误状态中恢复，以使程序能要么换一种方式运行，要么继续运行下去。</p>
+<h2 id="异常的参数"><a href="#异常的参数" class="headerlink" title="异常的参数"></a>异常的参数</h2><p>标准的异常有两个构造器:一个是无参构造器；另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器.</p>
+<h2 id="异常的捕获"><a href="#异常的捕获" class="headerlink" title="异常的捕获"></a>异常的捕获</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">	正常语句</span><br><span class="line">&#125;catch&#123;</span><br><span class="line">	异常处理程序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>要自己定义异常类，必须从已有的异常类继承，最好是选择意思相近的异常类继承（不过这样的异常并不容易找）。建立新的异常类型最简单的方法就是让编译器为你产生无参构造器.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class SimpleException extends Exception &#123;&#125;</span><br><span class="line"></span><br><span class="line">public class InheritingExceptions &#123;</span><br><span class="line">    public void f() throws SimpleException &#123;</span><br><span class="line">        System.out.println(</span><br><span class="line">                &quot;Throw SimpleException from f()&quot;);</span><br><span class="line">        throw new SimpleException();</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InheritingExceptions sed &#x3D;</span><br><span class="line">                new InheritingExceptions();</span><br><span class="line">        try &#123;</span><br><span class="line">            sed.f();</span><br><span class="line">        &#125; catch(SimpleException e) &#123;</span><br><span class="line">            System.out.println(&quot;Caught it!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常的声明"><a href="#异常的声明" class="headerlink" title="异常的声明"></a>异常的声明</h2><p>在方法后面附加关键字<strong>throws</strong>,后面跟上所有的异常类型的列表<br><code>void f() throws TooBig, TooSmall, DivZero {...}</code></p>
+<h2 id="捕获所有异常"><a href="#捕获所有异常" class="headerlink" title="捕获所有异常"></a>捕获所有异常</h2><p>可以只写一个异常处理程序来捕获所有类型的异常。通过捕获异常类型的基类 Exception，就可以做到这一点（</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;Caught an exception&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多重捕获"><a href="#多重捕获" class="headerlink" title="多重捕获"></a>多重捕获</h2><p>对于要捕获多种异常,java7之前只能一个个catch(),java7之后可以使用<br><code>catch(Except1 | Except2 | Except3 | Except4 e) {
+            process();
+        }</code></p>
+<h2 id="重新抛出异常"><a href="#重新抛出异常" class="headerlink" title="重新抛出异常"></a>重新抛出异常</h2><p>既然已经得到了对当前异常对象的引用，可以直接把它重新抛出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(Exception e) &#123;</span><br><span class="line">    System.out.println(&quot;An exception was thrown&quot;);</span><br><span class="line">    throw e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重抛异常会把异常抛给上一级环境中的异常处理程序，同一个 try 块的后续 catch 子句将被忽略。此外，异常对象的所有信息都得以保持，所以高一级环境中捕获此异常的处理程序可以从这个异常对象中得到所有信息。</p>
+<h2 id="异常链"><a href="#异常链" class="headerlink" title="异常链"></a>异常链</h2><p>常常会想要在捕获一个异常后抛出另一个异常，并且希望把原始异常的信息保存下来，这被称为异常链。</p>
+<p>现在所有<code>Throwable</code>的子类在构造器中都可以接受一个<code>cause</code>对象作为参数。这个<code>cause</code>就用来表示原始异常，这样通过把原始异常传递给新的异常，使得即使在当前位置创建并抛出了新的异常，也能通过这个异常链追踪到异常最初发生的位置。</p>
+<p>在<code>Throwable</code>的子类中，只有三种基本的异常类提供了带<code>cause</code>参数的构造器。它们是<code>Error</code>（用于 Java 虚拟机报告系统错误）、Exception 以及 RuntimeException。如果要把其他类型的异常链接起来，应该使用<code>initCause()</code>方法而不是构造器。</p>
+<h2 id="使用finally进行清理"><a href="#使用finally进行清理" class="headerlink" title="使用finally进行清理"></a>使用finally进行清理</h2><ul>
+<li>不管try块中的异常是否会抛出,它们都可以得道执行,多用于内存回收</li>
+<li>即便finally在return语句之后,也会执行,完成相关内容的回收</li>
+</ul>
+<h2 id="异常的丢失"><a href="#异常的丢失" class="headerlink" title="异常的丢失"></a>异常的丢失</h2><ul>
+<li>如果在finally语句中,也有会抛出的异常,那么就会导致try语句块中的异常缺失</li>
+<li>如果在finally语句中,有return,也会导致try语句块中的异常缺失<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class ExceptionSilencer &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            &#x2F;&#x2F; Using &#39;return&#39; inside the finally block</span><br><span class="line">            &#x2F;&#x2F; will silence any thrown exception.</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="Java7出现的-try-with-resources"><a href="#Java7出现的-try-with-resources" class="headerlink" title="Java7出现的 try-with-resources"></a>Java7出现的 try-with-resources</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">public class TryWithResources &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try(</span><br><span class="line">                InputStream in &#x3D; new FileInputStream(</span><br><span class="line">                        new File(&quot;TryWithResources.java&quot;))</span><br><span class="line">        ) &#123;</span><br><span class="line">            int contents &#x3D; in.read();</span><br><span class="line">            &#x2F;&#x2F; Process contents</span><br><span class="line">        &#125; catch(IOException e) &#123;</span><br><span class="line">            &#x2F;&#x2F; Handle the error</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出在try()catch(){}之间多了个{}<br>括号内的部分称为资源规范头（resource specification header）。现在可用于整个 try 块的其余部分。<strong>无论你如何退出 try 块（正常或异常），都会执行相应的close语句</strong>，</p>
+<p>Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了 try-with-resources 特性。</p>
+<p>try-with-resource语句可以在没有catch()和finally()的情况下运行<br>如果使用一个没有AutoCloseable接口的对象,编译器会直接报错</p>
+<h2 id="异常匹配"><a href="#异常匹配" class="headerlink" title="异常匹配"></a>异常匹配</h2><p>抛出异常的时候，异常处理系统会按照代码的书写顺序找出“最近”的处理程序。找到匹配的处理程序之后，它就认为异常将得到处理，然后就不再继续查找。</p>
+<p>查找的时候并不要求抛出的异常同处理程序所声明的异常完全匹配。派生类的对象也可以匹配其基类的处理程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Annoyance extends Exception &#123;&#125;</span><br><span class="line">class Sneeze extends Annoyance &#123;&#125;</span><br><span class="line">public class Human &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F; Catch the exact type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Sneeze s) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Sneeze&quot;);</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; Catch the base type:</span><br><span class="line">        try &#123;</span><br><span class="line">            throw new Sneeze();</span><br><span class="line">        &#125; catch(Annoyance a) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-ThinkinginJava-LearnNote-11"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/ThinkinginJava-LearnNote-11/"
+    >ThinkinginJava LearnNote 11</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/ThinkinginJava-LearnNote-11/" class="article-date">
+  <time datetime="2020-08-02T03:12:57.269Z" itemprop="datePublished">2020-08-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第十一章-持有对象"><a href="#第十一章-持有对象" class="headerlink" title="第十一章 持有对象"></a>第十一章 持有对象</h1><blockquote>
+<p>该章中主要介绍了容器等基本知识</p>
+</blockquote>
+<h2 id="容器的泛型"><a href="#容器的泛型" class="headerlink" title="容器的泛型"></a>容器的泛型</h2><ul>
+<li>通过ArrayList<Type>来代替ArrayList,可以再编译前对插入对象进行校验</li>
+<li>对于泛型中的元素可以进行向上转型(可以将子类add()到父类的ArrayList中)</li>
+</ul>
+<h2 id="集合-Collection"><a href="#集合-Collection" class="headerlink" title="集合 Collection"></a>集合 Collection</h2><ul>
+<li>一个独立元素的序列，这些元素都服从一条或多条规则。<strong>Lis</strong>必须以插入的顺序保存元素,<strong>Set</strong> 不能包含重复元素,<strong>Queue</strong>按照排队规则来确定对象产生的顺序（通常与它们被插入的顺序相同）。</li>
+</ul>
+<h2 id="映射-Map"><a href="#映射-Map" class="headerlink" title="映射 Map"></a>映射 Map</h2><ul>
+<li>一组成对的<strong>键值对</strong>对象，允许使用键来查找值。</li>
+</ul>
+<h2 id="元素添加"><a href="#元素添加" class="headerlink" title="元素添加"></a>元素添加</h2><ul>
+<li><code>Arrays.asList()</code>接受一个数组或者逗号分割的元素列表,转为List</li>
+<li><code>Collections.addAll()</code>接受一个Collection对象,以及一个数组或者逗号分隔的列表</li>
+</ul>
+<h2 id="集合的打印"><a href="#集合的打印" class="headerlink" title="集合的打印"></a>集合的打印</h2><ul>
+<li>数组需要使用<code>Arrays.toString()</code></li>
+<li>集合的打印直接输出即可,以数组的形式输出</li>
+</ul>
+<h2 id="列表List"><a href="#列表List" class="headerlink" title="列表List"></a>列表List</h2><ul>
+<li>第一种ArrayList,随机访问数据,插入删除速度较慢.</li>
+<li>第二种LinkedList,它通过代价较低的的插入和删除操作，提供了优化的顺序访问.LinkedList 对于随机访问来说相对较慢，但它具有比 ArrayList 更大的特征集.</li>
+<li>通过<code>contains(X)</code>可以返回是否List包含该元素</li>
+<li>通过<code>toArray()</code>可以将List转为数组</li>
+<li>通过<code>subList()</code>可以进行切片操作</li>
+</ul>
+<h2 id="迭代器Iterators"><a href="#迭代器Iterators" class="headerlink" title="迭代器Iterators"></a>迭代器Iterators</h2><ul>
+<li>使用<code>Iterator()</code>返回一个Iterator(序列中第一个元素)</li>
+<li>使用<code>next()</code>方法获取序列下一个元素</li>
+<li>使用<code>hasNext()</code>方法检查序列中是否还有元素</li>
+<li>使用<code>remove()</code>方法将迭代器最近返回的那个元素删除(<strong>调用remove()之前必须调用next()</strong>)</li>
+</ul>
+<h2 id="链表LinkedList"><a href="#链表LinkedList" class="headerlink" title="链表LinkedList"></a>链表LinkedList</h2><ul>
+<li>相比ArrayList,LinkedList添加了一些方法,使其可以用作栈,队列或双端队列</li>
+<li><code>getFirst()</code> 和 <code>element()</code> 是相同的，它们都返回列表的头部（第一个元素）而并不删除它，如果 List为空，则抛出NoSuchElementException异常</li>
+<li><code>peek()</code> 方法与这两个方法只是稍有差异，它在列表为空时返回 null</li>
+<li><code>removeFirst()</code> 和 <code>remove()</code> 也是相同的，它们删除并返回列表的头部元素，并在列表为空时抛出 NoSuchElementException 异常</li>
+<li><code>poll()</code> 稍有差异，它在列表为空时返回 null</li>
+<li><code>addFirst()</code> 在列表的开头插入一个元素</li>
+<li><code>offer()</code> 与 <code>add()</code> 和 <code>addLast()</code> 相同.它们都在列表的尾部（末尾）添加一个元素</li>
+<li><code>removeLast()</code> 删除并返回列表的最后一个元素</li>
+</ul>
+<h2 id="堆栈Stack"><a href="#堆栈Stack" class="headerlink" title="堆栈Stack"></a>堆栈Stack</h2><ul>
+<li>在java6中增加了ArrayDeque包含了实现了堆栈的功能<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class StackTest &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Deque&lt;String&gt; stack &#x3D; new ArrayDeque&lt;&gt;();</span><br><span class="line">    for(String s : &quot;My dog has fleas&quot;.split(&quot; &quot;))</span><br><span class="line">      stack.push(s);</span><br><span class="line">    while(!stack.isEmpty())</span><br><span class="line">      System.out.print(stack.pop() + &quot; &quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="集合Set"><a href="#集合Set" class="headerlink" title="集合Set"></a>集合Set</h2><ul>
+<li>Set中最常用的就是测试归属性,查找是最重要的操作,通常使用HashSet实现</li>
+<li>HashSet维护的顺序与TreeSet或LinkedhashSet不同,因为底层存储顺序不同</li>
+<li>HashSet使用散列,TreeSet使用红黑树,LinkedhashSet虽然使用散列,但是维护了插入顺序</li>
+<li>最常用操作使用<code>contains()</code>测试成员属性</li>
+</ul>
+<h2 id="映射Map"><a href="#映射Map" class="headerlink" title="映射Map"></a>映射Map</h2><ul>
+<li><code>containsKey()</code>和<code>containsValue()</code>判断是否含有某个元素</li>
+<li>在遍历时,通过foreach,遍历<code>X.keySet()</code>,使用<code>X.get(key)</code>获取对应的value</li>
+<li>Map和Collection之间唯一的交集是map可以使用entrySet()和values()</li>
+</ul>
+<h2 id="队列Queue"><a href="#队列Queue" class="headerlink" title="队列Queue"></a>队列Queue</h2><ul>
+<li>队列的先进先出,由Linkedlist实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class QueueDemo &#123;</span><br><span class="line">  public static void printQ(Queue queue) &#123;</span><br><span class="line">    while(queue.peek() !&#x3D; null)</span><br><span class="line">      System.out.print(queue.remove() + &quot; &quot;);</span><br><span class="line">    System.out.println();</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Queue&lt;Integer&gt; queue &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">    Random rand &#x3D; new Random(47);</span><br><span class="line">    for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">      queue.offer(rand.nextInt(i + 10));</span><br><span class="line">    printQ(queue);</span><br><span class="line">    Queue&lt;Character&gt; qc &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">    for(char c : &quot;Brontosaurus&quot;.toCharArray())</span><br><span class="line">      qc.offer(c);</span><br><span class="line">    printQ(qc);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>普通的队列顺序是由插入顺序确定的</li>
+<li>优先级队列<strong>PriorityQueue</strong>,基于Comparator兑现改变元素的顺序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class PriorityQueueDemo &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    PriorityQueue&lt;Integer&gt; priorityQueue &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;();</span><br><span class="line">    Random rand &#x3D; new Random(47);</span><br><span class="line">    for(int i &#x3D; 0; i &lt; 10; i++)</span><br><span class="line">      priorityQueue.offer(rand.nextInt(i + 10));</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; ints &#x3D; Arrays.asList(25, 22, 20,</span><br><span class="line">      18, 14, 9, 3, 1, 1, 2, 3, 9, 14, 18, 21, 23, 25);</span><br><span class="line">    priorityQueue &#x3D; new PriorityQueue&lt;&gt;(ints);</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line">    priorityQueue &#x3D; new PriorityQueue&lt;&gt;(</span><br><span class="line">        ints.size(), Collections.reverseOrder());</span><br><span class="line">    priorityQueue.addAll(ints);</span><br><span class="line">    QueueDemo.printQ(priorityQueue);</span><br><span class="line"></span><br><span class="line">    String fact &#x3D; &quot;EDUCATION SHOULD ESCHEW OBFUSCATION&quot;;</span><br><span class="line">    List&lt;String&gt; strings &#x3D;</span><br><span class="line">      Arrays.asList(fact.split(&quot;&quot;));</span><br><span class="line">    PriorityQueue&lt;String&gt; stringPQ &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;(strings);</span><br><span class="line">    QueueDemo.printQ(stringPQ);</span><br><span class="line">    stringPQ &#x3D; new PriorityQueue&lt;&gt;(</span><br><span class="line">      strings.size(), Collections.reverseOrder());</span><br><span class="line">    stringPQ.addAll(strings);</span><br><span class="line">    QueueDemo.printQ(stringPQ);</span><br><span class="line"></span><br><span class="line">    Set&lt;Character&gt; charSet &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">    for(char c : fact.toCharArray())</span><br><span class="line">      charSet.add(c); &#x2F;&#x2F; Autoboxing</span><br><span class="line">    PriorityQueue&lt;Character&gt; characterPQ &#x3D;</span><br><span class="line">      new PriorityQueue&lt;&gt;(charSet);</span><br><span class="line">    QueueDemo.printQ(characterPQ);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="不要在新代码中使用遗留类-Vector-HashTable-和Stack"><a href="#不要在新代码中使用遗留类-Vector-HashTable-和Stack" class="headerlink" title="不要在新代码中使用遗留类 Vector HashTable 和Stack"></a>不要在新代码中使用遗留类 Vector HashTable 和Stack</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-8-1-Random"
   class="article article-type-post"
   itemscope
